@@ -1,0 +1,5 @@
+package otaniemipeli
+
+class Game {
+
+}
