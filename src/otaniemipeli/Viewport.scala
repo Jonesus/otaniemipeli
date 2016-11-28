@@ -1,0 +1,5 @@
+package otaniemipeli
+
+object Viewport {
+
+}
