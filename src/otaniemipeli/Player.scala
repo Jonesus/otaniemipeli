@@ -5,12 +5,16 @@ object Player {
   var health = 100
   var speed = 40
   var graphic = "player.png"
-  var position = (0,0)
+  var position_x = Viewport.x/2
+  var position_y = 0
   
   def update() = {
-    if (speed==40){
-      position.(0)+= 1
-      position(1)+= 1
+    if (speed == 40){
+      position_y += 1
+      //Listens to user and moves accordingly.
+      if (keypressed){
+        
+      }
     }
   }
   
