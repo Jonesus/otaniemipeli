@@ -27,9 +27,6 @@ object Player {
   }
   
   def render(img: BufferedImage) = {
-    val width = img.getWidth
-    val height = img.getHeight
-    var img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB))
     return img
   }
   
