@@ -7,7 +7,7 @@ object Player {
   var health = 100
   var speed = 40
   var verticalspeed = 0
-  var graphic = "player.png"
+  var graphic = "../gfx/teekkari.png"
   var position_x = Viewport.x/2
   var position_y = Viewport.y/4
   var img = ImageIO.read(new File("player.jpg"))
