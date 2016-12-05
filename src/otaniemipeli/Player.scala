@@ -1,25 +1,33 @@
 package otaniemipeli
 import math.{sqrt, pow}
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 
 object Player {
   var health = 100
   var speed = 40
-  var graphic = "player.png"
+  var verticalspeed = 0
+  var graphic = "../gfx/teekkari.png"
   var position_x = Viewport.x/2
-  var position_y = 0
+  var position_y = Viewport.y/4
+  var img = ImageIO.read(new File("player.jpg"))
   
   def update() = {
     if (speed == 40){
-      position_y += 1
-      //Listens to user and moves accordingly.
-      if (keypressed){
-        
+      position_y += 1}
+    if (speed>40){
+      position_y+=2
+    }
+    if (verticalspeed<0){
+      position_x+=1  
       }
+    if (verticalspeed>0){
+      position_x-=1
     }
   }
   
-  def render() = {
-    
+  def render(img: BufferedImage) = {
+    return img
   }
   
   def checkForCollisions(World.worldItemList) = {
