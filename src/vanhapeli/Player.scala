@@ -1,4 +1,4 @@
-package otaniemipeli
+package vanhapeli
 import math.{sqrt, pow}
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO

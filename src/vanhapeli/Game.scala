@@ -1,4 +1,4 @@
-package otaniemipeli
+package vanhapeli
 
 import scala.swing._
 import java.awt.Color

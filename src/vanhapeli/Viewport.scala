@@ -1,4 +1,4 @@
-package otaniemipeli
+package vanhapeli
 
 object Viewport {
 
