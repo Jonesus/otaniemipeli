@@ -1,10 +1,10 @@
 package otaniemipeli
 
 class Map {
-  
+  /*
   val backgroundPicture = load("kuvakansionnimi"/"kuvatiedostonnimi")
   val backgroundMusic = WavFile("filename.wav")
-  
+  */
   val mapLength = 1
   val mapWidth = 1
   

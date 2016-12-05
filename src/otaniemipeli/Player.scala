@@ -3,6 +3,7 @@ import math.{sqrt, pow}
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 
+/*
 object Player {
   var health = 100
   var speed = 40
@@ -29,7 +30,8 @@ object Player {
   def render(img: BufferedImage) = {
     return img
   }
-  
+
+
   def checkForCollisions(World.worldItemList) = {
     var collisionList = []
     for item in World.worldItemList{
@@ -39,5 +41,5 @@ object Player {
     }
     return collisionList
   }
-  
 }
+*/
