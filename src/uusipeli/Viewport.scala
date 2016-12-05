@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import scala.swing._
 import scala.swing.event._

@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import scala.swing._
 import java.awt.Color
@@ -48,7 +48,7 @@ object Game extends SimpleSwingApplication {
   // Timer events
   val renderingTimer = new Timer((1000 / frame_rate), new ActionListener() {
     override def actionPerformed(e: ActionEvent) {
-      update
+      update()
       viewport.repaint()
     }
   })

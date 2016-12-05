@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import java.awt.image.BufferedImage
 import java.awt.Graphics2D

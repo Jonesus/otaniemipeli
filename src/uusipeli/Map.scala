@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import scala.collection.mutable.ArrayBuffer
 

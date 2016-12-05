@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import java.awt.image.BufferedImage
 import java.awt.Color
@@ -8,7 +8,7 @@ class Player {
   var position_x = 0.0
   var position_y = 0.0
   
-  var default_speed = 0.5
+  var default_speed = 0.8
   
   /* Player speed: Pixels per frame. */
   var speed_x = 0.0
@@ -44,6 +44,7 @@ class Player {
   }
   
   def update() = {
+    
     /* Here we update the player's position. */
     position_x += speed_x
     position_y += speed_y

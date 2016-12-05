@@ -1,8 +1,7 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 class LevelOne extends Map {
   /* Dimensions of this level. */
-  
   width = 1200
   height = 1200
   
@@ -17,10 +16,14 @@ class LevelOne extends Map {
   background_music_filename = "taustamusiikki.wav"
   
   /* Here we add items to this map. */
+ 
   
-  val b = new Ball
-  b.position_x = 300
-  b.position_y = 300
+  items += new Ball
+  items += new Ball
   
-  items += b
+  items(0).position_x = 300
+  items(0).position_y = 350
+  
+  items(1).position_x = 340
+  items(1).position_y = 280  
 }

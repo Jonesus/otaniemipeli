@@ -1,4 +1,4 @@
-package arkkitehtuurikokeilu
+package uusipeli
 
 import scala.collection.mutable.ArrayBuffer
 import java.awt.image.BufferedImage
@@ -44,6 +44,7 @@ class World(player: Player) {
       case e: Exception => println("Error: Could not read background image file.")
     }
   }
+  
   def update() = {
     for (item <- items) {
       item.update
