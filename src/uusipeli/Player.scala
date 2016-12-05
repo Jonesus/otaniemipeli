@@ -7,11 +7,11 @@ class Player {
   
   var position_x = 0.0
   var position_y = 0.0
-  var deltaX = 0
+  var deltaX = 0  // Speed vectors for current frame
   var deltaY = 0
-  var xVelocity = 0
+  var xVelocity = 0  // Speed vectors for current movement
   var yVelocity = 0
-  var maxSpeed = 20
+  var maxSpeed = 10
   var acceleration = 1
   
   var default_speed = 0.8
@@ -53,14 +53,18 @@ class Player {
   
   def update() = {
     
-    /* Here we update the player's position. */
+    /* Checks if the player is accelerating or decelerating
+     * and changes current frame delta vectors accordingly
+     */
     if (deltaX == 0 && xVelocity != 0) {
       deltaX = if (xVelocity > 0) 0 - acceleration else acceleration
     }
     if (deltaY == 0 && yVelocity != 0) {
       deltaY = if (yVelocity > 0) 0 - acceleration else acceleration
     }
-    
+    /* Calculates new velocity vectors while keeping max
+     * velocity in control
+     */
     if (scala.math.abs(xVelocity + deltaX) < maxSpeed) {
       xVelocity += deltaX
     }

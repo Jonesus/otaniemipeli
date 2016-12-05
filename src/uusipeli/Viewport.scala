@@ -22,6 +22,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
     case KeyPressed(_, Key.S, _, _) => Game.keyPressed("s")
     case KeyPressed(_, Key.A, _, _) => Game.keyPressed("a")
     case KeyPressed(_, Key.D, _, _) => Game.keyPressed("d")
+    case KeyReleased(_, Key.W, _, _) => Game.keyReleased("w")
+    case KeyReleased(_, Key.S, _, _) => Game.keyReleased("s")
+    case KeyReleased(_, Key.A, _, _) => Game.keyReleased("a")
+    case KeyReleased(_, Key.D, _, _) => Game.keyReleased("d")
   }
   
   def render() = {

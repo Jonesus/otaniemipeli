@@ -12,6 +12,13 @@ import java.awt.image.BufferedImage
  */
 object Game extends SimpleSwingApplication {
   
+  /* Keys being held down */
+  var key_w = false
+  var key_s = false
+  var key_a = false
+  var key_d = false
+  
+  
   /* Game window width and height */
   val window_width = 600
   val window_height = 600
@@ -41,6 +48,7 @@ object Game extends SimpleSwingApplication {
   }
   
   def update() = {
+    processKeys()
     player.update()
     world.update()
   }  
@@ -53,19 +61,48 @@ object Game extends SimpleSwingApplication {
     }
   })
   
+  def processKeys() {
+    if (key_w) {
+      player.turnUp()
+    }
+    if (key_s) {
+      player.turnDown()
+    }
+    if (key_a) {
+      player.turnLeft()
+    }
+    if (key_d) {
+      player.turnRight()
+    }
+  }
+  
   // Keyboard events
   def keyPressed(k: String) = {
     if (k == "w") {
-      player.turnUp()
+      key_w = true
     }
     if (k == "s") {
-      player.turnDown()
+      key_s = true
     }
     if (k == "a") {
-      player.turnLeft()
+      key_a = true
     }
     if (k == "d") {
-      player.turnRight()
+      key_d = true
+    }
+  }
+  def keyReleased(k: String) = {
+    if (k == "w") {
+      key_w = false
+    }
+    if (k == "s") {
+      key_s = false
+    }
+    if (k == "a") {
+      key_a = false
+    }
+    if (k == "d") {
+      key_d = false
     }
   }
   
