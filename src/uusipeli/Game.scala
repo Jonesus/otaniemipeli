@@ -49,6 +49,7 @@ object Game extends SimpleSwingApplication {
   
   def update() = {
     processKeys()
+    viewport.update()
     player.update()
     world.update()
   }  

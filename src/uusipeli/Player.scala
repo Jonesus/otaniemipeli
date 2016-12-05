@@ -3,6 +3,8 @@ package uusipeli
 import java.awt.image.BufferedImage
 import java.awt.Color
 
+
+
 class Player {
   
   var position_x = 0.0
@@ -11,14 +13,11 @@ class Player {
   var deltaY = 0
   var xVelocity = 0  // Speed vectors for current movement
   var yVelocity = 0
-  var maxSpeed = 10
-  var acceleration = 1
+  val maxSpeedX = 10
+  val maxSpeedY = 5
+  val acceleration = 1
   
-  var default_speed = 0.8
-  
-  /* Player speed: Pixels per frame. */
-  var speed_x = 0.0
-  var speed_y = 0.0
+  val Y_RESTING_SPEED = 2  // Constant speed down
   
   var width = 40
   var height = 40
@@ -59,16 +58,16 @@ class Player {
     if (deltaX == 0 && xVelocity != 0) {
       deltaX = if (xVelocity > 0) 0 - acceleration else acceleration
     }
-    if (deltaY == 0 && yVelocity != 0) {
-      deltaY = if (yVelocity > 0) 0 - acceleration else acceleration
+    if (deltaY == 0 && yVelocity != Y_RESTING_SPEED) {
+      deltaY = if (yVelocity > Y_RESTING_SPEED) 0 - acceleration else acceleration
     }
     /* Calculates new velocity vectors while keeping max
      * velocity in control
      */
-    if (scala.math.abs(xVelocity + deltaX) < maxSpeed) {
+    if (scala.math.abs(xVelocity + deltaX) < maxSpeedX) {
       xVelocity += deltaX
     }
-    if (scala.math.abs(yVelocity + deltaY) < maxSpeed) {
+    if (scala.math.abs(yVelocity + deltaY) < maxSpeedY) {
       yVelocity += deltaY
     }
     

@@ -39,7 +39,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
       viewport_graphics.drawImage(
           world.background_image.get,
           0,
-          0,
+          0 - (viewport_y - 300),  // Keep background image position static
           null)
     }
       
@@ -76,5 +76,9 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
       null,
       0,
       0)
+  }
+  
+  def update() = {
+    viewport_y += 3  // Scroll screen downwards
   }
 }
