@@ -10,13 +10,12 @@ class LevelOne extends Map {
   player_position_y = 100
   
   /* Background image file. */
-  background_image_filename = "taustakuva.png"
+  background_image_filename = "gfx/level1_background.png"
   
   /* Background music file. */
-  background_music_filename = "taustamusiikki.wav"
+  background_music_filename = "music/level1_music.wav"
   
   /* Here we add items to this map. */
- 
   
   items += new Ball
   items += new Ball
