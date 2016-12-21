@@ -47,6 +47,14 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
             0,
             slice.index * slice.height - viewport_y,
             null)
+        
+        for (item <- slice.items) {
+          viewport_graphics.drawImage(
+              item.render,
+              item.position_x,
+              slice.index * slice.height + item.position_y - viewport_y,
+              null)
+        }
       }
     }
     
@@ -64,7 +72,9 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
     }*/
       
     /* Then we draw the items. */
-      
+    
+    
+    /*
     for (item <- world.items) {
       // Is this object visible?
       if (
@@ -80,6 +90,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
             null)
       }
     }
+    */
       
     /* Finally, we draw the player. */
     viewport_graphics.drawImage(
