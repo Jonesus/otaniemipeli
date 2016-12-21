@@ -20,7 +20,7 @@ object Game extends SimpleSwingApplication {
   
   
   /* Game window width and height */
-  val window_width = 600
+  val window_width = 1000
   val window_height = 600
   
   /* Game window title */
@@ -36,14 +36,15 @@ object Game extends SimpleSwingApplication {
   world.loadResources()
   
   /* Viewport to the world */
-  val viewport = new Viewport(world, window_width, window_height, 300, 300)
+  val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
   
   def top = new MainFrame {
+    ignoreRepaint = true
     title = window_title
     size = new Dimension(window_width, window_height)
     background = Color.black
-
     viewport.preferredSize = new Dimension(window_width, window_height)
+    
     contents = viewport
   }
   
