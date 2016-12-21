@@ -2,7 +2,8 @@ package uusipeli
 
 import java.awt.image.BufferedImage
 import java.awt.Color
-
+import javax.imageio.ImageIO
+import java.io.File
 
 
 class Player {
@@ -13,6 +14,7 @@ class Player {
   var deltaY = 0
   var xVelocity = 0  // Speed vectors for current movement
   var yVelocity = 0
+  
   val maxSpeedX = 10
   val maxSpeedY = 5
   val acceleration = 1
@@ -22,7 +24,30 @@ class Player {
   var width = 40
   var height = 40
   
-  var image = drawImage()
+  /* Player walking animation */
+  var avatar_filename_right = "gfx/128 pixel teekkari oikea.png"
+  var avatar_filename_left = "gfx/128 pixel teekkari vasen.png"
+  var images = Array.ofDim[BufferedImage](2)
+  
+  var currImage = 0
+  val frameDuration = 400 // How many milliseconds to show one frame of the animation?
+  var lastRenderTime: Long = 0
+  
+  loadResources()
+
+  def loadResources() = {
+    /* Load the avatar images. */
+    try {
+      images(0) = ImageIO.read(new File(avatar_filename_left))
+      images(1) = ImageIO.read(new File(avatar_filename_right))
+      width = images(0).getWidth()
+      height = images(0).getHeight()
+    } catch {
+      case e: Exception => println("Error: Could not read avatar image file.")
+      images(0) = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
+      images(0) = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
+    }
+  }
   
   def turnUp() = {
     deltaY -= acceleration
@@ -42,7 +67,13 @@ class Player {
   
 
   def render: BufferedImage = {
-    return image
+    val currTime = scala.compat.Platform.currentTime
+    
+    if (currTime > (lastRenderTime + frameDuration)) {
+      if (currImage == 0) currImage = 1 else currImage = 0
+      lastRenderTime = scala.compat.Platform.currentTime
+    }
+    return images(currImage)
   }
   
   def move(dx: Int, dy: Int) = {
@@ -76,6 +107,7 @@ class Player {
     deltaY = 0
   }
   
+  /* Not in use any more. */
   def drawImage(): BufferedImage = {
     val avatar = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
     val g = avatar.createGraphics()
