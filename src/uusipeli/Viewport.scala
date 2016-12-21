@@ -34,6 +34,26 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
     /* Fill the background. */
     viewport_graphics.clearRect(0, 0, viewport_width, viewport_height)
     
+    
+    
+    for (slice <- world.slices) {
+      // Is this object visible?
+      if (
+        slice.index * slice.height > (viewport_y - viewport_height)
+        && slice.index * slice.height < (viewport_y + viewport_height)) {
+            
+        viewport_graphics.drawImage(
+            slice.background_image.get,
+            0,
+            slice.index * slice.height - viewport_y,
+            null)
+      }
+    }
+    
+    
+    
+    
+    /*
     /* First we draw the background image, if it exists. */
     if (world.background_image.isDefined) {
       viewport_graphics.drawImage(
@@ -41,7 +61,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
           0,
           0 - (viewport_y - 300),  // Keep background image position static
           null)
-    }
+    }*/
       
     /* Then we draw the items. */
       
@@ -51,7 +71,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
         item.position_x > (viewport_x - viewport_width / 2)
         && item.position_x < (viewport_x + viewport_width / 2)
         && item.position_y > (viewport_y - viewport_height / 2)
-        && item.position_x < (viewport_y + viewport_height / 2)) {
+        && item.position_y < (viewport_y + viewport_height / 2)) {
             
         viewport_graphics.drawImage(
             item.render,

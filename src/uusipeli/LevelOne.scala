@@ -25,5 +25,12 @@ class LevelOne extends Map {
   items(0).position_y = 350
   
   items(1).position_x = 340
-  items(1).position_y = 280  
+  items(1).position_y = 280
+  
+  var i = 0
+  for (i <- 0 to 20) {
+    slices += new Slice
+    slices(i).index = i
+    items ++ slices(i).items
+  }
 }
