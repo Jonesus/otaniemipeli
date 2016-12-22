@@ -17,8 +17,8 @@ class LevelOne extends Map {
   
   /* Here we add items to this map. */
   
-  items += new Ball
-  items += new Ball
+  items += new Olutpullo
+  items += new Olutpullo
   
   items(0).position_x = 300
   items(0).position_y = 350
