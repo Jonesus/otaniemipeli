@@ -52,6 +52,7 @@ object Game extends SimpleSwingApplication {
     processKeys()
     viewport.update()
     player.update()
+    player.checkCollisions(world.items)
     world.update()
   }  
   

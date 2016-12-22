@@ -23,7 +23,7 @@ class Map {
   var background_music_filename = ""
   
   var slices = ArrayBuffer[Slice]()
-  val items = ArrayBuffer[Item]()
+  var items = ArrayBuffer[Item]()
 }
 
 class Slice {
@@ -43,10 +43,12 @@ class Slice {
   
   def populate = {
     var i = 0
-    for (i <- 0 to rand.nextInt(2)) {
+    for (i <- 0 to rand.nextInt(1)) {
       items += new Olutpullo
       items(i).position_x = 130 + rand.nextInt(340)
-      items(i).position_y = 20 + rand.nextInt(160)
+      items(i).position_y = 20 + rand.nextInt(100)
+      items(i).width = 20
+      items(i).height = 64
       items(i).slice_index = index
     }
   }

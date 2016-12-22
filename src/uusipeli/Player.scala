@@ -4,7 +4,8 @@ import java.awt.image.BufferedImage
 import java.awt.Color
 import javax.imageio.ImageIO
 import java.io.File
-
+import scala.collection.mutable.ArrayBuffer
+import uusipeli.model._
 
 class Player {
   
@@ -21,8 +22,8 @@ class Player {
   
   val Y_RESTING_SPEED = 2  // Constant speed down
   
-  var width = 40
-  var height = 40
+  var width = 128
+  var height = 128
   
   /* Player walking animation */
   var avatar_filename_right = "gfx/128 pixel teekkari oikea.png"
@@ -81,8 +82,37 @@ class Player {
     position_y += dy
   }
   
+  
   def update() = {
+    updatePosition()
     
+  }
+  
+  
+  def intersects(player: Player, item: Item) : Boolean = {
+    val itemX = item.position_x
+    val itemY = item.position_y + (item.slice_index * SLICE_HEIGHT)
+    val playerX = player.position_x
+    val playerY = player.position_y
+    
+    if (itemX < playerX + player.width && itemX + item.width > playerX &&
+        itemY < playerY + player.height && itemY + item.height > playerY) {
+      return true
+    }
+    return false
+  }
+  
+  
+  def checkCollisions(items: ArrayBuffer[Item]) = {
+    for (item <- items) {
+      if (intersects(this, item)) {
+        println("moi")
+      }
+    }
+  }
+  
+  
+  def updatePosition() = {
     /* Checks if the player is accelerating or decelerating
      * and changes current frame delta vectors accordingly
      */
@@ -106,6 +136,7 @@ class Player {
     deltaX = 0
     deltaY = 0
   }
+  
   
   /* Not in use any more. */
   def drawImage(): BufferedImage = {
