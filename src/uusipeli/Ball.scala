@@ -9,7 +9,7 @@ class Ball extends Item {
   width = 20
   height = 20
   
-  val image = drawImage()
+  image = drawImage()
   
   override def render: BufferedImage = {
     return image
