@@ -22,7 +22,7 @@ object Game extends SimpleSwingApplication {
   
   /* Game window width and height */
   val window_width = WINDOW_WIDTH
-  val window_height = 600
+  val window_height = WINDOW_HEIGHT
   
   /* Game window title */
   val window_title = "Otaniemipelikö?"
