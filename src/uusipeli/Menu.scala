@@ -5,7 +5,7 @@ import swing._
 import event._
 import Swing._
 import ListView._
-
+/*
 object Menu extends SimpleSwingApplication {
   def top = new MainFrame{
     title = "Otaniemipeli"
@@ -29,3 +29,4 @@ object Menu extends SimpleSwingApplication {
     }
   }
 }
+*/
