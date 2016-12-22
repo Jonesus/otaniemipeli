@@ -3,24 +3,43 @@ package uusipeli
 import java.awt.image.BufferedImage
 import java.awt.Graphics2D
 import java.awt.Color
+import javax.imageio.ImageIO
+import java.io.File
+
 
 class Olutpullo extends Item {
   
-  width = 20
-  height = 20
-  
-  val image = drawImage()
+  val image = Olutpullo.getImage()
+  width = image.getWidth()
+  height = image.getHeight()
   
   override def render: BufferedImage = {
     return image
   }
+}
+
+object Olutpullo {
+  val imageFilename = "gfx/64 kalja.png"
   
-  def drawImage(): BufferedImage = {
-    val bottle = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    val g = bottle.createGraphics()
-    g.setColor(Color.blue)
-    g.fillOval(0, 0, 20, 20)
+  var image: Option[BufferedImage] = None
+  
+  def getImage(): BufferedImage = {
+    if (this.image.isDefined) {
     
-    return bottle
+      return this.image.get
+    
+    } else {
+      
+      /* Load the item image. */
+      try {
+        this.image = Some(ImageIO.read(new File(imageFilename)))
+      } catch {
+        case e: Exception => println("Error: Could not read item image file.")
+        this.image = Some(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
+      }
+    
+    }
+ 
+    this.image.get
   }
 }
