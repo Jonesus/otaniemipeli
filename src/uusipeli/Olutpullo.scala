@@ -9,37 +9,18 @@ import java.io.File
 
 class Olutpullo extends Item {
   
-  val image = Olutpullo.getImage()
-  width = image.getWidth()
-  height = image.getHeight()
+  setImage(Olutpullo.getImage())
   
-  override def render: BufferedImage = {
-    return image
+  override def processCollision(p: Player) = {
+    /*
+     * Here we process the collision:
+     * - we change player's state
+     * - we play a sound
+     */
   }
 }
 
-object Olutpullo {
-  val imageFilename = "gfx/64 kalja.png"
-  
-  var image: Option[BufferedImage] = None
-  
-  def getImage(): BufferedImage = {
-    if (this.image.isDefined) {
-    
-      return this.image.get
-    
-    } else {
-      
-      /* Load the item image. */
-      try {
-        this.image = Some(ImageIO.read(new File(imageFilename)))
-      } catch {
-        case e: Exception => println("Error: Could not read item image file.")
-        this.image = Some(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
-      }
-    
-    }
- 
-    this.image.get
-  }
+object Olutpullo extends ItemStatic {
+  imageFilename = "gfx/64 kalja.png"
+  soundFilename = "sound/glass.wav"
 }
