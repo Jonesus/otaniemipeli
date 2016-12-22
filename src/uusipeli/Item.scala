@@ -6,6 +6,8 @@ class Item {
   var position_x: Int = 0
   var position_y: Int = 0
   
+  var slice_index = 0
+  
   var width: Int = 0
   var height: Int = 0
   

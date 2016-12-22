@@ -17,6 +17,7 @@ class World(player: Player) {
   
   /* Items */
   var items = ArrayBuffer[Item]()
+  var slices = ArrayBuffer[Slice]()
   
   /* Background image */
   var background_image: Option[BufferedImage] = None
@@ -24,6 +25,7 @@ class World(player: Player) {
   def loadMap(m: Map) = {
     /* We populate this world with the provided map. */
     items = m.items
+    slices = m.slices
     
     /* Player's starting position. */
     player.position_x = m.player_position_x
