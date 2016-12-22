@@ -44,7 +44,7 @@ class Slice {
   def populate = {
     var i = 0
     for (i <- 0 to rand.nextInt(2)) {
-      items += new Ball
+      items += new Olutpullo
       items(i).position_x = 130 + rand.nextInt(340)
       items(i).position_y = 20 + rand.nextInt(160)
       items(i).slice_index = index
