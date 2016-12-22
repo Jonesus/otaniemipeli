@@ -22,6 +22,6 @@ class LevelOne extends Map {
     slices += new Slice
     slices(i).index = i
     slices(i).populate
-    items ++ slices(i).items
+    items = items ++ slices(i).items
   }
 }
