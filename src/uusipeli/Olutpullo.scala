@@ -13,8 +13,8 @@ class Olutpullo extends Item {
   
   setImage(Olutpullo.getImage())
   
-  var olut = "../sounds/olutpullo.mp3"
-  var olutaani = new Media(olut);
+  //var olut = "../sounds/olutpullo.mp3"
+  var aani = new Media(soundFilename);
   
   override def processCollision(p: Player) = {
     this.active = 0
@@ -23,12 +23,12 @@ class Olutpullo extends Item {
      * - we change player's state
      * - we play a sound
      */
-    var mediaPlayer = new MediaPlayer(olutaani)
+    var mediaPlayer = new MediaPlayer(aani)
     mediaPlayer.play();
   }
 }
 
 object Olutpullo extends ItemStatic {
   imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/glass.wav"
+  soundFilename = "sound/olutpullo.mp3"
 }
