@@ -9,26 +9,27 @@ import javafx.scene.media.Media
 import javafx.scene.media.MediaPlayer
 
 
-class Olutpullo extends Item {
+class Noppa extends Item {
   
   setImage(Olutpullo.getImage())
   
-  //var olut = "../sounds/olutpullo.mp3"
-  var aani = new Media(soundFilename);
+  var noppa = "../sounds/noppa.mp3"
+  var noppaaani = new Media(noppa);
   
   override def processCollision(p: Player) = {
     this.active = 0
+    p.score += 1
     /*
      * Here we process the collision:
      * - we change player's state
      * - we play a sound
      */
-    var mediaPlayer = new MediaPlayer(aani)
+    var mediaPlayer = new MediaPlayer(noppaaani)
     mediaPlayer.play();
   }
 }
 
 object Olutpullo extends ItemStatic {
   imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/olutpullo.mp3"
+  soundFilename = "sound/glass.wav"
 }
