@@ -29,7 +29,7 @@ class Nakki extends Item {
   }
 }
 
-object Olutpullo extends ItemStatic {
-  imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/glass.wav"
+object Nakki extends ItemStatic {
+  imageFilename = "gfx/64 nakki.png"
+  soundFilename = "sounds/nakki.mp3"
 }

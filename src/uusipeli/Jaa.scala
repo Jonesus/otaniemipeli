@@ -11,13 +11,13 @@ import javafx.scene.media.MediaPlayer
 
 class Jaa extends Item {
   
-  setImage(Olutpullo.getImage())
+  setImage(Jaa.getImage())
   
   var slip = "../sounds/slip.mp3"
   var slipaani = new Media(slip);
   
   override def processCollision(p: Player) = {
-    p.
+    
     /*
      * Here we process the collision:
      * - we change player's state
@@ -28,7 +28,7 @@ class Jaa extends Item {
   }
 }
 
-object Olutpullo extends ItemStatic {
-  imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/glass.wav"
+object Jaa extends ItemStatic {
+  imageFilename = "gfx/64 jaa.png"
+  soundFilename = "sounds/slip.mp3"
 }

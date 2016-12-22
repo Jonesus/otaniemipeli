@@ -29,7 +29,7 @@ class Noppa extends Item {
   }
 }
 
-object Olutpullo extends ItemStatic {
-  imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/glass.wav"
+object Noppa extends ItemStatic {
+  imageFilename = "gfx/64 noppa.png"
+  soundFilename = "sounds/noppa.mp3"
 }

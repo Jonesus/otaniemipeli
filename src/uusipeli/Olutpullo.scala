@@ -30,5 +30,5 @@ class Olutpullo extends Item {
 
 object Olutpullo extends ItemStatic {
   imageFilename = "gfx/64 kalja.png"
-  soundFilename = "sound/olutpullo.mp3"
+  soundFilename = "sounds/olutpullo.mp3"
 }
