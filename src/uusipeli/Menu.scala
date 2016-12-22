@@ -1,6 +1,7 @@
 package uusipeli
 package scala.swing
 
+//tarkista importtien tarpeellisuus
 import swing._
 import event._
 import Swing._
