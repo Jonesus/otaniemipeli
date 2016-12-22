@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer
 import java.awt.image.BufferedImage
+import uusipeli.model._
 
 /*
  * This object is the main application of the game.
@@ -20,7 +21,7 @@ object Game extends SimpleSwingApplication {
   
   
   /* Game window width and height */
-  val window_width = 1000
+  val window_width = WINDOW_WIDTH
   val window_height = 600
   
   /* Game window title */

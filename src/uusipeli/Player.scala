@@ -135,6 +135,15 @@ class Player {
     move(xVelocity, yVelocity)
     deltaX = 0
     deltaY = 0
+    
+    if (position_x < WALL_WIDTH) {
+      xVelocity = 0
+      position_x = WALL_WIDTH
+    }
+    if (position_x > SLICE_WIDTH - WALL_WIDTH - width) {
+      xVelocity = 0
+      position_x = SLICE_WIDTH - WALL_WIDTH - width
+    }
   }
   
   
