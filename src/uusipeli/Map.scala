@@ -10,6 +10,9 @@ import scala.util.Random
 
 
 class Map {
+  val rand = new scala.util.Random
+
+  
   var width = 0
   var height = 0
   
@@ -25,13 +28,11 @@ class Map {
 
 class Slice {
   val rand = new scala.util.Random
-  
+
   var index = 0
   val width = 600
   val height = 200
   val items = ArrayBuffer[Item]()
-  
-  populate
   
   val filename = "gfx/slice.png"
   val background_image = Some(ImageIO.read(new File(filename)))
@@ -46,6 +47,7 @@ class Slice {
       items += new Ball
       items(i).position_x = 130 + rand.nextInt(340)
       items(i).position_y = 20 + rand.nextInt(160)
+      items(i).slice_index = index
     }
   }
   

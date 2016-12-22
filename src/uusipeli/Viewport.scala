@@ -58,46 +58,13 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
       }
     }
     
-    
-    
-    
-    /*
-    /* First we draw the background image, if it exists. */
-    if (world.background_image.isDefined) {
-      viewport_graphics.drawImage(
-          world.background_image.get,
-          0,
-          0 - (viewport_y - 300),  // Keep background image position static
-          null)
-    }*/
-      
-    /* Then we draw the items. */
-    
-    
-    /*
-    for (item <- world.items) {
-      // Is this object visible?
-      if (
-        item.position_x > (viewport_x - viewport_width / 2)
-        && item.position_x < (viewport_x + viewport_width / 2)
-        && item.position_y > (viewport_y - viewport_height / 2)
-        && item.position_y < (viewport_y + viewport_height / 2)) {
-            
-        viewport_graphics.drawImage(
-            item.render,
-            (viewport_width / 2) + (item.position_x - viewport_x) - (item.width / 2),
-            (viewport_height / 2) + (item.position_y - viewport_y) - (item.height / 2),
-            null)
-      }
-    }
-    */
-      
-    /* Finally, we draw the player. */
+
     viewport_graphics.drawImage(
             world.getPlayer.render,
-            (viewport_width / 2) + (world.getPlayer.position_x.toInt - viewport_x) - (world.getPlayer.width / 2),
-            (viewport_height / 2) + (world.getPlayer.position_y.toInt - viewport_y) - (world.getPlayer.height / 2),
+            world.getPlayer.position_x.toInt,
+            world.getPlayer.position_y.toInt - viewport_y,
             null)
+    
   }
 
   override def paintComponent(g: Graphics2D) {

@@ -7,7 +7,7 @@ class LevelOne extends Map {
   
   /* Player's starting position. */
   player_position_x = 300
-  player_position_y = 100
+  player_position_y = 300
   
   /* Background image file. */
   background_image_filename = "taustakuva.png"
@@ -15,22 +15,13 @@ class LevelOne extends Map {
   /* Background music file. */
   background_music_filename = "taustamusiikki.wav"
   
-  /* Here we add items to this map. */
- 
-  
-  items += new Ball
-  items += new Ball
-  
-  items(0).position_x = 300
-  items(0).position_y = 350
-  
-  items(1).position_x = 340
-  items(1).position_y = 280
-  
+  /* Generate map slices */
+
   var i = 0
   for (i <- 0 to 20) {
     slices += new Slice
     slices(i).index = i
+    slices(i).populate
     items ++ slices(i).items
   }
 }
