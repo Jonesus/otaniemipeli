@@ -19,6 +19,9 @@ object Game extends SimpleSwingApplication {
   var key_a = false
   var key_d = false
   
+  /* Reverse keys? */
+  var keysReversed = false
+  
   
   /* Game window width and height */
   val window_width = WINDOW_WIDTH
@@ -66,17 +69,33 @@ object Game extends SimpleSwingApplication {
   })
   
   def processKeys() {
-    if (key_w) {
-      player.turnUp()
-    }
-    if (key_s) {
-      player.turnDown()
-    }
-    if (key_a) {
-      player.turnLeft()
-    }
-    if (key_d) {
-      player.turnRight()
+    if (keysReversed == true) {
+      if (key_w) {
+        player.turnUp()
+      }
+      if (key_s) {
+        player.turnDown()
+      }
+      if (key_a) {
+        player.turnLeft()
+      }
+      if (key_d) {
+        player.turnRight()
+      }  
+    } else {
+      if (key_w) {
+        player.turnUp()
+      }
+      if (key_s) {
+        player.turnDown()
+      }
+      if (key_a) {
+        player.turnLeft()
+      }
+      if (key_d) {
+        player.turnRight()
+      }
+  
     }
   }
   
