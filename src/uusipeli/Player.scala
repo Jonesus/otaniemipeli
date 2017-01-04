@@ -20,7 +20,7 @@ class Player {
   
   val maxSpeedX = 10
   val maxSpeedY = 7
-  val acceleration = 1
+  var acceleration = 1
   
   val Y_RESTING_SPEED = 2  // Constant speed down
   

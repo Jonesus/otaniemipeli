@@ -1,6 +1,12 @@
 package uusipeli
 
-class Effect {
-  var timeout = 20
+abstract class Effect {
+  var timeout = 0
+  def start(player: Player){
+    
+  }
+  def end(player: Player){
+    
+  }
   
 }
