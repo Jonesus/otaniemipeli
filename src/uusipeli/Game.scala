@@ -132,7 +132,6 @@ object Game extends SimpleSwingApplication {
   }
   
   def addEffect(e: Effect) = {
-    ???
   }
   
   // Start the game loop.
