@@ -107,8 +107,8 @@ class Player {
   
   def checkCollisions(items: ArrayBuffer[Item]) = {
     for (item <- items) {
-      if (intersects(this, item)) {
-        println("moi")
+      if (intersects(this, item) && item.active == true) {
+        item.processCollision(this)
       }
     }
   }
