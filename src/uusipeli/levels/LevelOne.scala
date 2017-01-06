@@ -1,4 +1,7 @@
-package uusipeli
+package uusipeli.levels
+
+import uusipeli.Map
+import uusipeli.Slice
 
 class LevelOne extends Map {
   /* Dimensions of this level. */

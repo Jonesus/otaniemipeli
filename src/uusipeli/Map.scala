@@ -6,6 +6,7 @@ import java.awt.Graphics2D
 import javax.imageio.ImageIO
 import java.io.File
 import scala.util.Random
+import uusipeli.items.Olutpullo
 
 
 

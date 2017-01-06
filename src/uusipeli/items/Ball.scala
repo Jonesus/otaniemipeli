@@ -1,8 +1,8 @@
-package uusipeli
+package uusipeli.items
 
 import java.awt.image.BufferedImage
-import java.awt.Graphics2D
 import java.awt.Color
+import uusipeli.Item
 
 class Ball extends Item {
   

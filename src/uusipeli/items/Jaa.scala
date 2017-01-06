@@ -1,12 +1,10 @@
-package uusipeli
+package uusipeli.items
 
-import java.awt.image.BufferedImage
-import java.awt.Graphics2D
-import java.awt.Color
-import javax.imageio.ImageIO
-import java.io.File
 import javafx.scene.media.Media
 import javafx.scene.media.MediaPlayer
+import uusipeli.Item
+import uusipeli.ItemStatic
+import uusipeli.Player
 
 
 class Jaa extends Item {

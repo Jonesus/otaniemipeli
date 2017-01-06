@@ -1,12 +1,11 @@
-package uusipeli
+package uusipeli.items
 
-import java.awt.image.BufferedImage
-import java.awt.Graphics2D
-import java.awt.Color
-import javax.imageio.ImageIO
-import java.io.File
 import javafx.scene.media.Media
-import javafx.scene.media.MediaPlayer
+import uusipeli.effects.BeerEffect
+import uusipeli.Game
+import uusipeli.Item
+import uusipeli.ItemStatic
+import uusipeli.Player
 
 
 class Olutpullo extends Item {
@@ -23,8 +22,11 @@ class Olutpullo extends Item {
      * - we change player's state
      * - we play a sound
      */
+    /*
     var mediaPlayer = new MediaPlayer(aani)
     mediaPlayer.play();
+    */
+    Game.addEffect(new BeerEffect())
   }
 }
 

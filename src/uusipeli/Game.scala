@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer
 import java.awt.image.BufferedImage
 import uusipeli.model._
+import uusipeli.levels.LevelOne
 
 /*
  * This object is the main application of the game.
@@ -114,6 +115,7 @@ object Game extends SimpleSwingApplication {
       key_d = true
     }
   }
+  
   def keyReleased(k: String) = {
     if (k == "w") {
       key_w = false
@@ -129,6 +131,11 @@ object Game extends SimpleSwingApplication {
     }
   }
   
+  def addEffect(e: Effect) = {
+    ???
+  }
+  
+  // Start the game loop.
   renderingTimer.start()
 }
 
