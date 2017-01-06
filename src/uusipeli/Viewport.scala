@@ -49,11 +49,13 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
             null)
         
         for (item <- slice.items) {
-          viewport_graphics.drawImage(
-              item.render,
-              item.position_x,
-              slice.index * slice.height + item.position_y - viewport_y,
-              null)
+          if (item.active == true) {
+            viewport_graphics.drawImage(
+                item.render,
+                item.position_x,
+                slice.index * slice.height + item.position_y - viewport_y,
+                null)
+          }
         }
       }
     }
