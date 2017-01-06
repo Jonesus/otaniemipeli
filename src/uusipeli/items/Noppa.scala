@@ -16,7 +16,7 @@ class Noppa extends Item {
   var noppaaani = new Media(noppa);
   
   override def processCollision(p: Player) = {
-    this.active = 0
+    this.active = false
     p.score += 1
     /*
      * Here we process the collision:

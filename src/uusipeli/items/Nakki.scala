@@ -16,7 +16,7 @@ class Nakki extends Item {
   var nakkiaani = new Media(nakki);
   
   override def processCollision(p: Player) = {
-    this.active = 0
+    this.active = false
     p.score -= 5
     /*
      * Here we process the collision:

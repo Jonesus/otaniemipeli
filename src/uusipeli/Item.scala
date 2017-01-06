@@ -10,7 +10,7 @@ import java.io.File
 class Item {
   var position_x: Int = 0
   var position_y: Int = 0
-  var active = 1
+  var active = true
   
   var slice_index = 0
   
