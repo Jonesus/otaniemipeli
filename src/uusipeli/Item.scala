@@ -6,7 +6,6 @@ import java.awt.Color
 import javax.imageio.ImageIO
 import java.io.File
 
-
 class Item {
   var position_x: Int = 0
   var position_y: Int = 0
@@ -28,8 +27,11 @@ class Item {
     return this.image
   }
   
-  def processCollision(p: Player) = {
-    
+  /* Default collision behavior:
+   * - We deactivate the item, so it disappears from the screen.
+   */
+  def processCollision() = {
+    this.active = false
   }
   
   def update = {
