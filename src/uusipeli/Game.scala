@@ -8,6 +8,7 @@ import javax.swing.Timer
 import java.awt.image.BufferedImage
 import uusipeli.model._
 import uusipeli.levels.LevelOne
+import scala.collection.mutable.ArrayBuffer
 
 /*
  * This object is the main application of the game.
@@ -23,19 +24,20 @@ object Game extends SimpleSwingApplication {
   /* Reverse keys? */
   var keysReversed = false
   
-  
   /* Game window width and height */
   val window_width = WINDOW_WIDTH
   val window_height = WINDOW_HEIGHT
   
   /* Game window title */
-  val window_title = "Otaniemipelikö?"
+  val window_title = "Otaniemipeli"
   
   /* Frame rate */
   val frame_rate = 60
   
   val player = new Player
   val world = new World(player)
+  
+  val effects = ArrayBuffer[Effect]()
   
   world.loadMap(new LevelOne)
   world.loadResources()
@@ -54,6 +56,7 @@ object Game extends SimpleSwingApplication {
   }
   
   def update() = {
+    processEffects()
     processKeys()
     viewport.update()
     player.update()
@@ -61,7 +64,7 @@ object Game extends SimpleSwingApplication {
     world.update()
   }  
   
-  // Timer events
+  // Timer: Here we set up a timer that updates the game state and calls viewport.repaint.
   val renderingTimer = new Timer((1000 / frame_rate), new ActionListener() {
     override def actionPerformed(e: ActionEvent) {
       update()
@@ -78,10 +81,10 @@ object Game extends SimpleSwingApplication {
         player.turnDown()
       }
       if (key_a) {
-        player.turnLeft()
+        player.turnRight()
       }
       if (key_d) {
-        player.turnRight()
+        player.turnLeft()
       }  
     } else {
       if (key_w) {
@@ -96,7 +99,6 @@ object Game extends SimpleSwingApplication {
       if (key_d) {
         player.turnRight()
       }
-  
     }
   }
   
@@ -131,7 +133,26 @@ object Game extends SimpleSwingApplication {
     }
   }
   
-  def addEffect(e: Effect) = {
+  def addEffect(effect: Effect) = {
+    effect.startTime = scala.compat.Platform.currentTime
+    this.effects += effect
+    effect.start()
+  }
+  
+  def processEffects() = {
+    val currTime = scala.compat.Platform.currentTime
+    var oldEffects = ArrayBuffer[Effect]()
+    this.effects.foreach { x =>
+      if (currTime > (x.startTime + x.timeout)) {
+        x.end()
+        oldEffects += x
+      }
+    }
+    
+    /* Remove old effects from the array. */
+    if (oldEffects.size > 0) {
+      this.effects --= oldEffects
+    }
   }
   
   // Start the game loop.
