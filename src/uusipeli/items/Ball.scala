@@ -20,7 +20,6 @@ class Ball extends Item {
     val g = ball.createGraphics()
     g.setColor(Color.blue)
     g.fillOval(0, 0, 20, 20)
-    
     return ball
   }
 }

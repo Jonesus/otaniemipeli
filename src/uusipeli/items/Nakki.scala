@@ -1,34 +1,24 @@
 package uusipeli.items
 
-import javafx.scene.media.Media
-import javafx.scene.media.MediaPlayer
-import uusipeli.items.Olutpullo
 import uusipeli.Item
 import uusipeli.ItemStatic
+import uusipeli.Game
 import uusipeli.Player
 
 
 class Nakki extends Item {
   
-  setImage(Olutpullo.getImage())
+  setImage(Nakki.getImage())
+  Nakki.loadSound()
   
-  var nakki = "../sounds/nakki.mp3"
-  var nakkiaani = new Media(nakki);
-  
-  override def processCollision(p: Player) = {
+  override def processCollision() = {
     this.active = false
-    p.score -= 5
-    /*
-     * Here we process the collision:
-     * - we change player's state
-     * - we play a sound
-     */
-    var mediaPlayer = new MediaPlayer(nakkiaani)
-    mediaPlayer.play();
+    Game.player.score -= 5
+    Nakki.playSound()
   }
 }
 
 object Nakki extends ItemStatic {
   imageFilename = "gfx/64 nakki.png"
-  soundFilename = "sounds/nakki.mp3"
+  soundFilename = "sounds/nakki.wav"
 }

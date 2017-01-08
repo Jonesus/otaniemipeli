@@ -1,34 +1,24 @@
 package uusipeli.items
 
-import javafx.scene.media.Media
-import javafx.scene.media.MediaPlayer
-import uusipeli.items.Olutpullo
 import uusipeli.Item
 import uusipeli.ItemStatic
+import uusipeli.Game
 import uusipeli.Player
 
 
 class Noppa extends Item {
   
-  setImage(Olutpullo.getImage())
+  setImage(Noppa.getImage())
+  Noppa.loadSound()
   
-  var noppa = "../sounds/noppa.mp3"
-  var noppaaani = new Media(noppa);
-  
-  override def processCollision(p: Player) = {
+  override def processCollision() = {
     this.active = false
-    p.score += 1
-    /*
-     * Here we process the collision:
-     * - we change player's state
-     * - we play a sound
-     */
-    var mediaPlayer = new MediaPlayer(noppaaani)
-    mediaPlayer.play();
+    Game.player.score += 1
+    Noppa.playSound()
   }
 }
 
 object Noppa extends ItemStatic {
   imageFilename = "gfx/64 noppa.png"
-  soundFilename = "sounds/noppa.mp3"
+  soundFilename = "sounds/noppa.wav"
 }
