@@ -22,34 +22,23 @@ class Player {
   val maxSpeedY = 7
   var acceleration = 1
   
-  val Y_RESTING_SPEED = 2  // Constant speed down
+  var Y_RESTING_SPEED = 2  // Constant speed down
   
   var width = 128
   var height = 128
   
   /* Player walking animation */
+  val playerAnimation = new Animation
   var avatar_filename_right = "gfx/128 pixel teekkari oikea.png"
   var avatar_filename_left = "gfx/128 pixel teekkari vasen.png"
-  var images = Array.ofDim[BufferedImage](2)
-  
-  var currImage = 0
-  val frameDuration = 400 // How many milliseconds to show one frame of the animation?
-  var lastRenderTime: Long = 0
   
   loadResources()
 
   def loadResources() = {
-    /* Load the avatar images. */
-    try {
-      images(0) = ImageIO.read(new File(avatar_filename_left))
-      images(1) = ImageIO.read(new File(avatar_filename_right))
-      width = images(0).getWidth()
-      height = images(0).getHeight()
-    } catch {
-      case e: Exception => println("Error: Could not read avatar image file.")
-      images(0) = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
-      images(0) = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
-    }
+    /* Load the animation for the player avatar. */
+    this.playerAnimation.frameDuration = 500
+    this.playerAnimation.addFrame(avatar_filename_left)
+    this.playerAnimation.addFrame(avatar_filename_right)
   }
   
   def turnUp() = {
@@ -70,13 +59,7 @@ class Player {
   
 
   def render: BufferedImage = {
-    val currTime = scala.compat.Platform.currentTime
-    
-    if (currTime > (lastRenderTime + frameDuration)) {
-      if (currImage == 0) currImage = 1 else currImage = 0
-      lastRenderTime = scala.compat.Platform.currentTime
-    }
-    return images(currImage)
+    return this.playerAnimation.render()
   }
   
   def move(dx: Int, dy: Int) = {
@@ -108,11 +91,10 @@ class Player {
   def checkCollisions(items: ArrayBuffer[Item]) = {
     for (item <- items) {
       if (intersects(this, item) && item.active == true) {
-        item.processCollision(this)
+        item.processCollision()
       }
     }
   }
-  
   
   def updatePosition() = {
     /* Checks if the player is accelerating or decelerating
