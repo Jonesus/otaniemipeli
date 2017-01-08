@@ -31,11 +31,11 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
   def render() = {
     val viewport_graphics = viewport_image.getGraphics
     
-    /* Fill the background. */
+    /* Clear the buffer. */
     viewport_graphics.clearRect(0, 0, viewport_width, viewport_height)
     
     
-    
+    /* Draw items from slices. */
     for (slice <- world.slices) {
       // Is this object visible?
       if (
@@ -60,7 +60,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
       }
     }
     
-
+    /* Draw player on top of the image. */
     viewport_graphics.drawImage(
             world.getPlayer.render,
             world.getPlayer.position_x.toInt,
