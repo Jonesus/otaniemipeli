@@ -52,8 +52,8 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
           if (item.active == true) {
             viewport_graphics.drawImage(
                 item.render,
-                item.position_x,
-                slice.index * slice.height + item.position_y - viewport_y,
+                item.position_x - (item.width / 2),
+                slice.index * slice.height + (item.position_y - (item.height / 2)) - viewport_y,
                 null)
           }
         }
