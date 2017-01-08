@@ -1,14 +1,14 @@
 package uusipeli
 
 abstract class Effect {
-  var startTime = 0
+  var startTime: Long = 0
   var timeout = 0
   
-  def start(player: Player){
-    
-  }
-  def end(player: Player){
+  def start() = {
     
   }
   
+  def end() = {
+    
+  }
 }
