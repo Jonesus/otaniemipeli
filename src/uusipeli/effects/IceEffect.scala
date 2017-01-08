@@ -1,17 +1,18 @@
 package uusipeli.effects
 
 import uusipeli.Effect
-import uusipeli.Player
+import uusipeli.Game
 
 class IceEffect extends Effect {
   
-  timeout = 400
+  timeout = 4000
+  val ratio = 4
   
-  override def start(player: Player)={
-    player.acceleration = 2
+  override def start() = {
+    Game.player.Y_RESTING_SPEED = Game.player.Y_RESTING_SPEED * ratio
   }
   
-  override def end(player: Player)={
-    player.acceleration = 1
+  override def end() = {
+    Game.player.Y_RESTING_SPEED = Game.player.Y_RESTING_SPEED / ratio
   }
 }

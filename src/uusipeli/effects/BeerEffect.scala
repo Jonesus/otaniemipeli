@@ -6,13 +6,15 @@ import uusipeli.Player
 
 class BeerEffect extends Effect {
   
-  timeout = 800
+  timeout = 4000
   
-  override def start(p: Player) = {
+  override def start() = {
     Game.keysReversed = true
+    // println("BeerEffect started.")
   }
   
-  override def end(p: Player) = {
+  override def end() = {
     Game.keysReversed = false
+    // println("BeerEffect ended.")
   }
 }
