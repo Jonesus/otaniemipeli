@@ -28,8 +28,8 @@ class Slice(filename: String) {
     for (i <- 0 to rand.nextInt(1)) {
       val n: Option[Item] = randomItem()
       n.foreach { i =>
-        i.position_x = 130 + rand.nextInt(340)
-        i.position_y = 20 + rand.nextInt(100)
+        i.position_x = 160 + rand.nextInt(704)
+        i.position_y = 32 + rand.nextInt(64)
         i.slice_index = index
         this.items += i 
       }
