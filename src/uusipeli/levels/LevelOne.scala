@@ -19,9 +19,10 @@ class LevelOne extends Map {
   background_music_filename = "music/level1_music.wav"
   
   /* Generate map slices */
-
-  var i = 0
-  for (i <- 0 to 20) {
+  slices += new Slice
+  slices += new Slice
+  slices += new Slice
+  for (i <- 3 to 20) {
     slices += new Slice
     slices(i).index = i
     slices(i).populate
