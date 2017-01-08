@@ -7,16 +7,17 @@ import javax.imageio.ImageIO
 import java.io.File
 import scala.util.Random
 import uusipeli.items._
+import uusipeli.model._
 
-class Slice {
+class Slice(filename: String) {
   val rand = new scala.util.Random
 
   var index = 0
-  val width = 600
-  val height = 200
+  val width = SLICE_WIDTH
+  val height = SLICE_HEIGHT
+  
   val items = ArrayBuffer[Item]()
   
-  val filename = "gfx/slice.png"
   val background_image = Some(ImageIO.read(new File(filename)))
   
   def render: BufferedImage = {

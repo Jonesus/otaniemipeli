@@ -18,12 +18,16 @@ class LevelOne extends Map {
   /* Background music file. */
   background_music_filename = "music/level1_music.wav"
   
+  val rand = new scala.util.Random
+  val bg_files = List("gfx/bg1.png", "gfx/bg2.png", "gfx/bg3.png", "gfx/bg4.png")
+  
   /* Generate map slices */
-  slices += new Slice
-  slices += new Slice
-  slices += new Slice
-  for (i <- 3 to 20) {
-    slices += new Slice
+  slices += new Slice("gfx/bg1.png")
+  slices += new Slice("gfx/bg2.png")
+  slices += new Slice("gfx/bg3.png")
+  
+  for (i <- 3 to 50) {
+    slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
     slices(i).index = i
     slices(i).populate
     items = items ++ slices(i).items
