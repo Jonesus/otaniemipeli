@@ -4,6 +4,7 @@ import uusipeli.Item
 import uusipeli.ItemStatic
 import uusipeli.Game
 import uusipeli.Player
+import uusipeli.effects.IceEffect
 
 
 class Jaa extends Item {
@@ -14,6 +15,7 @@ class Jaa extends Item {
   override def processCollision() = {
     this.active = false
     Jaa.playSound()
+    Game.addEffect(new IceEffect())
   }
 }
 
