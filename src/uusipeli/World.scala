@@ -35,7 +35,7 @@ class World(player: Player) {
     background_image_filename = m.background_image_filename
     
     /* Background music filename. */
-    background_music_filename = background_music_filename
+    background_music_filename = m.background_music_filename
   }
   
   def loadResources() = {
