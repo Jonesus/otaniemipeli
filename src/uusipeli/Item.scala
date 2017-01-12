@@ -9,10 +9,16 @@ import java.io.File
 class Item {
   var position_x: Int = 0
   var position_y: Int = 0
+  
+  /* Is this item active? Should collisions be processed? */
   var active = true
+  
+  /* Is this item visible on the map? */
+  var visible = true
   
   var slice_index = 0
   
+  /* Width and height of the image. */
   var width: Int = 0
   var height: Int = 0
   
