@@ -75,8 +75,10 @@ class Player {
   
   
   def intersects(player: Player, item: Item) : Boolean = {
+    // Here we assume that the slice is as wide as the world.
     val itemX = item.position_x
     val itemY = item.position_y + (item.slice_index * SLICE_HEIGHT)
+    
     val playerX = player.position_x
     val playerY = player.position_y
     
@@ -120,13 +122,13 @@ class Player {
     deltaX = 0
     deltaY = 0
     
-    if (position_x < WALL_WIDTH) {
+    if ((position_x - (width / 2)) < WALL_WIDTH) {
       xVelocity = 0
-      position_x = WALL_WIDTH
+      position_x = WALL_WIDTH + (width / 2)
     }
-    if (position_x > SLICE_WIDTH - WALL_WIDTH - width) {
+    if ((position_x + (width / 2)) > (SLICE_WIDTH - WALL_WIDTH)) {
       xVelocity = 0
-      position_x = SLICE_WIDTH - WALL_WIDTH - width
+      position_x = SLICE_WIDTH - WALL_WIDTH - (width / 2)
     }
   }
   
