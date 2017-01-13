@@ -13,6 +13,7 @@ class Noppa extends Item {
   
   override def processCollision() = {
     this.active = false
+    this.visible = false
     Game.player.score += 1
     Noppa.playSound()
   }

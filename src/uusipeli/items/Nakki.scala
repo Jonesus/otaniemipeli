@@ -13,6 +13,7 @@ class Nakki extends Item {
   
   override def processCollision() = {
     this.active = false
+    this.visible = false
     Game.player.score -= 5
     Nakki.playSound()
   }

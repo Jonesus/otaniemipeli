@@ -11,6 +11,7 @@ class Kivi extends Item {
  
   override def processCollision() = {
     this.active = false
+    this.visible = false
     Kivi.playSound()
     Game.player.health -= 1
   }

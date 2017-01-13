@@ -12,12 +12,8 @@ class Olutpullo extends Item {
   Olutpullo.loadSound()
   
   override def processCollision() = {
-    /*
-     * Here we process the collision:
-     * - we change the player's state
-     * - we play a sound
-     */
     this.active = false
+    this.visible = false
     Olutpullo.playSound()
     Game.addEffect(new BeerEffect())
   }
