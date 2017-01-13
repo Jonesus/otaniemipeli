@@ -11,9 +11,12 @@ import uusipeli.model._
  * Viewport_x and viewport_y: The middle of the viewport in world coordinates.
  */
 
-class Viewport(world: World, viewport_width: Int, viewport_height: Int, var viewport_x: Int, var viewport_y: Int) extends Panel {
+class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
   // Background color the the viewport.
   this.background = Color.black
+  
+  var viewport_x = viewport_start_x
+  var viewport_y = viewport_start_y
   
   val viewport_image = new BufferedImage(viewport_width, viewport_height, BufferedImage.TYPE_INT_ARGB)
   
@@ -38,6 +41,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
     
     case KeyTyped(_, 'P', _, _) => Game.pauseKeyPressed()
     case KeyTyped(_, 'p', _, _) => Game.pauseKeyPressed()
+    /*
+    case KeyTyped(_, 'N', _, _) => Game.newGameKeyPressed()
+    case KeyTyped(_, 'n', _, _) => Game.newGameKeyPressed()    
+  	*/
   }
   
   def render() = {
@@ -130,5 +137,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
   
   def update() = {
     viewport_y += 3  // Scroll screen downwards
+  }
+  
+  def reset() = {
+    this.viewport_x = this.viewport_start_x
+    this.viewport_y = this.viewport_start_y
   }
 }
