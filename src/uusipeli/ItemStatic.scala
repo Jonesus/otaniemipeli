@@ -21,7 +21,7 @@ class ItemStatic {
     if (wavClip.isDefined) return
     
     try {
-      wavClip = Some(AudioSystem.getClip())
+      wavClip = Some(AudioSystem.getClip(null))
       wavClip.get.open(AudioSystem.getAudioInputStream(new File(soundFilename)))
     } catch {
       case e: Exception => println("Could not open sound file " + soundFilename + ": " + e.toString())

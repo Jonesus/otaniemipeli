@@ -70,7 +70,7 @@ class World(player: Player) {
     if (backgroundMusicClip.isDefined) return
     
     try {
-      backgroundMusicClip = Some(AudioSystem.getClip())
+      backgroundMusicClip = Some(AudioSystem.getClip(null))
       backgroundMusicClip.get.open(AudioSystem.getAudioInputStream(new File(background_music_filename)))
     } catch {
       case e: Exception => println("Could not open sound file " + background_music_filename + ": " + e.toString())
