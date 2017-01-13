@@ -19,6 +19,9 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
   var viewport_y = viewport_start_y
   
   val viewport_image = new BufferedImage(viewport_width, viewport_height, BufferedImage.TYPE_INT_ARGB)
+  val full_health = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
+  val no_health = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
+  val noppa32 = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
   
   // We set this component focusable and request focus, so we can react to keyboard events.
   focusable = true
@@ -106,7 +109,15 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
                 null)
           }
         }
-      }
+        
+        //Draw points and health
+        UI.drawImage(
+        UI_image,
+        null
+        WINDOW_WIDTH-50,
+        50
+        )
+       
     }
     
     /*
