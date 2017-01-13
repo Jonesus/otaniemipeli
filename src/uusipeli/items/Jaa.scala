@@ -13,9 +13,13 @@ class Jaa extends Item {
   Jaa.loadSound()
   
   override def processCollision() = {
-    this.active = false
-    Jaa.playSound()
-    Game.addEffect(new IceEffect())
+    // Process collision if this item is not disabled temporarily.
+    if (this.checkIfDisabledAndEnable()) {
+      Jaa.playSound()
+      Game.addEffect(new IceEffect())
+      // Disable for one second.
+      this.disableTemporarily(1000)
+    }
   }
 }
 
