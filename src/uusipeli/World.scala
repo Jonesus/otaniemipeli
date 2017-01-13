@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage
 import java.awt.Graphics2D
 import javax.imageio.ImageIO
 import java.io.File
+import java.io.File
+import javax.sound.sampled._
 
 class World(player: Player) {
   
@@ -45,6 +47,8 @@ class World(player: Player) {
     } catch {
       case e: Exception => println("Error: Could not read background image file.")
     }
+    
+    loadMusic()
   }
   
   def update() = {
@@ -56,5 +60,51 @@ class World(player: Player) {
   def getPlayer = {
     this.player
   }
-}
 
+  var backgroundMusicClip: Option[Clip] = None
+  
+  var backgroundMusicPosition: Long = 0
+  
+  /* We load the audio file to memory. */
+  def loadMusic(): Unit = {
+    if (backgroundMusicClip.isDefined) return
+    
+    try {
+      backgroundMusicClip = Some(AudioSystem.getClip())
+      backgroundMusicClip.get.open(AudioSystem.getAudioInputStream(new File(background_music_filename)))
+    } catch {
+      case e: Exception => println("Could not open sound file " + background_music_filename + ": " + e.toString())
+    }
+  }
+  
+  def playMusic() = {
+    this.backgroundMusicClip.foreach {x =>
+      x.setMicrosecondPosition(0)
+      x.start()
+    
+    }
+  }
+  
+  def stopMusic() = {
+    this.backgroundMusicClip.foreach { x => x.stop() }
+  }
+  
+  def pauseMusic() = {
+    this.backgroundMusicClip.foreach { x =>
+      this.backgroundMusicPosition = x.getMicrosecondPosition()
+      x.stop()    
+    }
+  }
+  
+  def continueMusic() = {
+    this.backgroundMusicClip.foreach {x =>
+      x.setMicrosecondPosition(this.backgroundMusicPosition)
+      x.start()
+    }
+  }
+  
+  def reset() = {
+    items.clear()
+    slices.clear()
+  }
+}

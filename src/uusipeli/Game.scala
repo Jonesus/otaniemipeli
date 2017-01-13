@@ -28,26 +28,29 @@ object Game extends SimpleSwingApplication {
   def startGame() = {
     world.loadMap(currLevel)
     world.loadResources()
-    
     this.started = true
+    world.playMusic()
     renderingTimer.start()
   }
   
   /* Stops the game. */
   def stopGame() = {
     this.started = false
+    world.stopMusic()
     renderingTimer.stop()
   }
   
   /* Pauses the game. */
   def pauseGame() = {
     this.paused = true
+    world.pauseMusic()
     renderingTimer.stop()
   }
   
   /* Continues a paused game. */
   def continueGame() = {
     this.paused = false
+    world.continueMusic()
     renderingTimer.start()
   }
   
@@ -59,6 +62,13 @@ object Game extends SimpleSwingApplication {
       this.continueGame()
     } else {
       this.pauseGame()
+    }
+  }
+  
+  def newGameKeyPressed() = {
+    if (this.started) {
+      this.stopGame()
+      this.startGame()
     }
   }
   
