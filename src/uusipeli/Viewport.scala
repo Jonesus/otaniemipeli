@@ -129,6 +129,6 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, var view
   }
   
   def update() = {
-    viewport_y += 2  // Scroll screen downwards
+    viewport_y += 3  // Scroll screen downwards
   }
 }
