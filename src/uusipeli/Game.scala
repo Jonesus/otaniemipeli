@@ -15,6 +15,53 @@ import scala.collection.mutable.ArrayBuffer
  */
 object Game extends SimpleSwingApplication {
   
+  /* Game state */
+  
+  /* Is the game running? */
+  var started = false
+  
+  /* Is the game paused? */
+  var paused = false
+  
+  /* Starts the game.
+   * */
+  def startGame() = {
+    world.loadMap(currLevel)
+    world.loadResources()
+    
+    this.started = true
+    renderingTimer.start()
+  }
+  
+  /* Stops the game. */
+  def stopGame() = {
+    this.started = false
+    renderingTimer.stop()
+  }
+  
+  /* Pauses the game. */
+  def pauseGame() = {
+    this.paused = true
+    renderingTimer.stop()
+  }
+  
+  /* Continues a paused game. */
+  def continueGame() = {
+    this.paused = false
+    renderingTimer.start()
+  }
+  
+  /* This method is called when the pause key is pressed.
+   * See Viewport.
+   */
+  def pauseKeyPressed() = {
+    if (this.paused) {
+      this.continueGame()
+    } else {
+      this.pauseGame()
+    }
+  }
+  
   /* Keys being held down */
   var key_w = false
   var key_s = false
@@ -37,10 +84,12 @@ object Game extends SimpleSwingApplication {
   val player = new Player
   val world = new World(player)
   
-  val effects = ArrayBuffer[Effect]()
   
-  world.loadMap(new LevelOne)
-  world.loadResources()
+  /* Current level. */
+  var currLevel = new LevelOne
+  
+  /* Effects, such as the "drunk effect" that last for a defined period of time. */
+  val effects = ArrayBuffer[Effect]()
   
   /* Viewport to the world */
   val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
@@ -56,12 +105,14 @@ object Game extends SimpleSwingApplication {
   }
   
   def update() = {
-    processEffects()
-    processKeys()
-    viewport.update()
-    player.update()
-    player.checkCollisions(world.items)
-    world.update()
+    if (this.started == true && this.paused != true) {
+      processKeys()
+      processEffects()
+      viewport.update()
+      player.update()
+      player.checkCollisions(world.items)
+      world.update()
+    }
   }  
   
   // Timer: Here we set up a timer that updates the game state and calls viewport.repaint.
@@ -156,6 +207,5 @@ object Game extends SimpleSwingApplication {
   }
   
   // Start the game loop.
-  renderingTimer.start()
+  startGame()
 }
-
