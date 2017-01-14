@@ -19,10 +19,11 @@ class Player {
   var score = 0
   
   val maxSpeedX = 10
-  val maxSpeedY = 7
+  val maxSpeedY = 15
   var acceleration = 1
   
   var Y_RESTING_SPEED = PLAYER_SPEED_DOWN  // Constant speed down
+  var level_speed_bonus = 0
   
   var width = 128
   var height = 128
@@ -134,8 +135,8 @@ class Player {
     if (deltaX == 0 && xVelocity != 0) {
       deltaX = if (xVelocity > 0) 0 - acceleration else acceleration
     }
-    if (deltaY == 0 && yVelocity != Y_RESTING_SPEED) {
-      deltaY = if (yVelocity > Y_RESTING_SPEED) 0 - acceleration else acceleration
+    if (yVelocity != Y_RESTING_SPEED + level_speed_bonus) {
+      deltaY = if (yVelocity > Y_RESTING_SPEED + level_speed_bonus) 0 - acceleration else acceleration
     }
     /* Calculates new velocity vectors while keeping max
      * velocity in control
@@ -170,6 +171,7 @@ class Player {
     yVelocity = 0
     health = 5
     score = 0
+    level_speed_bonus = 0
   }
 }
 
