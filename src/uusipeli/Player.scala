@@ -22,23 +22,52 @@ class Player {
   val maxSpeedY = 7
   var acceleration = 1
   
-  var Y_RESTING_SPEED = 2  // Constant speed down
+  var Y_RESTING_SPEED = PLAYER_SPEED_DOWN  // Constant speed down
   
   var width = 128
   var height = 128
   
   /* Player walking animation */
-  val playerAnimation = new Animation
-  var avatar_filename_right = "gfx/128 pixel teekkari oikea.png"
-  var avatar_filename_left = "gfx/128 pixel teekkari vasen.png"
+  val soberPlayerAnimation = new Animation
+  var sober_player_image_right_filename = "gfx/128 pixel teekkari oikea.png"
+  var sober_player_image_left_filename = "gfx/128 pixel teekkari vasen.png"
+  
+  /* Drunken player animation */
+  val drunkenPlayerAnimation = new Animation
+  var drunken_player_image_right_filename = "gfx/128 teekkari kanni oikea.png"
+  var drunken_player_image_left_filename = "gfx/128 teekkari kanni vasen.png"
+  
+  /* Dead player animation */
+  val deadPlayerAnimation = new Animation
+  var dead_player_image_right_filename = "gfx/128 teekkari dead oikea.png"
+  var dead_player_image_left_filename = "gfx/128 teekkari dead vasen.png" 
+  
+  /* Current animation */
+  var playerAnimation = soberPlayerAnimation
   
   loadResources()
 
   def loadResources() = {
-    /* Load the animation for the player avatar. */
-    this.playerAnimation.frameDuration = 500
-    this.playerAnimation.addFrame(avatar_filename_left)
-    this.playerAnimation.addFrame(avatar_filename_right)
+    /* Prepare the animations. */
+    this.soberPlayerAnimation.frameDuration = 500
+    this.soberPlayerAnimation.addFrame(sober_player_image_left_filename)
+    this.soberPlayerAnimation.addFrame(sober_player_image_right_filename)
+    
+    this.drunkenPlayerAnimation.frameDuration = 500
+    this.drunkenPlayerAnimation.addFrame(drunken_player_image_right_filename)
+    this.drunkenPlayerAnimation.addFrame(drunken_player_image_left_filename)
+    
+    this.deadPlayerAnimation.frameDuration = 500
+    this.deadPlayerAnimation.addFrame(dead_player_image_right_filename)
+    this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)    
+  }
+  
+  def playerIsDrunk() = {
+    this.playerAnimation = drunkenPlayerAnimation
+  }
+  
+  def playerIsSober() = {
+    this.playerAnimation = soberPlayerAnimation
   }
   
   def turnUp() = {
@@ -70,7 +99,6 @@ class Player {
   
   def update() = {
     updatePosition()
-    
   }
   
   
@@ -130,17 +158,6 @@ class Player {
       xVelocity = 0
       position_x = SLICE_WIDTH - WALL_WIDTH - (width / 2)
     }
-  }
-  
-  
-  /* Not in use any more. */
-  def drawImage(): BufferedImage = {
-    val avatar = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    val g = avatar.createGraphics()
-    g.setColor(Color.red)
-    g.fillOval(0, 0, 40, 40)
-    
-    return avatar
   }
 }
 

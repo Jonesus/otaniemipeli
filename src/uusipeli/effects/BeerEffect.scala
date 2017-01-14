@@ -10,11 +10,12 @@ class BeerEffect extends Effect {
   
   override def start() = {
     Game.keysReversed = true
-    // println("BeerEffect started.")
+    Game.player.playerIsDrunk()
+
   }
   
   override def end() = {
     Game.keysReversed = false
-    // println("BeerEffect ended.")
+    Game.player.playerIsSober()
   }
 }
