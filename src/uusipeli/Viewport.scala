@@ -114,7 +114,7 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
         UI.drawImage(
         UI_image,
         null
-        WINDOW_WIDTH-50,
+        WINDOW_WIDTH-37*5,
         50
         )
        
