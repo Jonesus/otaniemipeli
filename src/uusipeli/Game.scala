@@ -76,6 +76,8 @@ object Game extends SimpleSwingApplication {
   var key_s = false
   var key_a = false
   var key_d = false
+  var key_left = false
+  var key_right = false
   
   /* Reverse keys? */
   var keysReversed = false
@@ -152,10 +154,10 @@ object Game extends SimpleSwingApplication {
         player.turnDown()
       }
       */
-      if (key_a) {
+      if (key_a || key_left) {
         player.turnRight()
       }
-      if (key_d) {
+      if (key_d || key_right) {
         player.turnLeft()
       }  
     } else {
@@ -167,10 +169,10 @@ object Game extends SimpleSwingApplication {
         player.turnDown()
       }
       */
-      if (key_a) {
+      if (key_a || key_left) {
         player.turnLeft()
       }
-      if (key_d) {
+      if (key_d || key_right) {
         player.turnRight()
       }
     }
@@ -190,6 +192,12 @@ object Game extends SimpleSwingApplication {
     if (k == "d") {
       key_d = true
     }
+    if (k == "left"){
+      key_left = true
+    }
+    if (k == "right"){
+      key_right = true
+    }
   }
   
   def keyReleased(k: String) = {
@@ -204,6 +212,12 @@ object Game extends SimpleSwingApplication {
     }
     if (k == "d") {
       key_d = false
+    }
+    if (k == "left"){
+      key_left = false
+    }
+    if (k == "right"){
+      key_right = false
     }
   }
   

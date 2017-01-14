@@ -38,11 +38,15 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
     case KeyPressed(_, Key.S, _, _) => Game.keyPressed("s")
     case KeyPressed(_, Key.A, _, _) => Game.keyPressed("a")
     case KeyPressed(_, Key.D, _, _) => Game.keyPressed("d")
+    case KeyPressed(_, Key.Left,_,_) => Game.keyPressed("left")
+    case KeyPressed(_, Key.Right,_,_) => Game.keyPressed("right")
     
     case KeyReleased(_, Key.W, _, _) => Game.keyReleased("w")
     case KeyReleased(_, Key.S, _, _) => Game.keyReleased("s")
     case KeyReleased(_, Key.A, _, _) => Game.keyReleased("a")
     case KeyReleased(_, Key.D, _, _) => Game.keyReleased("d")
+    case KeyReleased(_, Key.Left,_,_) => Game.keyReleased("left")
+    case KeyReleased(_, Key.Right,_,_) => Game.keyReleased("right")
     
     case KeyTyped(_, 'P', _, _) => Game.pauseKeyPressed()
     case KeyTyped(_, 'p', _, _) => Game.pauseKeyPressed()
