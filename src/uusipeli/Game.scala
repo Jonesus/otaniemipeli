@@ -13,7 +13,7 @@ import scala.collection.mutable.ArrayBuffer
 /*
  * This object is the main application of the game.
  */
-object Game extends SimpleSwingApplication {
+object Game {
   
   /* Game state */
   
@@ -26,6 +26,8 @@ object Game extends SimpleSwingApplication {
   /* Starts the game.
    * */
   def startGame() = {
+    currLevel = new LevelOne
+    player = new Player
     world.loadMap(currLevel)
     world.loadResources()
     this.started = true
@@ -38,6 +40,10 @@ object Game extends SimpleSwingApplication {
     this.started = false
     world.stopMusic()
     renderingTimer.stop()
+    viewport.reset()
+    player.reset()
+    world.reset()
+    effects.clear()
   }
   
   /* Pauses the game. */
@@ -91,7 +97,7 @@ object Game extends SimpleSwingApplication {
   /* Frame rate */
   val frame_rate = 60
   
-  val player = new Player
+  var player = new Player
   val world = new World(player)
   
   
@@ -103,6 +109,8 @@ object Game extends SimpleSwingApplication {
   
   /* Viewport to the world */
   val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
+  viewport.preferredSize = new Dimension(window_width, window_height)
+
   
   def top = new MainFrame {
     ignoreRepaint = true
@@ -215,7 +223,4 @@ object Game extends SimpleSwingApplication {
       this.effects --= oldEffects
     }
   }
-  
-  // Start the game loop.
-  startGame()
 }

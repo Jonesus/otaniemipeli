@@ -142,5 +142,16 @@ class Player {
     
     return avatar
   }
+  
+  def reset() {
+    position_x = 0
+    position_y = 0
+    deltaX = 0  // Speed vectors for current frame
+    deltaY = 0
+    xVelocity = 0  // Speed vectors for current movement
+    yVelocity = 0
+    health = 5
+    score = 0
+  }
 }
 
