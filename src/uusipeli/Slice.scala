@@ -43,8 +43,8 @@ class Slice(filename: String) {
     if (itemType == 2) return Some(new Nakki())
     if (itemType == 3) return Some(new Jaa())
     if (itemType == 4) return Some(new Kivi())
-    // if (itemType == 5) return Some(new Prujut())
-    // if (itemType == 6) return Some(new Spagetti())
+    if (itemType == 5) return Some(new Prujut())
+    if (itemType == 6) return Some(new Spagetti())
     None
   }
 }
