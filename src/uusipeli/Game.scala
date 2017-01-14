@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer
 import java.awt.image.BufferedImage
 import uusipeli.model._
-import uusipeli.levels.LevelOne
+import uusipeli.levels._
 import scala.collection.mutable.ArrayBuffer
 
 /*
@@ -15,20 +15,37 @@ import scala.collection.mutable.ArrayBuffer
  */
 object Game {
   
-  /* Game state */
+  val window_width = WINDOW_WIDTH
+  val window_height = WINDOW_HEIGHT
+  val window_title = "Otaniemipeli"
+  val frame_rate = 60
   
-  /* Is the game running? */
+  /* Keys being held down */
+  var key_w = false
+  var key_s = false
+  var key_a = false
+  var key_d = false
+  
   var started = false
-  
-  /* Is the game paused? */
   var paused = false
+  var keysReversed = false
   
-  /* Starts the game.
-   * */
-  def startGame() = {
-    currLevel = new LevelOne
-    player = new Player
-    world.loadMap(currLevel)
+  var player = new Player
+  val world = new World(player)
+  var currLevel = new LevelOne
+  
+  /* Effects, such as the "drunk effect" that last for a defined period of time. */
+  var effects = ArrayBuffer[Effect]()
+  
+  /* Viewport to the world */
+  val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
+  viewport.preferredSize = new Dimension(window_width, window_height)
+  
+  
+  
+  /* Starts the game. */
+  def startGame(lvl: Map) = {
+    world.loadMap(lvl)
     world.loadResources()
     this.started = true
     world.playMusic()
@@ -43,7 +60,7 @@ object Game {
     viewport.reset()
     player.reset()
     world.reset()
-    effects.clear()
+    resetEffects()
   }
   
   /* Pauses the game. */
@@ -74,42 +91,9 @@ object Game {
   def newGameKeyPressed() = {
     if (this.started) {
       this.stopGame()
-      this.startGame()
+      this.startGame(new LevelOne)
     }
   }
-  
-  /* Keys being held down */
-  var key_w = false
-  var key_s = false
-  var key_a = false
-  var key_d = false
-  
-  /* Reverse keys? */
-  var keysReversed = false
-  
-  /* Game window width and height */
-  val window_width = WINDOW_WIDTH
-  val window_height = WINDOW_HEIGHT
-  
-  /* Game window title */
-  val window_title = "Otaniemipeli"
-  
-  /* Frame rate */
-  val frame_rate = 60
-  
-  var player = new Player
-  val world = new World(player)
-  
-  
-  /* Current level. */
-  var currLevel = new LevelOne
-  
-  /* Effects, such as the "drunk effect" that last for a defined period of time. */
-  val effects = ArrayBuffer[Effect]()
-  
-  /* Viewport to the world */
-  val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
-  viewport.preferredSize = new Dimension(window_width, window_height)
 
   
   def top = new MainFrame {
@@ -236,5 +220,14 @@ object Game {
     if (oldEffects.size > 0) {
       this.effects --= oldEffects
     }
+  }
+  
+  def resetEffects() = {
+    this.effects.foreach {
+      x => {
+        x.end()
+      }
+    }
+    this.effects.clear()
   }
 }
