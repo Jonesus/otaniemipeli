@@ -13,12 +13,17 @@ import uusipeli.model._
 
 class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
   // Background color the the viewport.
+  val omaUI = new UI
+  
   this.background = Color.black
   
   var viewport_x = viewport_start_x
   var viewport_y = viewport_start_y
   
   val viewport_image = new BufferedImage(viewport_width, viewport_height, BufferedImage.TYPE_INT_ARGB)
+  val full_health = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
+  val no_health = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
+  val noppa32 = new BufferedImage(32,32, BufferedImage.TYPE_INT_ARGB)
   
   // We set this component focusable and request focus, so we can react to keyboard events.
   focusable = true
@@ -33,11 +38,15 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
     case KeyPressed(_, Key.S, _, _) => Game.keyPressed("s")
     case KeyPressed(_, Key.A, _, _) => Game.keyPressed("a")
     case KeyPressed(_, Key.D, _, _) => Game.keyPressed("d")
+    case KeyPressed(_, Key.Left,_,_) => Game.keyPressed("left")
+    case KeyPressed(_, Key.Right,_,_) => Game.keyPressed("right")
     
     case KeyReleased(_, Key.W, _, _) => Game.keyReleased("w")
     case KeyReleased(_, Key.S, _, _) => Game.keyReleased("s")
     case KeyReleased(_, Key.A, _, _) => Game.keyReleased("a")
     case KeyReleased(_, Key.D, _, _) => Game.keyReleased("d")
+    case KeyReleased(_, Key.Left,_,_) => Game.keyReleased("left")
+    case KeyReleased(_, Key.Right,_,_) => Game.keyReleased("right")
     
     case KeyTyped(_, 'P', _, _) => Game.pauseKeyPressed()
     case KeyTyped(_, 'p', _, _) => Game.pauseKeyPressed()
@@ -108,6 +117,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
         }
       }
     }
+  
+    
+    
+    
     
     /*
      * Player's coordinates (middle point of the player) in viewport coordinates, where (0, 0) is the upper left corner.
@@ -124,6 +137,24 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
             
     /* TODO: Draw the level name. */
     
+            
+    //Draw noppa indicator and health
+            
+      viewport_graphics.drawImage(
+          omaUI.noppa32,
+          5 ,
+          5,
+          null)
+          
+      viewport_graphics.drawImage(
+          omaUI.drawHealthbar,
+          5,
+          42,
+          null)
+            
+      
+          
+      
   }
 
   override def paintComponent(g: Graphics2D) {
@@ -133,6 +164,8 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
       null,
       0,
       0)
+    // draw number of points
+    omaUI.pointsfunction(g)
   }
   
   def update() = {

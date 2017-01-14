@@ -10,5 +10,9 @@ package object model {
   
   /* Speed: pixels / frame */
   val PLAYER_SPEED_DOWN = 3.0
-
+  
+  /* When will viewport start scrolling? */
+  val START_VIEWPORT_SCROLL = 200
+  
+  val VIEWPORT_SCROLL_OFFSET = (this.WINDOW_HEIGHT / 2) - this.START_VIEWPORT_SCROLL
 }

@@ -21,8 +21,6 @@ object Game {
   val frame_rate = 60
   
   /* Keys being held down */
-  var key_w = false
-  var key_s = false
   var key_a = false
   var key_d = false
   
@@ -95,7 +93,6 @@ object Game {
       this.startGame(new LevelOne)
     }
   }
-
   
   def top = new MainFrame {
     ignoreRepaint = true
@@ -120,11 +117,11 @@ object Game {
   }
   
   /* This method syncs the viewports location with player y coordinate.
-   * This is activated when the player has reached the middle of the viewport. 
+   * This is activated when the player has reached START_VIEWPORT_SCROLL. 
    */
   def updateViewportLocation() = {
-    if (player.position_y > ((WINDOW_HEIGHT / 2) - 1)) {
-      viewport.viewport_y = player.position_y.toInt
+    if (player.position_y >= START_VIEWPORT_SCROLL) {
+      viewport.viewport_y = player.position_y.toInt + VIEWPORT_SCROLL_OFFSET
     }
   }
   
@@ -138,14 +135,6 @@ object Game {
   
   def processKeys() {
     if (keysReversed == true) {
-      /*
-      if (key_w) {
-        player.turnUp()
-      }
-      if (key_s) {
-        player.turnDown()
-      }
-      */
       if (key_a) {
         player.turnRight()
       }
@@ -153,14 +142,6 @@ object Game {
         player.turnLeft()
       }  
     } else {
-      /*
-      if (key_w) {
-        player.turnUp()
-      }
-      if (key_s) {
-        player.turnDown()
-      }
-      */
       if (key_a) {
         player.turnLeft()
       }
@@ -172,31 +153,31 @@ object Game {
   
   // Keyboard events
   def keyPressed(k: String) = {
-    if (k == "w") {
-      key_w = true
-    }
-    if (k == "s") {
-      key_s = true
-    }
     if (k == "a") {
       key_a = true
     }
     if (k == "d") {
       key_d = true
     }
+    if (k == "left"){
+      key_a = true
+    }
+    if (k == "right"){
+      key_d = true
+    }
   }
   
   def keyReleased(k: String) = {
-    if (k == "w") {
-      key_w = false
-    }
-    if (k == "s") {
-      key_s = false
-    }
     if (k == "a") {
       key_a = false
     }
     if (k == "d") {
+      key_d = false
+    }
+    if (k == "left"){
+      key_a= false
+    }
+    if (k == "right"){
       key_d = false
     }
   }
