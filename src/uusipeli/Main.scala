@@ -40,7 +40,7 @@ object Main extends SimpleSwingApplication {
     
     def startJMT(x: Unit) { start_game(new LevelOne) }
     def startSMT(x: Unit) { start_game(new LevelTwo) }
-    def startOTA(x: Unit) { start_game(new LevelTwo) }
+    def startOTA(x: Unit) { start_game(new LevelThree) }
     
     mymenu.JMTbutton.action = startJMT 
     mymenu.SMTbutton.action = startSMT
