@@ -11,7 +11,7 @@ class LevelOne extends Map {
   
   /* Player's starting position. */
   player_position_x = width / 2
-  player_position_y = 200
+  player_position_y = 100
   
   /* Background image file. */
   background_image_filename = "gfx/level1_background.png"
