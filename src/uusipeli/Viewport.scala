@@ -13,6 +13,8 @@ import uusipeli.model._
 
 class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
   // Background color the the viewport.
+  val omaUI = new UI
+  
   this.background = Color.black
   
   var viewport_x = viewport_start_x
@@ -132,23 +134,23 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
     /* TODO: Draw the level name. */
     
             
-    //Draw points and health
-      val omaUI = new UI
-      viewport_graphics.drawImage(
-          omaUI.drawHealthbar,
-          playerXViewport - 37*3-5,
-          5,
-          null)
+    //Draw noppa indicator and health
             
       viewport_graphics.drawImage(
           omaUI.noppa32,
-          playerXViewport - 37*3-5,
-          5+37,
+          5 ,
+          5,
           null)
           
-      val area = new TextArea {
-      font = new Font("Gamer", 37*2-5, 5+37)
-}
+      viewport_graphics.drawImage(
+          omaUI.drawHealthbar,
+          5,
+          42,
+          null)
+            
+      
+          
+      
   }
 
   override def paintComponent(g: Graphics2D) {
@@ -158,6 +160,8 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
       null,
       0,
       0)
+    // draw number of points
+    omaUI.pointsfunction(g)
   }
   
   def update() = {
