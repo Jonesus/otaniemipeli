@@ -1,5 +1,6 @@
 package uusipeli
 
+import uusipeli.menu._
 import scala.swing._
 import java.awt.Color
 import uusipeli.model._
@@ -15,8 +16,9 @@ import ListView._
 
 
 
-object Menu extends SimpleSwingApplication {
+object Main extends SimpleSwingApplication {
   val mygame = Game
+  val mymenu = new MenuView
   
   def top = new MainFrame {
     title = "Otaniemipeli"
@@ -34,7 +36,12 @@ object Menu extends SimpleSwingApplication {
       }
     }
     
-
+    
+    def go_to_menu2() {
+      mygame.stopGame
+      this.contents = mymenu
+    }
+    
     def go_to_menu() {
       mygame.stopGame
       this.contents = new FlowPanel() {
@@ -62,6 +69,6 @@ object Menu extends SimpleSwingApplication {
       mygame.startGame(lvl)
     }
     
-    go_to_menu()
+    go_to_menu2()
   }
 }
