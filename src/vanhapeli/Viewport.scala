@@ -1,5 +1,0 @@
-package vanhapeli
-
-object Viewport {
-
-}
