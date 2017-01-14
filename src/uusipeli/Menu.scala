@@ -4,6 +4,7 @@ import scala.swing._
 import java.awt.Color
 import uusipeli.model._
 import scala.collection.mutable.Buffer
+import uusipeli.levels._
 
 
 //tarkista importtien tarpeellisuus
@@ -23,18 +24,11 @@ object Menu extends SimpleSwingApplication {
     background = Color.black
     
     menuBar = new MenuBar {
-      contents += new Menu("Choose your level"){
-        contents += new MenuItem(Action("JMT"){
-          start_game()
-        })
-        contents += new MenuItem(Action("Otakaari"){
+      contents += new Menu("Menu"){
+        contents += new MenuItem(Action("Go to menu"){
           go_to_menu()
         })
-        contents += new MenuItem(Action("SMT"){
-          
-        })
         contents += new MenuItem(Action("Exit game"){
-          //game.dispose()
           quit()
         })
       }
@@ -47,23 +41,25 @@ object Menu extends SimpleSwingApplication {
         preferredSize = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
         val s = new Dimension(300, 50)
         contents += new Button(Action("JMT"){
-          start_game()
+          start_game(new LevelOne)
         }) {
           preferredSize = s
         }
-        contents += new Button("dsa") {
+        contents += new Button(Action("SMT"){
+          start_game(new LevelTwo)
+        }) {
           preferredSize = s
         }
-        contents += new Button("sad") {
+        contents += new Button("existence is pain") {
           preferredSize = s
         }
       }
     }
     
-    def start_game() {
+    def start_game(lvl: Map) {
       this.contents = mygame.viewport
       mygame.viewport.requestFocus()
-      mygame.startGame()
+      mygame.startGame(lvl)
     }
     
     go_to_menu()
