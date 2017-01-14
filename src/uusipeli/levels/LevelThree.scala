@@ -2,6 +2,7 @@ package uusipeli.levels
 
 import uusipeli.Map
 import uusipeli.Slice
+import uusipeli.Game
 import uusipeli.model._
 import uusipeli.items._
 
@@ -20,6 +21,8 @@ class LevelThree extends Map {
   val bg_files = List("gfx/tl1.png", "gfx/tl2.png", "gfx/tl3.png", "gfx/tl4.png")
   
   def reset() = {
+    Game.player.level_speed_bonus = 4
+    
     /* Generate map slices */
     slices.clear()
     
