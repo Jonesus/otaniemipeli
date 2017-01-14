@@ -87,7 +87,7 @@ object Game extends SimpleSwingApplication {
   val window_height = WINDOW_HEIGHT
   
   /* Game window title */
-  val window_title = "Otaniemipeli"
+  val window_title = "Teekkarisimulaattori"
   
   /* Frame rate */
   val frame_rate = 60
