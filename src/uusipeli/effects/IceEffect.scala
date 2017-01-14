@@ -7,10 +7,10 @@ import uusipeli.model._
 class IceEffect extends Effect {
   
   timeout = 4000
-  val ratio = 4
+  val bonus = 4
   
   override def start() = {
-    Game.player.Y_RESTING_SPEED = PLAYER_SPEED_DOWN * ratio
+    Game.player.Y_RESTING_SPEED = PLAYER_SPEED_DOWN + bonus
   }
   
   override def end() = {
