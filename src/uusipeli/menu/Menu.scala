@@ -25,7 +25,6 @@ class MenuView extends Panel {
   
   reactions += {
       case e: MouseClicked => {
-        println("Mouse clicked at " + e.point)
         for (button <- buttons) {
           button.isClicked(e.point)
         }
