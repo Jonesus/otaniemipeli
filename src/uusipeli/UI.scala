@@ -9,17 +9,17 @@ import java.io.File
 
 class UI {
   
-  BufferedImage health = ImageIO.read(new File("gfx/32 heart full.png"))
-  BufferedImage nohealth = ImageIO.read(new File("gfx/32 heart empty.png"))
-  BufferedImage noppa32 = ImageIO.read(new File("gfx/ 32 noppa.png"))
+  var health: BufferedImage = ImageIO.read(new File("gfx/32 heart full.png"))
+  var nohealth: BufferedImage = ImageIO.read(new File("gfx/32 heart empty.png"))
+  var noppa32: BufferedImage = ImageIO.read(new File("gfx/ 32 noppa.png"))
   
-  int w = 36*5
-  int h = 69
+  var w: Int = 36*5
+  var h: Int = 69
   
  
   
   def drawHealthbar() = {
-    Graphics healthbar = combined.getGraphics()
+    var healthbar: Graphics = combined.getGraphics()
     if (Player.points >= 1) {
       healthbar.drawImage(health, 0, 0, null);
     }
