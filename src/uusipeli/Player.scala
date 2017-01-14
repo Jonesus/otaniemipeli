@@ -99,6 +99,7 @@ class Player {
   
   def update() = {
     updatePosition()
+    if (health > 3) health = 3
   }
   
   
