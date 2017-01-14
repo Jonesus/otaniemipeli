@@ -16,6 +16,8 @@ class UI {
   var fontgraphic: Graphics2D = image.createGraphics()
   val fontFile = new File("gfx/Gamer.ttf")
   val gamerfont = Font.createFont(Font.TRUETYPE_FONT, fontFile)
+  val ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+  ge.registerFont(gamerfont);
   
   
   def drawHealthbar() : BufferedImage = {
