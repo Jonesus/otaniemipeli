@@ -15,7 +15,7 @@ class Player {
   var deltaY = 0
   var xVelocity = 0  // Speed vectors for current movement
   var yVelocity = 0
-  var health = 5
+  var health = 3
   var score = 0
   
   val maxSpeedX = 10

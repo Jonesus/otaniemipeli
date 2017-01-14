@@ -109,16 +109,12 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
                 null)
           }
         }
-        
-        //Draw points and health
-        UI.drawImage(
-        UI_image,
-        null
-        WINDOW_WIDTH-37*5,
-        50
-        )
-       
+      }
     }
+  
+    
+    
+    
     
     /*
      * Player's coordinates (middle point of the player) in viewport coordinates, where (0, 0) is the upper left corner.
@@ -135,6 +131,24 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
             
     /* TODO: Draw the level name. */
     
+            
+    //Draw points and health
+      val omaUI = new UI
+      viewport_graphics.drawImage(
+          omaUI.drawHealthbar,
+          playerXViewport - 37*3-5,
+          5,
+          null)
+            
+      viewport_graphics.drawImage(
+          omaUI.noppa32,
+          playerXViewport - 37*3-5,
+          5+37,
+          null)
+          
+      val area = new TextArea {
+      font = new Font("Gamer", 37*2-5, 5+37)
+}
   }
 
   override def paintComponent(g: Graphics2D) {
