@@ -14,8 +14,10 @@ class World(player: Player) {
   val width = 0
   val height = 0
   
+  /* File names */
   var background_image_filename = ""
   var background_music_filename = ""
+  var level_name_image_filename = ""
   
   /* Items */
   var items = ArrayBuffer[Item]()
@@ -23,6 +25,9 @@ class World(player: Player) {
   
   /* Background image */
   var background_image: Option[BufferedImage] = None
+  
+  /* Level name image */
+  var level_name_image: Option[BufferedImage] = None
  
   def loadMap(m: Map) = {
     /* We populate this world with the provided map. */
