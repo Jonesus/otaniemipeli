@@ -32,7 +32,7 @@ object Game {
   
   var player = new Player
   val world = new World(player)
-  var currLevel = new LevelOne
+  var currLevel: Map = new LevelOne
   
   /* Effects, such as the "drunk effect" that last for a defined period of time. */
   var effects = ArrayBuffer[Effect]()
@@ -45,6 +45,7 @@ object Game {
   
   /* Starts the game. */
   def startGame(lvl: Map) = {
+    currLevel = lvl
     world.loadMap(lvl)
     world.loadResources()
     this.started = true
