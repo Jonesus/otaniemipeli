@@ -34,7 +34,9 @@ class LevelOne extends Map {
   def reset() = {
     /* Generate map slices */
     slices.clear()
-    slices += new Slice("gfx/bg_testi.png")
+    
+    /* First add empty slices. */
+    slices += new Slice("gfx/bg1.png")
     slices += new Slice("gfx/bg2.png")
     slices += new Slice("gfx/bg3.png")
   

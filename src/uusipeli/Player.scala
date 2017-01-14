@@ -22,7 +22,7 @@ class Player {
   val maxSpeedY = 7
   var acceleration = 1
   
-  var Y_RESTING_SPEED = 2  // Constant speed down
+  var Y_RESTING_SPEED = PLAYER_SPEED_DOWN  // Constant speed down
   
   var width = 128
   var height = 128
@@ -70,7 +70,6 @@ class Player {
   
   def update() = {
     updatePosition()
-    
   }
   
   

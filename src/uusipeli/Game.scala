@@ -126,12 +126,22 @@ object Game {
     if (this.started == true && this.paused != true) {
       processKeys()
       processEffects()
-      viewport.update()
       player.update()
+      // viewport.update()
+      updateViewportLocation()
       player.checkCollisions(world.items)
       world.update()
     }
-  }  
+  }
+  
+  /* This method syncs the viewports location with player y coordinate.
+   * This is activated when the player has reached the middle of the viewport. 
+   */
+  def updateViewportLocation() = {
+    if (player.position_y > ((WINDOW_HEIGHT / 2) - 1)) {
+      viewport.viewport_y = player.position_y.toInt
+    }
+  }
   
   // Timer: Here we set up a timer that updates the game state and calls viewport.repaint.
   val renderingTimer = new Timer((1000 / frame_rate), new ActionListener() {
@@ -143,12 +153,14 @@ object Game {
   
   def processKeys() {
     if (keysReversed == true) {
+      /*
       if (key_w) {
         player.turnUp()
       }
       if (key_s) {
         player.turnDown()
       }
+      */
       if (key_a) {
         player.turnRight()
       }
@@ -156,12 +168,14 @@ object Game {
         player.turnLeft()
       }  
     } else {
+      /*
       if (key_w) {
         player.turnUp()
       }
       if (key_s) {
         player.turnDown()
       }
+      */
       if (key_a) {
         player.turnLeft()
       }
