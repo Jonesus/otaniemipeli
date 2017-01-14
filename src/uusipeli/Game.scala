@@ -30,7 +30,7 @@ object Game {
   
   var player = new Player
   val world = new World(player)
-  var currLevel: Map = new LevelOne
+  var currLevel: Map = _
   
   /* Effects, such as the "drunk effect" that last for a defined period of time. */
   var effects = ArrayBuffer[Effect]()
