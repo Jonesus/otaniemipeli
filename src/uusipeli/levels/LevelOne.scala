@@ -14,7 +14,6 @@ class LevelOne extends Map {
   player_position_x = width / 2
   player_position_y = 100
   
-  background_image_filename = "gfx/level1_background.png"
   background_music_filename = "sounds/pahkinansarkija.wav"
   
   val rand = new scala.util.Random
@@ -37,7 +36,7 @@ class LevelOne extends Map {
     slices(2).items += new LevelNameItem("gfx/title jmt.png")
     slices(2).items(0).position_x = WINDOW_WIDTH / 2
     
-    for (i <- 3 to 50) {
+    for (i <- 3 to 100) {
       slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
       slices(i).index = i
       slices(i).populate
