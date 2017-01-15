@@ -14,8 +14,6 @@ import event._
 import Swing._
 import ListView._
 
-
-
 object Main extends SimpleSwingApplication {
   val mygame = Game
   val mymenu = new MenuView
@@ -25,12 +23,10 @@ object Main extends SimpleSwingApplication {
     size = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
     background = Color.black
     
-    
     def go_to_menu() {
       mygame.stopGame
       this.contents = mymenu
     }
-    
     
     def start_game(lvl: Map) {
       this.contents = mygame.viewport
@@ -45,7 +41,6 @@ object Main extends SimpleSwingApplication {
     mymenu.JMTbutton.action = startJMT 
     mymenu.SMTbutton.action = startSMT
     mymenu.OTAbutton.action = startOTA
-
 
     go_to_menu()
   }
