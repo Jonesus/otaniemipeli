@@ -9,6 +9,7 @@ import uusipeli.items._
 
 class LevelTwo extends BaseLevel {
   length = 150
+  speed_bonus = 2
   background_music_filename = "sounds/pahkinansarkija.wav"
   level_title = "gfx/title smt.png"
   bg_files = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")

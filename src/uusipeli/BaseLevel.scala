@@ -17,6 +17,7 @@ class BaseLevel {
   val width = WINDOW_WIDTH
   val height = 1200
   var length = 100
+  var speed_bonus = 0
   
   /* Player's starting position. */
   var player_position_x = width / 2
@@ -46,6 +47,7 @@ class BaseLevel {
   
   
   def reset() = {
+    Game.player.level_speed_bonus = speed_bonus
     /* Generate map slices */
     slices.clear()
     
