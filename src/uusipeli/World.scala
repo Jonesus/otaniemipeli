@@ -15,44 +15,28 @@ class World(player: Player) {
   val height = 0
   
   /* File names */
-  var background_image_filename = ""
   var background_music_filename = ""
   var level_name_image_filename = ""
   
   /* Items */
   var items = ArrayBuffer[Item]()
   var slices = ArrayBuffer[Slice]()
-  
-  /* Background image */
-  var background_image: Option[BufferedImage] = None
-  
-  /* Level name image */
+
   var level_name_image: Option[BufferedImage] = None
  
-  def loadMap(m: Map) = {
+  def loadLevel(l: BaseLevel) = {
     /* We populate this world with the provided map. */
-    items = m.items
-    slices = m.slices
+    items = l.items
+    slices = l.slices
     
     /* Player's starting position. */
-    player.position_x = m.player_position_x
-    player.position_y = m.player_position_y
-    
-    /* Background image filename. */
-    background_image_filename = m.background_image_filename
-    
-    /* Background music filename. */
-    background_music_filename = m.background_music_filename
+    player.position_x = l.player_position_x
+    player.position_y = l.player_position_y
+
+    background_music_filename = l.background_music_filename
   }
   
   def loadResources() = {
-    /* Load the background image. */
-    try {
-      background_image = Some(ImageIO.read(new File(background_image_filename)))
-    } catch {
-      case e: Exception => println("Error: Could not read background image file.")
-    }
-    
     loadMusic()
   }
   

@@ -32,7 +32,7 @@ object Main extends SimpleSwingApplication {
     }
     
     
-    def start_game(lvl: Map) {
+    def start_game(lvl: BaseLevel) {
       this.contents = mygame.viewport
       mygame.viewport.requestFocus()
       mygame.startGame(lvl)
