@@ -6,20 +6,20 @@ import uusipeli.Game
 import uusipeli.Player
 
 
-class Noppa extends Item {
+class Dice extends Item {
   
-  setImage(Noppa.getImage())
-  Noppa.loadSound()
+  setImage(Dice.getImage())
+  Dice.loadSound()
   
   override def processCollision() = {
     this.active = false
     this.visible = false
     Game.player.score += 1
-    Noppa.playSound()
+    Dice.playSound()
   }
 }
 
-object Noppa extends ItemStatic {
+object Dice extends ItemStatic {
   imageFilename = "gfx/64 noppa.png"
   soundFilename = "sounds/noppa.wav"
 }

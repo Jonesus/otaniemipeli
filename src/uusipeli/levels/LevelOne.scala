@@ -15,13 +15,13 @@ class LevelOne extends BaseLevel {
   
   override def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)
-    if (itemType == 0) return Some(new Olutpullo())
-    if (itemType == 1) return Some(new Noppa())
-    if (itemType == 2) return Some(new Nakki())
-    if (itemType == 3) return Some(new Jaa())
-    if (itemType == 4) return Some(new Kivi())
-    if (itemType == 5) return Some(new Prujut())
-    if (itemType == 6) return Some(new Spagetti())
+    if (itemType == 0) return Some(new Beer())
+    if (itemType == 1) return Some(new Dice())
+    if (itemType == 2) return Some(new Sausage())
+    if (itemType == 3) return Some(new Ice())
+    if (itemType == 4) return Some(new Stone())
+    if (itemType == 5) return Some(new Cheatsheet())
+    if (itemType == 6) return Some(new Spaghetti())
     None
   }
   

@@ -4,20 +4,20 @@ import uusipeli.Item
 import uusipeli.ItemStatic
 import uusipeli.Game
 
-class Kivi extends Item {
+class Stone extends Item {
 
-  setImage(Kivi.getImage())
-  Kivi.loadSound()
+  setImage(Stone.getImage())
+  Stone.loadSound()
  
   override def processCollision() = {
     this.active = false
     this.visible = false
-    Kivi.playSound()
+    Stone.playSound()
     Game.player.health -= 1
   }
 }
 
-object Kivi extends ItemStatic {
+object Stone extends ItemStatic {
   imageFilename = "gfx/64 kivi.png"
   soundFilename = "sounds/kivi.wav"
 }

@@ -4,20 +4,20 @@ import uusipeli.Item
 import uusipeli.ItemStatic
 import uusipeli.Game
 
-class Spagetti extends Item {
+class Spaghetti extends Item {
 
-  setImage(Spagetti.getImage())
-  Spagetti.loadSound()
+  setImage(Spaghetti.getImage())
+  Spaghetti.loadSound()
  
   override def processCollision() = {
     this.active = false
     this.visible = false
-    Spagetti.playSound()
+    Spaghetti.playSound()
     Game.player.health += 1
   }
 }
 
-object Spagetti extends ItemStatic {
+object Spaghetti extends ItemStatic {
   imageFilename = "gfx/64 spagu2.png"
   soundFilename = "sounds/spagu.wav"
 }

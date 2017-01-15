@@ -6,20 +6,20 @@ import uusipeli.Game
 import uusipeli.Player
 
 
-class Nakki extends Item {
+class Sausage extends Item {
   
-  setImage(Nakki.getImage())
-  Nakki.loadSound()
+  setImage(Sausage.getImage())
+  Sausage.loadSound()
   
   override def processCollision() = {
     this.active = false
     this.visible = false
     Game.player.score -= 5
-    Nakki.playSound()
+    Sausage.playSound()
   }
 }
 
-object Nakki extends ItemStatic {
+object Sausage extends ItemStatic {
   imageFilename = "gfx/64 nakki.png"
   soundFilename = "sounds/nakki.wav"
 }

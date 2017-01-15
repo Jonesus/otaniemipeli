@@ -7,15 +7,15 @@ import uusipeli.Player
 import uusipeli.effects.IceEffect
 
 
-class Jaa extends Item {
+class Ice extends Item {
   
-  setImage(Jaa.getImage())
-  Jaa.loadSound()
+  setImage(Ice.getImage())
+  Ice.loadSound()
   
   override def processCollision() = {
     // Process collision if this item is not disabled temporarily.
     if (this.checkIfDisabledAndEnable()) {
-      Jaa.playSound()
+      Ice.playSound()
       Game.addEffect(new IceEffect())
       // Disable for one second.
       this.disableTemporarily(1000)
@@ -23,7 +23,7 @@ class Jaa extends Item {
   }
 }
 
-object Jaa extends ItemStatic {
+object Ice extends ItemStatic {
   imageFilename = "gfx/64 jaa.png"
   soundFilename = "sounds/liukastus.wav"
 }

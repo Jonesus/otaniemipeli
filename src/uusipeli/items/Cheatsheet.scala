@@ -6,20 +6,20 @@ import uusipeli.Game
 import uusipeli.Player
 
 
-class Prujut extends Item {
+class Cheatsheet extends Item {
   
-  setImage(Prujut.getImage())
-  Prujut.loadSound()
+  setImage(Cheatsheet.getImage())
+  Cheatsheet.loadSound()
   
   override def processCollision() = {
     this.active = false
     this.visible = false
     Game.player.score += 5
-    Prujut.playSound()
+    Cheatsheet.playSound()
   }
 }
 
-object Prujut extends ItemStatic {
+object Cheatsheet extends ItemStatic {
   imageFilename = "gfx/64 prujut.png"
   soundFilename = "sounds/prujut.wav"
 }
