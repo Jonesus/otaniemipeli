@@ -169,7 +169,7 @@ class Player {
     deltaY = 0
     xVelocity = 0  // Speed vectors for current movement
     yVelocity = 0
-    health = 5
+    health = 3
     score = 0
     level_speed_bonus = 0
   }
