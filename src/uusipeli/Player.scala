@@ -174,4 +174,3 @@ class Player {
     level_speed_bonus = 0
   }
 }
-

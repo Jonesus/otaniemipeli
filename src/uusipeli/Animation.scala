@@ -29,6 +29,7 @@ class Animation {
     
     val currTime = scala.compat.Platform.currentTime
     if (currTime > (this.lastRenderTime + this.frameDuration)) {
+      //Changes the frame of the animation if sufficient time has passed.
       if (this.currFrame == (this.frames.size - 1)) this.currFrame = 0 else this.currFrame += 1
       this.lastRenderTime = scala.compat.Platform.currentTime
     }
