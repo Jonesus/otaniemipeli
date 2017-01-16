@@ -17,8 +17,6 @@ class BaseLevel {
     
   var slices = ArrayBuffer[Slice]()
   
-  
-  
   val width = WINDOW_WIDTH
   var length = 100
   val height = SLICE_HEIGHT * this.length
@@ -30,9 +28,9 @@ class BaseLevel {
   var player_position_y = 100
   
   var background_music_filename = ""
-  var level_title = ""
+  var level_title_filename = ""
   var bg_files = List("", "", "", "")
-  
+  var level_goal_filename = ""
     
   def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)
@@ -51,26 +49,34 @@ class BaseLevel {
     Game.player.level_speed_bonus = speed_bonus
     
     /* Generate map slices */
-    slices.clear()
+    this.slices.clear()
     
     /* First add empty slices. */
-    slices += new Slice(bg_files(0))
-    slices += new Slice(bg_files(1))
-    slices += new Slice(bg_files(2))
+    this.slices += new Slice(bg_files(0))
+    this.slices += new Slice(bg_files(1))
+    this.slices += new Slice(bg_files(2))
   
     /* Set slice indexes. */
-    slices(0).index = 0
-    slices(1).index = 1
-    slices(2).index = 2
+    this.slices(0).index = 0
+    this.slices(1).index = 1
+    this.slices(2).index = 2
     
-    /* Add level name item to the third slice. */
-    slices(2).items += new LevelNameItem(level_title)
-    slices(2).items(0).position_x = WINDOW_WIDTH / 2
+    /* Add level title item to the third slice. */
+    val name = new LevelNameItem(this.level_title_filename)
+    name.position_x = WINDOW_WIDTH / 2
+    this.slices(2).items += name
     
-    for (i <- 3 to length) {
-      slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
-      slices(i).index = i
-      slices(i).populate(randomItem)
+    for (i <- 3 to this.length) {
+      this.slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
+      this.slices(i).index = i
+      this.slices(i).populate(this.randomItem)
     }
+  
+    // Finally, add the level goal to the last slice.
+    val lastSlice = this.slices(this.length - 1)
+    
+    val goal = new LevelGoalItem(this.level_goal_filename)
+    goal.position_x = WINDOW_WIDTH / 2
+    lastSlice.items += goal
   }
 }

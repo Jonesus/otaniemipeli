@@ -9,8 +9,9 @@ import uusipeli.items._
 class LevelOne extends BaseLevel {
   length = 100
   background_music_filename = "sounds/pahkinansarkija.wav"
-  level_title = "gfx/title jmt.png"
+  level_title_filename = "gfx/title jmt.png"
   bg_files = List("gfx/bg1.png", "gfx/bg2.png", "gfx/bg3.png", "gfx/bg4.png")
+  level_goal_filename = "gfx/maali1.png"
 
   
   override def randomItem(): Option[Item] = {
