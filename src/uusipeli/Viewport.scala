@@ -12,9 +12,12 @@ import uusipeli.model._
  */
 
 class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
-
-  //Create new UI object that will draw the player's health and points.
-  val omaUI = new InfoBar
+  
+  /* Toggle this true to enable render debug drawing. */
+  val renderDebug = false
+  
+  /* Create the info bar that draws the player's health and points. */
+  val infoBar = new InfoBar
 
   this.background = Color.black
 
@@ -22,9 +25,6 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
   var viewport_y = viewport_start_y
 
   val viewport_image = new BufferedImage(viewport_width, viewport_height, BufferedImage.TYPE_INT_ARGB)
-  val full_health = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
-  val no_health = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
-  val noppa32 = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB)
 
   // We set this component focusable and request focus, so we can react to keyboard events.
   focusable = true
@@ -62,6 +62,13 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
 
     val viewportUpperLeftXInWorldCoordinates = viewport_x - (viewport_width / 2)
     val viewportUpperLeftYInWorldCoordinates = viewport_y - (viewport_height / 2)
+    
+    // Item coordinates in world coordinate space.
+    var itemXWorld, itemYWorld = 0
+
+    // Item coordinates (the middle point of the item) in viewport coordinate space.
+    // (0, 0) is the upper left corner of the viewport.
+    var itemXViewport, itemYViewport = 0
 
     /* Clear the buffer. */
     viewport_graphics.clearRect(0, 0, viewport_width, viewport_height)
@@ -83,13 +90,6 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
           slice.index * slice.height - (viewport_y - (viewport_height / 2)),
           null)
 
-        // Item coordinates in world coordinate space.
-        var itemXWorld, itemYWorld = 0
-
-        // Item coordinates (the middle point of the item) in viewport coordinate space.
-        // (0, 0) is the upper left corner of the viewport.
-        var itemXViewport, itemYViewport = 0
-
         for (item <- slice.items) {
           if (item.visible == true) {
 
@@ -100,8 +100,9 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
             itemXViewport = itemXWorld
             itemYViewport = itemYWorld - viewportUpperLeftYInWorldCoordinates
 
-            // println("Rendered item. Local coordinates: (" + item.position_x + ", " + item.position_y + ") World coordinates: (" + itemXWorld + ", " + itemYWorld + ")")
-
+            if (this.renderDebug == true) {
+              viewport_graphics.drawRect(itemXViewport - item.width / 2, itemYViewport - item.height / 2, item.width, item.height);
+            }
             viewport_graphics.drawImage(
               item.render,
               itemXViewport - (item.width / 2),
@@ -117,7 +118,11 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
      */
     val playerXViewport = world.getPlayer.position_x.toInt - viewportUpperLeftXInWorldCoordinates
     val playerYViewport = world.getPlayer.position_y.toInt - viewportUpperLeftYInWorldCoordinates
-
+    
+    if (this.renderDebug == true) {
+      viewport_graphics.drawRect(playerXViewport - (world.getPlayer.width / 2), playerYViewport - (world.getPlayer.height / 2), world.getPlayer.width, world.getPlayer.width);
+    }
+    
     /* Draw player on top of the image. */
     viewport_graphics.drawImage(
       world.getPlayer.render,
@@ -125,20 +130,22 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
       playerYViewport - (world.getPlayer.height / 2),
       null)
 
-    //Here the omaUI object is used to draw the points indicator (noppa) and player health (hearts).
+    /* Here the InfoBar object is used to draw the points indicator (dice) and player health (hearts). */
 
     viewport_graphics.drawImage(
-      omaUI.noppa32,
+      infoBar.dice,
       5,
       5,
       null)
 
     viewport_graphics.drawImage(
-      omaUI.drawHealthbar,
+      infoBar.drawHealthbar(),
       5,
       42,
       null)
-
+      
+      /* Draw the numbers directly on the image (for performance reasons). */
+      infoBar.drawPoints(viewport_graphics.asInstanceOf[Graphics2D])
   }
 
   //Draw the players points next to the points indicator (noppa).
@@ -149,7 +156,6 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
       null,
       0,
       0)
-    omaUI.pointsfunction(g)
   }
 
   def reset() = {
