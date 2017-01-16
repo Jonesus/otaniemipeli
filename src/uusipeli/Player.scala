@@ -106,8 +106,8 @@ class Player {
   
   def intersects(player: Player, item: Item) : Boolean = {
     // Here we assume that the slice is as wide as the world.
-    val itemX = item.position_x
-    val itemY = item.position_y + (item.slice_index * SLICE_HEIGHT)
+    val itemX = item.position_x + (item.width / 2)
+    val itemY = item.position_y + (item.slice_index * SLICE_HEIGHT) + (item.height / 2)
     
     val playerX = player.position_x
     val playerY = player.position_y
@@ -169,7 +169,7 @@ class Player {
     deltaY = 0
     xVelocity = 0  // Speed vectors for current movement
     yVelocity = 0
-    health = 5
+    health = 3
     score = 0
     level_speed_bonus = 0
   }
