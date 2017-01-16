@@ -32,6 +32,9 @@ object Game {
   val world = new World(player)
   var currLevel: BaseLevel = _
   
+  /* Events that are processed once. */
+  var events = ArrayBuffer[Event]()
+  
   /* Effects, such as the "drunk effect" that last for a defined period of time. */
   var effects = ArrayBuffer[Effect]()
 
@@ -54,7 +57,7 @@ object Game {
     this.started = false
     world.stopMusic()
     renderingTimer.stop()
-    viewport.reset()
+    // viewport.reset()
     player.reset()
     world.reset()
     resetEffects()
@@ -104,6 +107,7 @@ object Game {
 
   def update() = {
     if (this.started == true && this.paused != true) {
+      processEvents()
       processKeys()
       processEffects()
       player.update()
@@ -185,6 +189,9 @@ object Game {
     effect.start()
   }
 
+  /* This method processes the effects:
+   * - If timeout has passed, end() is called and the effect is removed from the queue.
+   */
   def processEffects() = {
     val currTime = scala.compat.Platform.currentTime
     var oldEffects = ArrayBuffer[Effect]()
@@ -200,7 +207,21 @@ object Game {
       this.effects --= oldEffects
     }
   }
+  
+  def addEvent(event: Event) = {
+    this.events += event
+  }
+  
+  /* This methods processes the events that are run once. */
+  
+  def processEvents() = {
+    if (this.events.size > 0) {
+      this.events.foreach(x => x.run())
+      this.events.clear()
+    }
+  }
 
+  /* This methods ends all running effects. */
   def resetEffects() = {
     this.effects.foreach {
       x =>
