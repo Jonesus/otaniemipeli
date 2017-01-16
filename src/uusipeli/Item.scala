@@ -29,8 +29,6 @@ class Item {
   /* How long will this item be disabled? */
   var disabledTimeout: Int = 0
   
-  var slice_index = 0
-  
   /* Width and height of the image. */
   var width: Int = 0
   var height: Int = 0

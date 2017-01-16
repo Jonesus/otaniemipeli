@@ -104,26 +104,28 @@ class Player {
   }
   
   
-  def intersects(player: Player, item: Item) : Boolean = {
+  def intersects(slice: Slice, item: Item) : Boolean = {
     // Here we assume that the slice is as wide as the world.
     val itemX = item.position_x + (item.width / 2)
-    val itemY = item.position_y + (item.slice_index * SLICE_HEIGHT) + (item.height / 2)
+    val itemY = item.position_y + (slice.index * SLICE_HEIGHT) + (item.height / 2)
     
-    val playerX = player.position_x
-    val playerY = player.position_y
+    val playerX = this.position_x
+    val playerY = this.position_y
     
-    if (itemX < playerX + player.width && itemX + item.width > playerX &&
-        itemY < playerY + player.height && itemY + item.height > playerY) {
+    if (itemX < playerX + this.width && itemX + item.width > playerX &&
+        itemY < playerY + this.height && itemY + item.height > playerY) {
       return true
     }
     return false
   }
   
   
-  def checkCollisions(items: ArrayBuffer[Item]) = {
-    for (item <- items) {
-      if (intersects(this, item) && item.active == true) {
-        item.processCollision()
+  def checkCollisions() = {
+    for (slice <- Game.world.slices) {
+      for (item <- slice.items) {
+        if (intersects(slice, item) && item.active == true) {
+          item.processCollision()
+        }
       }
     }
   }

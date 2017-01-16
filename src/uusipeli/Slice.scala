@@ -29,7 +29,6 @@ class Slice(filename: String) {
     n.foreach { i =>
       i.position_x = 160 + rand.nextInt(704)
       i.position_y = 32 + rand.nextInt(64)
-      i.slice_index = index
       this.items += i 
     }
   }

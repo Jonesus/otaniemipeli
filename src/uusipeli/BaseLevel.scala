@@ -13,20 +13,21 @@ import uusipeli.items._
 
 
 class BaseLevel {
+  val rand = new scala.util.Random  // Random number generator
+    
+  var slices = ArrayBuffer[Slice]()
+  
+  
   
   val width = WINDOW_WIDTH
-  val height = 1200
   var length = 100
+  val height = SLICE_HEIGHT * this.length
+  
   var speed_bonus = 0
   
   /* Player's starting position. */
   var player_position_x = width / 2
   var player_position_y = 100
-  
-  var slices = ArrayBuffer[Slice]()
-  var items = ArrayBuffer[Item]()
-    
-  val rand = new scala.util.Random  // Random number generator
   
   var background_music_filename = ""
   var level_title = ""
@@ -48,6 +49,7 @@ class BaseLevel {
   
   def reset() = {
     Game.player.level_speed_bonus = speed_bonus
+    
     /* Generate map slices */
     slices.clear()
     
@@ -56,6 +58,7 @@ class BaseLevel {
     slices += new Slice(bg_files(1))
     slices += new Slice(bg_files(2))
   
+    /* Set slice indexes. */
     slices(0).index = 0
     slices(1).index = 1
     slices(2).index = 2
@@ -68,7 +71,6 @@ class BaseLevel {
       slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
       slices(i).index = i
       slices(i).populate(randomItem)
-      items = items ++ slices(i).items
     }
   }
 }

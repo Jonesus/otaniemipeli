@@ -107,15 +107,14 @@ object Game {
       processKeys()
       processEffects()
       player.update()
-      // viewport.update()
       updateViewportLocation()
-      player.checkCollisions(world.items)
+      player.checkCollisions()
       world.update()
     }
   }
 
-  /* This method syncs the viewports location with player y coordinate.
-   * This is activated when the player has reached START_VIEWPORT_SCROLL. 
+  /* This method syncs the viewport's y coordinate with the player's y coordinate.
+   * This is activated when the player has reached START_VIEWPORT_SCROLL.
    */
   def updateViewportLocation() = {
     if (player.position_y >= START_VIEWPORT_SCROLL) {

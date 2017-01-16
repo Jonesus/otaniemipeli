@@ -19,14 +19,12 @@ class World(player: Player) {
   var level_name_image_filename = ""
   
   /* Items */
-  var items = ArrayBuffer[Item]()
   var slices = ArrayBuffer[Slice]()
 
   var level_name_image: Option[BufferedImage] = None
  
   def loadLevel(l: BaseLevel) = {
     /* We populate this world with the provided map. */
-    items = l.items
     slices = l.slices
     
     /* Player's starting position. */
@@ -41,12 +39,14 @@ class World(player: Player) {
   }
   
   def update() = {
-    for (item <- items) {
-      item.update
+    for (slice <- this.slices) {
+      for (item <- slice.items) {
+        item.update
+      }
     }
   }
   
-  def getPlayer = {
+  def getPlayer() = {
     this.player
   }
 
@@ -93,7 +93,6 @@ class World(player: Player) {
   }
   
   def reset() = {
-    items.clear()
-    slices.clear()
+    this.slices.clear()
   }
 }
