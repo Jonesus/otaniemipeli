@@ -9,7 +9,7 @@ import java.io.File
 import java.awt.Font
 import java.awt.GraphicsEnvironment
 
-class UI {
+class InfoBar {
 
   var noppa32: BufferedImage = ImageIO.read(new File("gfx/32 noppa.png"))
 

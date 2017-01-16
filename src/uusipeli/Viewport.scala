@@ -14,7 +14,7 @@ import uusipeli.model._
 class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
 
   //Create new UI object that will draw the player's health and points.
-  val omaUI = new UI
+  val omaUI = new InfoBar
 
   this.background = Color.black
 
