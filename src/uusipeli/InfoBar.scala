@@ -1,5 +1,6 @@
 package uusipeli
 
+import scala.collection.mutable.ArrayBuffer
 import java.awt.image.BufferedImage
 import java.awt.Graphics2D
 import java.awt.Graphics
@@ -9,42 +10,47 @@ import java.io.File
 import java.awt.Font
 import java.awt.GraphicsEnvironment
 
+
+/* This class draws the info bar that show's players health and points. */
 class InfoBar {
-
-  var noppa32: BufferedImage = ImageIO.read(new File("gfx/32 noppa.png"))
-
-  //Create BufferedImage to help in creating fontgraphic.
-  var image: BufferedImage = new BufferedImage(37 * 2 - 5, 32, BufferedImage.TYPE_INT_RGB)
-  var fontgraphic: Graphics2D = image.createGraphics()
-
+  
+  /* Dice image */
+  val dice: BufferedImage = ImageIO.read(new File("gfx/32 noppa.png"))
+  
+  /* Heart images */
+  val healthBarImages = ArrayBuffer[BufferedImage]()
+  healthBarImages += ImageIO.read(new File("gfx/0health.png"))
+  healthBarImages += ImageIO.read(new File("gfx/1health.png"))
+  healthBarImages += ImageIO.read(new File("gfx/2health.png"))
+  healthBarImages += ImageIO.read(new File("gfx/3health.png"))
+  
+  val pointsImage: BufferedImage = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB)
+  val pointsGraphics = pointsImage.createGraphics()
+  
+  /* Font for points text */
   val fontFile = new File("gfx/Gamer.ttf")
-  val gamerfont = Font.createFont(Font.TRUETYPE_FONT, fontFile)
+  val font = Font.createFont(Font.TRUETYPE_FONT, fontFile)
 
-  //Add font to local GE, necessary for iOS and Unix.
+  /* Add font to local GE, necessary for iOS and Unix. */
   val ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-  ge.registerFont(gamerfont);
+  ge.registerFont(font);
+  
+  /* Font object to be used in drawing. */
+  val gamerFont = new Font("Gamer", Font.PLAIN, 64)
 
+  /* This method renders the hearts */
   def drawHealthbar(): BufferedImage = {
-    if (Game.player.health == 0) {
-      var healthbar: BufferedImage = ImageIO.read(new File("gfx/0health.png"))
-      return healthbar
-    }
-    if (Game.player.health == 1) {
-      var healthbar: BufferedImage = ImageIO.read(new File("gfx/1health.png"))
-      return healthbar
-    }
-    if (Game.player.health == 2) {
-      var healthbar: BufferedImage = ImageIO.read(new File("gfx/2health.png"))
-      return healthbar
-    } else {
-      var healthbar: BufferedImage = ImageIO.read(new File("gfx/3health.png"))
-      return healthbar
-    }
+    var health = Game.player.health
+    
+    if (health > 3) health = 3
+    if (health < 0) health = 0
+    
+    return healthBarImages(health)
   }
 
-  def pointsfunction(fontgraphic: Graphics2D) {
-    fontgraphic.setColor(new Color(255, 255, 255)) // a darker green
-    fontgraphic.setFont(new Font("Gamer", Font.PLAIN, 64))
-    fontgraphic.drawString(Game.player.score.toString, 37, 35)
+  def drawPoints(g: Graphics2D) = {
+    g.setColor(new Color(255, 255, 255)) // a darker green
+    g.setFont(gamerFont)
+    g.drawString(Game.player.score.toString, 37, 35)
   }
 }
