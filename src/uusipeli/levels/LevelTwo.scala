@@ -13,7 +13,7 @@ class LevelTwo extends BaseLevel {
   background_music_filename = "sounds/pahkinansarkija.wav"
   level_title_filename = "gfx/title smt.png"
   bg_files = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")
-  level_goal_filename = "gfx/maali1.png"
+  level_goal_filename = "gfx/maali2.png"
   
   
   override def randomItem(): Option[Item] = {
