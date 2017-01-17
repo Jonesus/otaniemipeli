@@ -73,10 +73,19 @@ class BaseLevel {
     }
   
     // Finally, add the level goal to the last slice.
-    val lastSlice = this.slices(this.length - 1)
+    this.slices += new Slice(bg_files(0))
+    this.slices(this.slices.length - 1).index = this.slices.length - 1
+    val lastSlice = this.slices(this.slices.length - 1)
     
     val goal = new LevelGoalItem(this.level_goal_filename)
     goal.position_x = WINDOW_WIDTH / 2
     lastSlice.items += goal
+    
+    // Add small visual buffer to the end of the level
+    for (i <- this.slices.length to this.slices.length + 3) {
+      this.slices += new Slice(bg_files(rand.nextInt(bg_files.length)))
+      this.slices(i).index = i
+    }
+    
   }
 }
