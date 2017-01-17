@@ -28,17 +28,14 @@ class Player {
   var width = 128
   var height = 128
   
-  /* Player walking animation */
   val soberPlayerAnimation = new Animation
   var sober_player_image_right_filename = "gfx/128 pixel teekkari oikea.png"
   var sober_player_image_left_filename = "gfx/128 pixel teekkari vasen.png"
   
-  /* Drunken player animation */
   val drunkenPlayerAnimation = new Animation
   var drunken_player_image_right_filename = "gfx/128 teekkari kanni oikea.png"
   var drunken_player_image_left_filename = "gfx/128 teekkari kanni vasen.png"
   
-  /* Dead player animation */
   val deadPlayerAnimation = new Animation
   var dead_player_image_right_filename = "gfx/128 teekkari dead oikea.png"
   var dead_player_image_left_filename = "gfx/128 teekkari dead vasen.png" 
@@ -46,7 +43,6 @@ class Player {
   /* Current animation */
   var playerAnimation = soberPlayerAnimation
   
-  loadResources()
 
   def loadResources() = {
     /* Prepare the animations. */

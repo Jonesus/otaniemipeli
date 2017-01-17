@@ -3,6 +3,7 @@ package uusipeli.levels
 import uusipeli.Item
 import uusipeli.BaseLevel
 import uusipeli.Slice
+import uusipeli.Game
 import uusipeli.model._
 import uusipeli.items._
 
@@ -12,7 +13,15 @@ class LevelOne extends BaseLevel {
   level_title_filename = "gfx/title jmt.png"
   bg_files = List("gfx/bg1.png", "gfx/bg2.png", "gfx/bg3.png", "gfx/bg4.png")
   level_goal_filename = "gfx/maali1.png"
-
+  
+  Game.player.sober_player_image_right_filename = "gfx/128 fuksi oikea.png"
+  Game.player.sober_player_image_left_filename = "gfx/128 fuksi vasen.png"
+  Game.player.drunken_player_image_right_filename = "gfx/128 fuksi kanni oikea.png"
+  Game.player.drunken_player_image_left_filename = "gfx/128 fuksi kanni vasen.png"
+  Game.player.dead_player_image_right_filename = "gfx/128 fuksi dead oikea.png"
+  Game.player.dead_player_image_left_filename = "gfx/128 fuksi dead vasen.png"
+  Game.player.loadResources()
+  
   
   override def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)
