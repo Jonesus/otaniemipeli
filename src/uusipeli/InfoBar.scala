@@ -24,9 +24,6 @@ class InfoBar {
   healthBarImages += ImageIO.read(new File("gfx/2health.png"))
   healthBarImages += ImageIO.read(new File("gfx/3health.png"))
   
-  val pointsImage: BufferedImage = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB)
-  val pointsGraphics = pointsImage.createGraphics()
-  
   /* Font for points text */
   val fontFile = new File("gfx/Gamer.ttf")
   val font = Font.createFont(Font.TRUETYPE_FONT, fontFile)
@@ -48,6 +45,9 @@ class InfoBar {
     return healthBarImages(health)
   }
 
+  /* This draws the points text directly to viewport's canvas.
+   * This is done for performance reasons: No need to clear the canvas twice.
+   */
   def drawPoints(g: Graphics2D) = {
     g.setColor(new Color(255, 255, 255)) // a darker green
     g.setFont(gamerFont)
