@@ -6,6 +6,8 @@ import javax.imageio.ImageIO
 import java.io.File
 import scala.collection.mutable.ArrayBuffer
 import uusipeli.model._
+import uusipeli.events.EndGameEvent
+
 
 class Player {
   
@@ -54,7 +56,7 @@ class Player {
     this.drunkenPlayerAnimation.addFrame(drunken_player_image_right_filename)
     this.drunkenPlayerAnimation.addFrame(drunken_player_image_left_filename)
     
-    this.deadPlayerAnimation.frameDuration = 500
+    this.deadPlayerAnimation.frameDuration = 999999
     this.deadPlayerAnimation.addFrame(dead_player_image_right_filename)
     this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)    
   }
@@ -66,6 +68,15 @@ class Player {
   def playerIsSober() = {
     this.playerAnimation = soberPlayerAnimation
   }
+  
+  def checkDeath() = {
+    if (this.health == 0) {
+      this.playerAnimation = deadPlayerAnimation
+      Game.addEvent(new EndGameEvent())
+    }
+  }
+  
+  
   
   def turnUp() = {
     deltaY -= acceleration
@@ -95,7 +106,7 @@ class Player {
   
   
   def update() = {
-    updatePosition()
+    if (health > 0) updatePosition()
     if (health > 3) health = 3
   }
   
