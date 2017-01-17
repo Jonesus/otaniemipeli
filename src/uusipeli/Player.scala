@@ -19,6 +19,7 @@ class Player {
   var yVelocity = 0
   var health = 3
   var score = 0
+  var stopped = false
   
   val maxSpeedX = 10
   val maxSpeedY = 15
@@ -106,7 +107,7 @@ class Player {
   
   
   def update() = {
-    if (health > 0) updatePosition()
+    if (stopped == false) updatePosition()
     if (health > 3) health = 3
   }
   
@@ -185,5 +186,6 @@ class Player {
     health = 3
     score = 0
     level_speed_bonus = 0
+    stopped = false
   }
 }
