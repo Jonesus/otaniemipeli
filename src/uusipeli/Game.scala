@@ -110,9 +110,10 @@ object Game {
       processEvents()
       processKeys()
       processEffects()
+      player.checkCollisions()
+      player.checkDeath()
       player.update()
       updateViewportLocation()
-      player.checkCollisions()
       world.update()
     }
   }
@@ -209,15 +210,25 @@ object Game {
   }
   
   def addEvent(event: Event) = {
+    event.startTime = scala.compat.Platform.currentTime
     this.events += event
   }
   
   /* This methods processes the events that are run once. */
   
   def processEvents() = {
-    if (this.events.size > 0) {
-      this.events.foreach(x => x.run())
-      this.events.clear()
+    val currTime = scala.compat.Platform.currentTime
+    var oldEvents = ArrayBuffer[Event]()
+    this.events.foreach { x =>
+      if (currTime > (x.startTime + x.delay)) {
+        x.run()
+        oldEvents += x
+      }
+    }
+
+    /* Remove old effects from the array. */
+    if (oldEvents.size > 0) {
+      this.events --= oldEvents
     }
   }
 

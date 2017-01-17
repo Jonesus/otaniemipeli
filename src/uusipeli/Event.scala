@@ -7,6 +7,9 @@ package uusipeli
  * Events are run exactly once and then they are disposed.
  */
 class Event {
+  var startTime: Long = 0
+  var delay = 0
+  
   def run() = {
     // Code to run
   }
