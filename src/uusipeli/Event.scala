@@ -6,11 +6,16 @@ package uusipeli
  * 
  * Events are run exactly once and then they are disposed.
  */
-class Event {
+abstract class Event {
   var startTime: Long = 0
   var delay = 0
+  var started = false
   
-  def run() = {
-    // Code to run
+  def start() = {
+    /* Code to run when the event is added to the queue. */
+  }
+  
+  def end() = {
+    /* Code to run when delay has passed. */
   }
 }
