@@ -76,6 +76,10 @@ object Game {
     world.continueMusic()
     renderingTimer.start()
   }
+  
+  /* Exists the game. */
+  def exitGameToMenu() = {
+  }
 
   /* This method is called when the pause key is pressed.
    * See Viewport.
@@ -187,11 +191,24 @@ object Game {
     }
   }
 
+  /* Adds a new effect to the queue.
+   * Note: Only one particular effect (for example one BeerEffect) can be running at the same time.
+   * Old effects are replaced with new effect.
+   */
   def addEffect(effect: Effect) = {
+    var oldEffects = ArrayBuffer[Effect]()
     effect.startTime = scala.compat.Platform.currentTime
+    this.effects.filter { x => x.getClass() == effect.getClass() }.foreach { x =>
+      oldEffects += x
+    }
+    if (oldEffects.size > 0) this.effects --= oldEffects
     this.effects += effect
     effect.start()
   }
+  
+  def addEvent(event: Event) = {
+    this.events += event
+  }  
 
   /* This method processes the effects:
    * - If timeout has passed, end() is called and the effect is removed from the queue.
@@ -199,10 +216,17 @@ object Game {
   def processEffects() = {
     val currTime = scala.compat.Platform.currentTime
     var oldEffects = ArrayBuffer[Effect]()
+    
     this.effects.foreach { x =>
-      if (currTime > (x.startTime + x.timeout)) {
-        x.end()
-        oldEffects += x
+      if (x.started == false) {
+        x.startTime = scala.compat.Platform.currentTime
+        x.start()
+        x.started = true
+      } else {
+        if (currTime > (x.startTime + x.delay)) {
+          x.end()
+          oldEffects += x
+        }
       }
     }
 
@@ -212,24 +236,26 @@ object Game {
     }
   }
   
-  def addEvent(event: Event) = {
-    event.startTime = scala.compat.Platform.currentTime
-    this.events += event
-  }
-  
   /* This methods processes the events that are run once. */
   
   def processEvents() = {
     val currTime = scala.compat.Platform.currentTime
     var oldEvents = ArrayBuffer[Event]()
+    
     this.events.foreach { x =>
-      if (currTime > (x.startTime + x.delay)) {
-        x.run()
-        oldEvents += x
+      if (x.started == false) {
+        x.startTime = scala.compat.Platform.currentTime
+        x.start()
+        x.started = true
+      } else {
+        if (currTime > (x.startTime + x.delay)) {
+          x.end()
+          oldEvents += x
+        }
       }
     }
 
-    /* Remove old effects from the array. */
+    /* Remove old events from the array. */
     if (oldEvents.size > 0) {
       this.events --= oldEvents
     }
