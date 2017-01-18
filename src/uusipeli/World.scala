@@ -7,6 +7,7 @@ import javax.imageio.ImageIO
 import java.io.File
 import java.io.File
 import javax.sound.sampled._
+import uusipeli.events.EndGameEvent
 
 class World(player: Player) {
   
@@ -95,4 +96,41 @@ class World(player: Player) {
   def reset() = {
     this.slices.clear()
   }
+  
+  def playerIntersectsWithItem(slice: Slice, item: Item) : Boolean = {
+    /*
+     * if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
+     * Intersection = Empty
+     * else:
+     * Intersection = Not Empty
+     */
+    val itemX = item.position_x - (item.width / 2)
+    val itemY = slice.index * slice.height + item.position_y - (item.height / 2)
+    
+    val playerX = (this.player.position_x - (this.player.width / 2)).toInt
+    val playerY = (this.player.position_y - (this.player.height / 2)).toInt
+    
+    if ( (itemX + item.width < playerX).||(playerX + this.player.width < itemX).||(itemY + item.height < playerY).||(playerY + this.player.height < itemY)) {
+      return false
+    }
+    
+    return true
+  }
+  
+  def checkPlayerCollisions() = {
+    for (slice <- this.slices) {
+      for (item <- slice.items) {
+        if (this.playerIntersectsWithItem(slice, item) && item.active == true) {
+          item.processCollision()
+        }
+      }
+    }
+  }
+  
+  def checkPlayerDeath() = {
+    if (this.player.health == 0) {
+      this.player.playerIsDead()
+      Game.addEvent(new EndGameEvent())
+    }
+  }  
 }

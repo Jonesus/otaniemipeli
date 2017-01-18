@@ -108,10 +108,13 @@ object Game {
   def update() = {
     if (this.started == true && this.paused != true) {
       processEvents()
-      processKeys()
       processEffects()
-      player.checkCollisions()
-      player.checkDeath()
+      
+      processKeys()
+      
+      world.checkPlayerCollisions()
+      world.checkPlayerDeath()
+      
       player.update()
       updateViewportLocation()
       world.update()

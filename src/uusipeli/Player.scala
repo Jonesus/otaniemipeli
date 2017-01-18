@@ -70,14 +70,9 @@ class Player {
     this.playerAnimation = soberPlayerAnimation
   }
   
-  def checkDeath() = {
-    if (this.health == 0) {
-      this.playerAnimation = deadPlayerAnimation
-      Game.addEvent(new EndGameEvent())
-    }
+  def playerIsDead() = {
+    this.playerAnimation = deadPlayerAnimation
   }
-  
-  
   
   def turnUp() = {
     deltaY -= acceleration
@@ -109,37 +104,6 @@ class Player {
   def update() = {
     if (stopped == false) updatePosition()
     if (health > 3) health = 3
-  }
-  
-  
-  def intersects(slice: Slice, item: Item) : Boolean = {
-    /*
-     * if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
-     * Intersection = Empty
-     * else:
-     * Intersection = Not Empty
-     */
-    val itemX = item.position_x - (item.width / 2)
-    val itemY = slice.index * slice.height + item.position_y - (item.height / 2)
-    
-    val playerX = (this.position_x - (this.width / 2)).toInt
-    val playerY = (this.position_y - (this.height / 2)).toInt
-    
-    if ( (itemX + item.width < playerX).||(playerX + this.width < itemX).||(itemY + item.height < playerY).||(playerY + this.height < itemY)) {
-      return false
-    }
-    
-    return true
-  }
-  
-  def checkCollisions() = {
-    for (slice <- Game.world.slices) {
-      for (item <- slice.items) {
-        if (intersects(slice, item) && item.active == true) {
-          item.processCollision()
-        }
-      }
-    }
   }
   
   def updatePosition() = {
