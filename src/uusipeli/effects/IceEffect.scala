@@ -6,7 +6,7 @@ import uusipeli.model._
 
 class IceEffect extends Effect {
   
-  timeout = 4000
+  delay = 4000
   val bonus = 4
   
   override def start() = {
