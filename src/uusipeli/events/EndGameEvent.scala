@@ -4,9 +4,12 @@ import uusipeli.Game
 
 class EndGameEvent extends Event {
   delay = 3000
-  Game.player.stopped = true
   
-  override def run() = {
+  override def start() = {
+    Game.player.stopped = true    
+  }
+  
+  override def end() = {
     Game.stopGame()
   }
 }
