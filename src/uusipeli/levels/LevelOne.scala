@@ -25,6 +25,7 @@ class LevelOne extends BaseLevel {
   stoneCount = 20
   iceCount = 5
   sausageCount = 5
+  maxScore = 20
   
   soberPlayerImageRightFilename = "gfx/128 fuksi oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 fuksi vasen.png"

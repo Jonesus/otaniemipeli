@@ -10,16 +10,14 @@ import javax.sound.sampled._
 import uusipeli.events.EndGameEvent
 
 class World(player: Player) {
-  
-  /* Width and height of the world. */
-  val width = 0
-  val height = 0
-  
+
   /* File names */
   var backgroundMusicFilename = ""
   
   /* Items */
   var slices = ArrayBuffer[Slice]()
+  
+  var levelMaxScore = 0
 
   def loadLevel(l: BaseLevel) = {
     this.backgroundMusicFilename = l.backgroundMusicFilename
@@ -27,6 +25,7 @@ class World(player: Player) {
     /* We populate this world with the provided map. */
     l.generateSlices()
     this.slices = l.slices
+    this.levelMaxScore = l.maxScore
     
     /* Reset all players variables and load new images */
     player.reset()    

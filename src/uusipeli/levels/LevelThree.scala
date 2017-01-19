@@ -23,6 +23,7 @@ class LevelThree extends BaseLevel {
   stoneCount = 30
   iceCount = 60
   sausageCount = 15
+  maxScore = 40
   
   soberPlayerImageRightFilename = "gfx/128 wanha oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 wanha vasen.png"

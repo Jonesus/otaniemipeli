@@ -23,6 +23,7 @@ class LevelTwo extends BaseLevel {
   stoneCount = 50
   iceCount = 10
   sausageCount = 10
+  maxScore = 30
   
   soberPlayerImageRightFilename = "gfx/128 pixel teekkari oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 pixel teekkari vasen.png"

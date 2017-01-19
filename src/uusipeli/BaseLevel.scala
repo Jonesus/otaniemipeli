@@ -29,7 +29,7 @@ class BaseLevel {
   var stoneCount = 0
   var iceCount = 0
   var sausageCount = 0
-  
+  var maxScore = 0
   
   /* Dimensions of this level. */
   val width = WINDOW_WIDTH

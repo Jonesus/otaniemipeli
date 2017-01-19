@@ -51,6 +51,6 @@ class InfoBar {
   def drawPoints(g: Graphics2D) = {
     g.setColor(new Color(255, 255, 255)) // a darker green
     g.setFont(gamerFont)
-    g.drawString(Game.player.score.toString, 37, 35)
+    g.drawString(Game.player.score.toString + "/" + Game.world.levelMaxScore, 37, 35)
   }
 }
