@@ -27,6 +27,9 @@ class World(player: Player) {
     /* We populate this world with the provided map. */
     l.generateSlices()
     this.slices = l.slices
+    
+    /* Reset all players variables and load new images */
+    player.reset()    
         
     /* Player's animations. */
     player.soberPlayerImageLeftFilename = l.soberPlayerImageLeftFilename
@@ -37,9 +40,6 @@ class World(player: Player) {
     
     player.deadPlayerImageLeftFilename = l.deadPlayerImageFeftFilename
     player.deadPlayerImageRightFilename = l.deadPlayerImageRightFilename
-    
-    /* Reset all players variables and load new images */
-    player.reset()
     
     /* Player's starting position. */
     player.positionX = l.playerPositionX
