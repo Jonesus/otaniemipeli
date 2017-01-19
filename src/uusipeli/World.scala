@@ -17,27 +17,17 @@ class World(player: Player) {
   
   /* File names */
   var background_music_filename = ""
-  var level_title_filename = ""
   
   /* Items */
   var slices = ArrayBuffer[Slice]()
 
-  var level_name_image: Option[BufferedImage] = None
- 
   def loadLevel(l: BaseLevel) = {
-    player.reset()
+    background_music_filename = l.background_music_filename
+    
     /* We populate this world with the provided map. */
     l.generateSlices()
-    
-    slices = l.slices
-    
-    /* Player's starting position. */
-    player.position_x = l.player_position_x
-    player.position_y = l.player_position_y
-
-    background_music_filename = l.background_music_filename
-    level_title_filename = l.level_title_filename
-    
+    this.slices = l.slices
+        
     /* Player's animations. */
     player.sober_player_image_left_filename = l.sober_player_image_left_filename
     player.sober_player_image_right_filename = l.sober_player_image_right_filename
@@ -47,6 +37,13 @@ class World(player: Player) {
     
     player.dead_player_image_left_filename = l.dead_player_image_left_filename
     player.dead_player_image_right_filename = l.dead_player_image_right_filename
+    
+    /* Reset all players variables and load new images */
+    player.reset()
+    
+    /* Player's starting position. */
+    player.position_x = l.player_position_x
+    player.position_y = l.player_position_y
     
     /* Player's speed bonus. */
     player.level_speed_bonus = l.level_speed_bonus

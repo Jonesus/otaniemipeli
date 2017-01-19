@@ -61,6 +61,8 @@ class Player {
     this.acceleration = 1
     var Y_RESTING_SPEED = PLAYER_SPEED_DOWN
     this.level_speed_bonus = 0
+    
+    this.loadResources()
   }
 
   def loadResources() = {
@@ -93,14 +95,6 @@ class Player {
   
   def playerIsDead() = {
     this.playerAnimation = deadPlayerAnimation
-  }
-  
-  def turnUp() = {
-    deltaY -= acceleration
-  }
-  
-  def turnDown() = {
-    deltaY += acceleration
   }
   
   def turnLeft() = {
