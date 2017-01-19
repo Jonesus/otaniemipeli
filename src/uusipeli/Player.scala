@@ -8,7 +8,7 @@ import scala.collection.mutable.ArrayBuffer
 import uusipeli.model._
 import uusipeli.events.EndGameEvent
 
-
+/* This class represents the player. */
 class Player {
   
   var position_x = 0.0
@@ -31,32 +31,54 @@ class Player {
   var width = 128
   var height = 128
   
-  val soberPlayerAnimation = new Animation
+  /* Default animations. These can be overriden from the level classes. */
+  var soberPlayerAnimation = new Animation
   var sober_player_image_right_filename = "gfx/128 pixel teekkari oikea.png"
   var sober_player_image_left_filename = "gfx/128 pixel teekkari vasen.png"
   
-  val drunkenPlayerAnimation = new Animation
+  var drunkenPlayerAnimation = new Animation
   var drunken_player_image_right_filename = "gfx/128 teekkari kanni oikea.png"
   var drunken_player_image_left_filename = "gfx/128 teekkari kanni vasen.png"
   
-  val deadPlayerAnimation = new Animation
+  var deadPlayerAnimation = new Animation
   var dead_player_image_right_filename = "gfx/128 teekkari dead oikea.png"
   var dead_player_image_left_filename = "gfx/128 teekkari dead vasen.png" 
   
   /* Current animation */
   var playerAnimation = soberPlayerAnimation
   
+  def reset() = {
+    this.position_x = 0.0
+    this.position_y = 0.0
+    
+    this.deltaX = 0
+    this.deltaY = 0
+    this.xVelocity = 0
+    this.yVelocity = 0
+    this.health = 3
+    this.score = 0
+    this.stopped = false
+    this.acceleration = 1
+    var Y_RESTING_SPEED = PLAYER_SPEED_DOWN
+    this.level_speed_bonus = 0
+    this.playerAnimation = soberPlayerAnimation
+    
+    this.loadResources()
+  }
 
   def loadResources() = {
     /* Prepare the animations. */
+    this.soberPlayerAnimation = new Animation
     this.soberPlayerAnimation.frameDuration = 500
     this.soberPlayerAnimation.addFrame(sober_player_image_left_filename)
     this.soberPlayerAnimation.addFrame(sober_player_image_right_filename)
     
+    this.drunkenPlayerAnimation = new Animation
     this.drunkenPlayerAnimation.frameDuration = 500
     this.drunkenPlayerAnimation.addFrame(drunken_player_image_right_filename)
     this.drunkenPlayerAnimation.addFrame(drunken_player_image_left_filename)
     
+    this.deadPlayerAnimation = new Animation
     this.deadPlayerAnimation.frameDuration = 999999
     this.deadPlayerAnimation.addFrame(dead_player_image_right_filename)
     this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)    
@@ -138,18 +160,5 @@ class Player {
       xVelocity = 0
       position_x = SLICE_WIDTH - WALL_WIDTH - (width / 2)
     }
-  }
-  
-  def reset() {
-    position_x = 0
-    position_y = 0
-    deltaX = 0  // Speed vectors for current frame
-    deltaY = 0
-    xVelocity = 0  // Speed vectors for current movement
-    yVelocity = 0
-    health = 3
-    score = 0
-    level_speed_bonus = 0
-    stopped = false
   }
 }
