@@ -21,6 +21,16 @@ class BaseLevel {
   /* Slices that have a background and hold items. */
   var slices = ArrayBuffer[Slice]()
   
+  /* Item counts */
+  var diceCount = 0
+  var cheatsheetCount = 0
+  var spaghettiCount = 0
+  var beerCount = 0
+  var stoneCount = 0
+  var iceCount = 0
+  var sausageCount = 0
+  
+  
   /* Dimensions of this level. */
   val width = WINDOW_WIDTH
   var length = 100
@@ -51,19 +61,7 @@ class BaseLevel {
   
   /* Player's speed bonus. */
   var levelSpeedBonus = 0
-  
-  /* This method is used to generate random items. */
-  def randomItem(): Option[Item] = {
-    val itemType = rand.nextInt(7)
-    if (itemType == 0) return Some(new Beer())
-    if (itemType == 1) return Some(new Dice())
-    if (itemType == 2) return Some(new Sausage())
-    if (itemType == 3) return Some(new Ice())
-    if (itemType == 4) return Some(new Stone())
-    if (itemType == 5) return Some(new Cheatsheet())
-    if (itemType == 6) return Some(new Spaghetti())
-    None
-  }
+
   
   /* This method generates the slices for this level. */
   def generateSlices() = {
@@ -89,7 +87,6 @@ class BaseLevel {
     for (i <- 3 to this.length - 6) {
       this.slices += new Slice(bgFiles(rand.nextInt(bgFiles.length)))
       this.slices(i).index = i
-      this.slices(i).populate(this.randomItem)
     }
   
     /* Finally, add the level goal to the last slice. */
@@ -111,5 +108,33 @@ class BaseLevel {
     val prize = new LevelGoalItem(this.levelGoalItem)
     prize.positionX = WINDOW_WIDTH / 2
     goalSlice.items += prize
+    
+    populateSlices()
   }
+  
+  def populateSlices() = {
+    var itemList = ArrayBuffer[Item]()
+    
+    var i = 0
+    for (i <- 0 to diceCount) itemList += new Dice()
+    for (i <- 0 to cheatsheetCount) itemList += new Cheatsheet()
+    for (i <- 0 to spaghettiCount) itemList += new Spaghetti()
+    for (i <- 0 to beerCount) itemList += new Beer()
+    for (i <- 0 to stoneCount) itemList += new Stone()
+    for (i <- 0 to iceCount) itemList += new Ice()
+    for (i <- 0 to sausageCount) itemList += new Sausage()
+
+    
+    /* Boundaries for item gen */
+    var lowerBound = 4
+    var upperBound = this.length - 8
+    var indices = lowerBound until upperBound
+    var newIndices = rand.shuffle(indices.toList)
+    
+    for (i <- 0 to itemList.length - 1) {
+      var slice = this.slices(newIndices(i))
+      slice.addItem(itemList(i))
+    }
+  }
+  
 }

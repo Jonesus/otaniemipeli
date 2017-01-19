@@ -63,6 +63,7 @@ object Game {
     this.paused = false
     this.keysReversed = false
     this.started = true
+    this.resetEffects()
     
     /* Reset the game world and load the level. */
     this.world.reset()

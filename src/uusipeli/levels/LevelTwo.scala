@@ -16,6 +16,14 @@ class LevelTwo extends BaseLevel {
   bgFiles = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")
   levelGoalItem = "gfx/128 maali2.png"
   
+  diceCount = 20
+  cheatsheetCount = 2
+  spaghettiCount = 5
+  beerCount = 20
+  stoneCount = 50
+  iceCount = 10
+  sausageCount = 10
+  
   soberPlayerImageRightFilename = "gfx/128 pixel teekkari oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 pixel teekkari vasen.png"
   drunkenPlayerImageRightFilename = "gfx/128 teekkari kanni oikea.png"
@@ -33,17 +41,4 @@ class LevelTwo extends BaseLevel {
   winAnimation.addFrame("gfx/128 wanha oikea.png")
   winAnimation.addFrame("gfx/128 wanha oikea.png")
   winAnimation.addFrame("gfx/128 wanha oikea.png")
-  
-  
-  override def randomItem(): Option[Item] = {
-    val itemType = rand.nextInt(7)
-    if (itemType == 0) return Some(new Beer())
-    if (itemType == 1) return Some(new Dice())
-    if (itemType == 2) return Some(new Sausage())
-    if (itemType == 3) return Some(new Ice())
-    if (itemType == 4) return Some(new Stone())
-    if (itemType == 5) return Some(new Cheatsheet())
-    if (itemType == 6) return Some(new Spaghetti())
-    None
-  }
 }

@@ -17,7 +17,7 @@ class Slice(filename: String) {
   val width = SLICE_WIDTH
   val height = SLICE_HEIGHT
   
-  val items = ArrayBuffer[Item]()
+  var items = ArrayBuffer[Item]()
   
   val backgroundImage = Some(ImageIO.read(new File(filename)))
   
@@ -28,9 +28,13 @@ class Slice(filename: String) {
   def populate(itemFunc: () => Option[Item]) = {
     val n: Option[Item] = itemFunc()
     n.foreach { i =>
-      i.positionX = 160 + rand.nextInt(704)
-      i.positionY = 32 + rand.nextInt(64)
-      this.items += i 
+      this.addItem(i)
     }
+  }
+  
+  def addItem(i: Item) = {
+    i.positionX = 160 + rand.nextInt(704)
+    i.positionY = 32 + rand.nextInt(64)
+    this.items += i
   }
 }
