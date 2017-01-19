@@ -14,6 +14,7 @@ import event._
 import Swing._
 import ListView._
 
+/* Main method of the game is in this object. */
 object Main extends SimpleSwingApplication {
   val game = Game
   val menu = new MenuView
@@ -24,8 +25,8 @@ object Main extends SimpleSwingApplication {
     background = Color.black
     
     def goToMenu() {
-      println("goToMenu() called. Current thread: " + Thread.currentThread())
       this.contents = menu
+      this.repaint()
     }
     
     def startNewGame(lvl: BaseLevel) {
