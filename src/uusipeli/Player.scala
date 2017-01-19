@@ -82,7 +82,7 @@ class Player {
     this.deadPlayerAnimation.addFrame(dead_player_image_right_filename)
     this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)
     
-    this.playerAnimation = soberPlayerAnimation
+    this.playerAnimation = this.soberPlayerAnimation
   }
   
   def playerIsDrunk() = {

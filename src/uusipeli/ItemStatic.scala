@@ -41,19 +41,22 @@ class ItemStatic {
     }
   }
   
+  def loadImage() = {
+    /* Load the item image. */
+    try {
+      this.image = Some(ImageIO.read(new File(imageFilename)))
+    } catch {
+      case e: Exception =>
+        println("Error: Could not read item image file.")
+        this.image = Some(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
+    }    
+  }
+  
   def getImage(): BufferedImage = {
     if (this.image.isDefined) {
       return this.image.get
     } else {
-
-      /* Load the item image. */
-      try {
-        this.image = Some(ImageIO.read(new File(imageFilename)))
-      } catch {
-        case e: Exception =>
-          println("Error: Could not read item image file.")
-          this.image = Some(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
-      }
+      this.loadImage()
     }
     this.image.get
   }

@@ -48,6 +48,9 @@ class World(player: Player) {
     /* Player's speed bonus. */
     player.level_speed_bonus = l.level_speed_bonus
     
+    /* Load the animations. */
+    player.loadResources()
+    
     /* We start with a sober player. */
     player.playerIsSober()
   }
