@@ -20,6 +20,7 @@ class Player {
   var health = 3
   var score = 0
   var stopped = false
+  var dead = false
   
   val maxSpeedX = 10
   val maxSpeedY = 15
@@ -61,6 +62,7 @@ class Player {
     this.health = 3
     this.score = 0
     this.stopped = false
+    this.dead = false
     this.acceleration = 1
     var Y_RESTING_SPEED = PLAYER_SPEED_DOWN
     this.levelSpeedBonus = 0
@@ -97,6 +99,7 @@ class Player {
   }
   
   def playerIsDead() = {
+    this.dead = true
     this.playerAnimation = deadPlayerAnimation
   }
   
@@ -121,7 +124,7 @@ class Player {
   
   def update() = {
     if (stopped == false) updatePosition()
-    else goToGoal()
+    else if (dead == false) goToGoal()
     if (health > 3) health = 3
   }
   
