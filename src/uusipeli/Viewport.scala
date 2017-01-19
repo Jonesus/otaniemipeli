@@ -41,6 +41,7 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
     case KeyPressed(_, Key.D, _, _) => Game.keyPressed("d")
     case KeyPressed(_, Key.Left, _, _) => Game.keyPressed("left")
     case KeyPressed(_, Key.Right, _, _) => Game.keyPressed("right")
+    case KeyPressed(_, Key.Escape, _, _) => Game.exitToMenuCommand = true
 
     case KeyReleased(_, Key.W, _, _) => Game.keyReleased("w")
     case KeyReleased(_, Key.S, _, _) => Game.keyReleased("s")
