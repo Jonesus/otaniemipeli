@@ -15,34 +15,34 @@ import Swing._
 import ListView._
 
 object Main extends SimpleSwingApplication {
-  val mygame = Game
-  val mymenu = new MenuView
+  val game = Game
+  val menu = new MenuView
   
   def top = new MainFrame {
     title = "Otaniemipeli"
     size = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
     background = Color.black
     
-    def go_to_menu() {
-      mygame.stopGame
-      this.contents = mymenu
+    def goToMenu() {
+      println("goToMenu() called. Current thread: " + Thread.currentThread())
+      this.contents = menu
     }
     
-    
-    def start_game(lvl: BaseLevel) {
-      this.contents = mygame.viewport
-      mygame.viewport.requestFocus()
-      mygame.startGame(lvl)
+    def startNewGame(lvl: BaseLevel) {
+      this.contents = Main.game.viewport
+      game.viewport.requestFocus()
+      game.startGame(lvl)
     }
     
-    def startJMT(x: Unit) { start_game(new LevelOne) }
-    def startSMT(x: Unit) { start_game(new LevelTwo) }
-    def startOTA(x: Unit) { start_game(new LevelThree) }
+    def startJMT(x: Unit) = { startNewGame(new LevelOne) }
+    def startSMT(x: Unit) = { startNewGame(new LevelTwo) }
+    def startOTA(x: Unit) = { startNewGame(new LevelThree) }
     
-    mymenu.JMTbutton.action = startJMT 
-    mymenu.SMTbutton.action = startSMT
-    mymenu.OTAbutton.action = startOTA
-
-    go_to_menu()
+    menu.JMTbutton.action = startJMT 
+    menu.SMTbutton.action = startSMT
+    menu.OTAbutton.action = startOTA
+    
+    game.setMenuCallback(this.goToMenu)
+    goToMenu()
   }
 }

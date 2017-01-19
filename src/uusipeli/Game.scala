@@ -19,7 +19,15 @@ object Game {
   val window_height = WINDOW_HEIGHT
   val window_title = "Otaniemipeli"
   val frame_rate = 60
-
+  
+  /* A callback function that will show the main menu. */
+  private var showMenuCallback: () => Any = null
+  
+  /* This sets the callback. */
+  def setMenuCallback(f: => Any) = {
+    this.showMenuCallback = () => f
+  }
+  
   /* Keys being held down */
   var key_a = false
   var key_d = false
@@ -79,6 +87,7 @@ object Game {
   
   /* Exists the game. */
   def exitGameToMenu() = {
+    this.showMainMenu()
   }
 
   /* This method is called when the pause key is pressed.
@@ -97,6 +106,14 @@ object Game {
       this.stopGame()
       this.startGame(new LevelOne)
     }
+  }
+  
+  def showMainMenu(): Unit = {
+    if (this.showMenuCallback == null) {
+      return
+    }
+    
+    this.showMenuCallback()
   }
 
   def top = new MainFrame {
