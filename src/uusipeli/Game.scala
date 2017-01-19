@@ -45,10 +45,7 @@ object Game {
   
   /* World object. */
   val world = new World(player)
-  
-  /* Current level, if any. */
-  var currLevel: BaseLevel = _
-  
+    
   /* Events that are processed once. */
   var events = ArrayBuffer[Event]()
   
@@ -66,7 +63,6 @@ object Game {
     this.paused = false
     this.keysReversed = false
     this.started = true
-    this.currLevel = lvl
     
     /* Reset the game world and load the level. */
     this.world.reset()

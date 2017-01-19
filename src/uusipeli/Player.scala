@@ -61,7 +61,6 @@ class Player {
     this.acceleration = 1
     var Y_RESTING_SPEED = PLAYER_SPEED_DOWN
     this.level_speed_bonus = 0
-    this.playerAnimation = soberPlayerAnimation
     
     this.loadResources()
   }
@@ -81,7 +80,9 @@ class Player {
     this.deadPlayerAnimation = new Animation
     this.deadPlayerAnimation.frameDuration = 999999
     this.deadPlayerAnimation.addFrame(dead_player_image_right_filename)
-    this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)    
+    this.deadPlayerAnimation.addFrame(dead_player_image_left_filename)
+    
+    this.playerAnimation = soberPlayerAnimation
   }
   
   def playerIsDrunk() = {
