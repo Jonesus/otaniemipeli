@@ -116,13 +116,13 @@ class BaseLevel {
     var itemList = ArrayBuffer[Item]()
     
     var i = 0
-    for (i <- 0 to diceCount) itemList += new Dice()
-    for (i <- 0 to cheatsheetCount) itemList += new Cheatsheet()
-    for (i <- 0 to spaghettiCount) itemList += new Spaghetti()
-    for (i <- 0 to beerCount) itemList += new Beer()
-    for (i <- 0 to stoneCount) itemList += new Stone()
-    for (i <- 0 to iceCount) itemList += new Ice()
-    for (i <- 0 to sausageCount) itemList += new Sausage()
+    for (i <- 0 to diceCount-1) itemList += new Dice()
+    for (i <- 0 to cheatsheetCount-1) itemList += new Cheatsheet()
+    for (i <- 0 to spaghettiCount-1) itemList += new Spaghetti()
+    for (i <- 0 to beerCount-1) itemList += new Beer()
+    for (i <- 0 to stoneCount-1) itemList += new Stone()
+    for (i <- 0 to iceCount-1) itemList += new Ice()
+    for (i <- 0 to sausageCount-1) itemList += new Sausage()
 
     
     /* Boundaries for item gen */
