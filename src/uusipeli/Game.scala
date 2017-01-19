@@ -32,12 +32,21 @@ object Game {
   var key_a = false
   var key_d = false
 
+  /* Boolean flags for game's current state. */
   var started = false
   var paused = false
   var keysReversed = false
-
+  
+  /* Flag that indicates that the game should be exited. */
+  var exitToMenuCommand = false
+  
+  /* Player object. */
   var player = new Player
+  
+  /* World object. */
   val world = new World(player)
+  
+  /* Current level, if any. */
   var currLevel: BaseLevel = _
   
   /* Events that are processed once. */
@@ -46,47 +55,66 @@ object Game {
   /* Effects, such as the "drunk effect" that last for a defined period of time. */
   var effects = ArrayBuffer[Effect]()
 
-  /* Viewport to the world */
+  /* Viewport to the world. */
   val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
   viewport.preferredSize = new Dimension(window_width, window_height)
 
-  /* Starts the game. */
+  /* Starts the game with level lvl. */
   def startGame(lvl: BaseLevel) = {
-    currLevel = lvl
-    world.loadLevel(lvl)
-    world.loadResources()
+    /* First, reset the game state. */
+    this.exitToMenuCommand = false
+    this.paused = false
+    this.keysReversed = false
     this.started = true
-    world.playMusic()
-    renderingTimer.start()
+    this.currLevel = lvl
+    
+    /* Reset the game world and load the level. */
+    this.world.reset()
+    this.world.loadLevel(lvl)
+    this.world.loadResources()
+    
+    /* Reset the viewport. */
+    this.viewport.reset()
+    
+    /* Start playing the background music. */
+    this.world.playMusic()
+    
+    /* Start the game loop. */
+    this.gameLoopTimer.start()
   }
 
   /* Stops the game. */
   def stopGame() = {
+    gameLoopTimer.stop()
     this.started = false
+    
+    this.events.clear()
+    this.effects.clear()
+
     world.stopMusic()
-    renderingTimer.stop()
-    // viewport.reset()
+
     player.reset()
     world.reset()
-    resetEffects()
+    viewport.reset()
   }
 
   /* Pauses the game. */
   def pauseGame() = {
     this.paused = true
     world.pauseMusic()
-    renderingTimer.stop()
+    gameLoopTimer.stop()
   }
 
   /* Continues a paused game. */
   def continueGame() = {
     this.paused = false
     world.continueMusic()
-    renderingTimer.start()
+    gameLoopTimer.start()
   }
   
-  /* Exists the game. */
+  /* Exits the game. Note: This is called from update().*/
   def exitGameToMenu() = {
+    this.stopGame()
     this.showMainMenu()
   }
 
@@ -100,14 +128,8 @@ object Game {
       this.pauseGame()
     }
   }
-
-  def newGameKeyPressed() = {
-    if (this.started) {
-      this.stopGame()
-      this.startGame(new LevelOne)
-    }
-  }
   
+  /* Calls the callback. */
   def showMainMenu(): Unit = {
     if (this.showMenuCallback == null) {
       return
@@ -115,18 +137,9 @@ object Game {
     
     this.showMenuCallback()
   }
-
-  def top = new MainFrame {
-    ignoreRepaint = true
-    title = window_title
-    size = new Dimension(window_width, window_height)
-    background = Color.black
-    viewport.preferredSize = new Dimension(window_width, window_height)
-
-    contents = viewport
-  }
-
-  def update() = {
+  
+  /* This method is run every time the game loop fires an event. */
+  def update(): Unit = {
     if (this.started == true && this.paused != true) {
       processEvents()
       processEffects()
@@ -139,6 +152,17 @@ object Game {
       player.update()
       updateViewportLocation()
       world.update()
+      this.checkExitGameCommand()
+    }
+  }
+  
+  /* Exits the game if the flag is set. */
+  def checkExitGameCommand() = {
+    this.synchronized {
+      if (this.exitToMenuCommand == true) {
+        this.stopGame()
+        this.exitGameToMenu()
+      }
     }
   }
 
@@ -151,14 +175,15 @@ object Game {
     }
   }
 
-  // Timer: Here we set up a timer that updates the game state and calls viewport.repaint.
-  val renderingTimer = new Timer((1000 / frame_rate), new ActionListener() {
+  /* Set up a timer that updates the game state and calls viewport.repaint. */
+  val gameLoopTimer = new Timer((1000 / frame_rate), new ActionListener() {
     override def actionPerformed(e: ActionEvent) {
       update()
       viewport.repaint()
     }
   })
 
+  /* Processes keys. */
   def processKeys() {
     if (keysReversed == true) {
       if (key_a) {
@@ -177,7 +202,7 @@ object Game {
     }
   }
 
-  // Keyboard events
+  /* Event handlers for keyboard events. See Viewport. */
   def keyPressed(k: String) = {
     if (k == "a") {
       key_a = true
@@ -210,16 +235,19 @@ object Game {
 
   /* Adds a new effect to the queue.
    * Note: Only one particular effect (for example one BeerEffect) can be running at the same time.
-   * Old effects are replaced with new effect.
+   * The old effect is replaced with the new effect.
    */
   def addEffect(effect: Effect) = {
     var oldEffects = ArrayBuffer[Effect]()
     effect.startTime = scala.compat.Platform.currentTime
+    
     this.effects.filter { x => x.getClass() == effect.getClass() }.foreach { x =>
       oldEffects += x
     }
+    
     if (oldEffects.size > 0) this.effects --= oldEffects
     this.effects += effect
+    
     effect.start()
   }
   
@@ -228,7 +256,7 @@ object Game {
   }  
 
   /* This method processes the effects:
-   * - If timeout has passed, end() is called and the effect is removed from the queue.
+   * - If delay has passed, end() is called and the effect is removed from the queue.
    */
   def processEffects() = {
     val currTime = scala.compat.Platform.currentTime
@@ -253,29 +281,31 @@ object Game {
     }
   }
   
-  /* This methods processes the events that are run once. */
-  
+  /* This methods processes the events. */
   def processEvents() = {
-    val currTime = scala.compat.Platform.currentTime
-    var oldEvents = ArrayBuffer[Event]()
-    
-    this.events.foreach { x =>
-      if (x.started == false) {
-        x.startTime = scala.compat.Platform.currentTime
-        x.start()
-        x.started = true
-      } else {
-        if (currTime > (x.startTime + x.delay)) {
-          x.end()
-          oldEvents += x
-        }
-      }
-    }
-
-    /* Remove old events from the array. */
+	  val currTime = scala.compat.Platform.currentTime
+	  val oldEvents = ArrayBuffer[Event]()
+	  
+	  this.events.foreach { x =>
+	    if (x.started == false) {
+		    x.startTime = scala.compat.Platform.currentTime
+		    x.start()
+			  x.started = true
+		  } else {
+	      if (currTime > (x.startTime + x.delay)) {
+			    if (x.ended == false) {
+				    x.ended = true
+					  x.end()
+					  oldEvents += x
+				  }
+			  }
+		  }
+	  }
+	  
+    /* Remove old effects from the array. */
     if (oldEvents.size > 0) {
       this.events --= oldEvents
-    }
+    }	  
   }
 
   /* This methods ends all running effects. */
@@ -286,6 +316,8 @@ object Game {
           x.end()
         }
     }
+    
+    /* Empty the queue. */
     this.effects.clear()
   }
 }
