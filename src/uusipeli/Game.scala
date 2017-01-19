@@ -15,10 +15,10 @@ import scala.collection.mutable.ArrayBuffer
  */
 object Game {
 
-  val window_width = WINDOW_WIDTH
-  val window_height = WINDOW_HEIGHT
-  val window_title = "Otaniemipeli"
-  val frame_rate = 60
+  val windowWidth = WINDOW_WIDTH
+  val windowHeight = WINDOW_HEIGHT
+  val windowTitle = "Otaniemipeli"
+  val frameRate = 60
   
   /* A callback function that will show the main menu. */
   private var showMenuCallback: () => Any = null
@@ -53,8 +53,8 @@ object Game {
   var effects = ArrayBuffer[Effect]()
 
   /* Viewport to the world. */
-  val viewport = new Viewport(world, window_width, window_height, (window_width / 2), (window_height / 2))
-  viewport.preferredSize = new Dimension(window_width, window_height)
+  val viewport = new Viewport(world, windowWidth, windowHeight, (windowWidth / 2), (windowHeight / 2))
+  viewport.preferredSize = new Dimension(windowWidth, windowHeight)
 
   /* Starts the game with level lvl. */
   def startGame(lvl: BaseLevel) = {
@@ -172,7 +172,7 @@ object Game {
   }
 
   /* Set up a timer that updates the game state and calls viewport.repaint. */
-  val gameLoopTimer = new Timer((1000 / frame_rate), new ActionListener() {
+  val gameLoopTimer = new Timer((1000 / frameRate), new ActionListener() {
     override def actionPerformed(e: ActionEvent) {
       update()
       viewport.repaint()
