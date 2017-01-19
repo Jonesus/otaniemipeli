@@ -97,14 +97,6 @@ class Player {
     this.playerAnimation = deadPlayerAnimation
   }
   
-  def turnUp() = {
-    deltaY -= acceleration
-  }
-  
-  def turnDown() = {
-    deltaY += acceleration
-  }
-  
   def turnLeft() = {
     deltaX -= acceleration
   }
