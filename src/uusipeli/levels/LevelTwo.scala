@@ -9,7 +9,7 @@ import uusipeli.items._
 import uusipeli.Animation
 
 class LevelTwo extends BaseLevel {
-  length = 30
+  length = 150
   levelSpeedBonus = 2
   backgroundMusicFilename = "sounds/pahkinansarkija.wav"
   levelTitleFilename = "gfx/title smt.png"
