@@ -13,7 +13,7 @@ class LevelOne extends BaseLevel {
   backgroundMusicFilename = "sounds/pahkinansarkija.wav"
   levelTitleFilename = "gfx/title jmt.png"
   bgFiles = List("gfx/bg1.png", "gfx/bg2.png", "gfx/bg3.png", "gfx/bg4.png")
-  levelGoalFilename = "gfx/maali1.png"
+  levelGoalItem = "gfx/128 maali1.png"
   
   soberPlayerImageRightFilename = "gfx/128 fuksi oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 fuksi vasen.png"

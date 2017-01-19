@@ -34,7 +34,8 @@ class BaseLevel {
   var backgroundMusicFilename = ""
   var levelTitleFilename = ""
   var bgFiles = List("", "", "", "")
-  var levelGoalFilename = ""
+  var levelGoalFilename = "gfx/64 maaliviiva.png"
+  var levelGoalItem = ""
   
   /* Player's animation frames. */
   var soberPlayerImageLeftFilename = ""
@@ -83,7 +84,7 @@ class BaseLevel {
     this.slices(2).items += name
     
     /* Populate slices with random items. Use a random slice background. */
-    for (i <- 3 to this.length - 3) {
+    for (i <- 3 to this.length - 6) {
       this.slices += new Slice(bgFiles(rand.nextInt(bgFiles.length)))
       this.slices(i).index = i
       this.slices(i).populate(this.randomItem)
@@ -99,9 +100,12 @@ class BaseLevel {
     lastSlice.items += goal
     
     /* Add a small visual buffer to the end of the level. */
-    for (i <- this.slices.length - 3 to this.slices.length) {
+    for (i <- this.length - 4 to this.length) {
       this.slices += new Slice(bgFiles(rand.nextInt(bgFiles.length)))
       this.slices(i).index = i
     }
+    
+    val goalSlice = this.slices(this.length - 3)
+    goalSlice.items += new LevelGoalItem(this.levelGoalItem)
   }
 }

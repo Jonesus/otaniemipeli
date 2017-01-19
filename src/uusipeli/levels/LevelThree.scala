@@ -14,7 +14,7 @@ class LevelThree extends BaseLevel {
   backgroundMusicFilename = "sounds/pahkinansarkija.wav"
   levelTitleFilename = "gfx/title otakaari.png"
   bgFiles = List("gfx/tl1.png", "gfx/tl2.png", "gfx/tl3.png", "gfx/tl4.png")
-  levelGoalFilename = "gfx/maali3.png"
+  levelGoalItem = "gfx/128 maali3.png"
   
   soberPlayerImageRightFilename = "gfx/128 wanha oikea.png"
   soberPlayerImageLeftFilename = "gfx/128 wanha vasen.png"
