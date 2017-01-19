@@ -17,7 +17,7 @@ import java.awt.geom._
 import scala.swing.event._
 import java.awt.event._
 
-
+/* The main menu. */
 class MenuView extends Panel {
   
   focusable = true

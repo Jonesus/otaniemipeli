@@ -6,6 +6,7 @@ import java.awt.Color
 import javax.imageio.ImageIO
 import java.io.File
 
+/* This class represents game items, such as beer bottle and ice cube. */
 class Item {
   /* Every item belongs to a slice.
    * These coordinates are in slices coordinate space:

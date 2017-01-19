@@ -7,6 +7,9 @@ import javax.imageio.ImageIO
 import java.io.File
 import javax.sound.sampled._
 
+/* This is a companion object for every item type. It caches the item's image and sound,
+ * so that they are not loaded for every item instance.
+ */
 class ItemStatic {
   var imageFilename = ""
 

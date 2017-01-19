@@ -9,6 +9,7 @@ import scala.util.Random
 import uusipeli.items._
 import uusipeli.model._
 
+/* This class represents a slice. The game world is composed of slices that hold items. */
 class Slice(filename: String) {
   val rand = new scala.util.Random
 
