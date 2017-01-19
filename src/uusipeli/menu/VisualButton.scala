@@ -12,7 +12,7 @@ import uusipeli.model._
 
 
 
-class visualButton(x_coord: Int, y_coord: Int, filename: String, func: Unit => Unit) {
+class VisualButton(xCoord: Int, yCoord: Int, filename: String, func: Unit => Unit) {
   
   // Resize image to half of original
   var image = Some(ImageIO.read(new File(filename))).get
@@ -26,7 +26,7 @@ class visualButton(x_coord: Int, y_coord: Int, filename: String, func: Unit => U
   val width = image.getWidth() 
   val height = image.getHeight()
   val x = WINDOW_WIDTH/2 - width/2  // Center the image
-  val y = y_coord
+  val y = yCoord
   
   
   var action = func  // What to do when clicked

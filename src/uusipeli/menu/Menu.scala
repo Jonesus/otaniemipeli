@@ -34,20 +34,20 @@ class MenuView extends Panel {
   
   
   val fontFile = new File("gfx/Gamer.ttf")
-  val new_font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+  val newFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
   val ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-  ge.registerFont(new_font);
+  ge.registerFont(newFont);
   
   
   this.background = Color.darkGray
   this.preferredSize = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
-  val menu_image = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB)
+  val menuImage = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB)
   
   
-  var JMTbutton = new visualButton(0, 200, "gfx/title jmt.png", null)
-  var SMTbutton = new visualButton(0, 300, "gfx/title smt.png", null)
-  var OTAbutton = new visualButton(0, 400, "gfx/title otakaari.png", null)
-  var buttons = new ArrayBuffer[visualButton]()
+  var JMTbutton = new VisualButton(0, 200, "gfx/title jmt.png", null)
+  var SMTbutton = new VisualButton(0, 300, "gfx/title smt.png", null)
+  var OTAbutton = new VisualButton(0, 400, "gfx/title otakaari.png", null)
+  var buttons = new ArrayBuffer[VisualButton]()
   buttons += JMTbutton
   buttons += SMTbutton
   buttons += OTAbutton
@@ -59,10 +59,10 @@ class MenuView extends Panel {
     g.drawString("TEEKKARISIMULAATTORI", 130, 80)
     
     
-    var menu_graphics = menu_image.getGraphics()
+    var menuGraphics = menuImage.getGraphics()
     
     for (button <- buttons) {
-      menu_graphics.drawImage(button.render(),
+      menuGraphics.drawImage(button.render(),
                               button.x,
                               button.y,
                               null)
@@ -73,6 +73,6 @@ class MenuView extends Panel {
   
   override def paintComponent(g: Graphics2D) {
     render(g)
-    g.drawImage(menu_image, null, 0, 0)
+    g.drawImage(menuImage, null, 0, 0)
   }
 }
