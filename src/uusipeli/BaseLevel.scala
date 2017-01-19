@@ -47,6 +47,8 @@ class BaseLevel {
   var deadPlayerImageFeftFilename = ""
   var deadPlayerImageRightFilename = ""
   
+  var winAnimation: Animation = _
+  
   /* Player's speed bonus. */
   var levelSpeedBonus = 0
   
@@ -106,6 +108,8 @@ class BaseLevel {
     }
     
     val goalSlice = this.slices(this.length - 3)
-    goalSlice.items += new LevelGoalItem(this.levelGoalItem)
+    val prize = new LevelGoalItem(this.levelGoalItem)
+    prize.positionX = WINDOW_WIDTH / 2
+    goalSlice.items += prize
   }
 }

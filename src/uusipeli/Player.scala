@@ -44,6 +44,9 @@ class Player {
   var deadPlayerImageRightFilename = "gfx/128 teekkari dead oikea.png"
   var deadPlayerImageLeftFilename = "gfx/128 teekkari dead vasen.png" 
   
+  var winAnimation: Animation = _
+  
+  
   /* Current animation */
   var playerAnimation = soberPlayerAnimation
   
@@ -118,7 +121,20 @@ class Player {
   
   def update() = {
     if (stopped == false) updatePosition()
+    else goToGoal()
     if (health > 3) health = 3
+  }
+  
+  def goToGoal() = {
+    var dx = 0
+    var dy = 0
+    if (Game.player.positionX.toInt != WINDOW_WIDTH / 2) {
+      dx = if (Game.player.positionX.toInt < WINDOW_WIDTH / 2) 1 else -1
+    }
+    if (Game.player.positionY.toInt != SLICE_HEIGHT * (Game.world.slices.length - 4)) {
+      dy = if (Game.player.positionY.toInt < SLICE_HEIGHT * (Game.world.slices.length - 4)) 1 else -1
+    }
+    Game.player.move(dx, dy)
   }
   
   def updatePosition() = {

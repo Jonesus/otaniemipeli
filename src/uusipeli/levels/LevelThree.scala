@@ -6,9 +6,9 @@ import uusipeli.Slice
 import uusipeli.Game
 import uusipeli.model._
 import uusipeli.items._
+import uusipeli.Animation
 
 class LevelThree extends BaseLevel {
-  
   length = 200
   levelSpeedBonus = 4
   backgroundMusicFilename = "sounds/pahkinansarkija.wav"
@@ -22,6 +22,10 @@ class LevelThree extends BaseLevel {
   drunkenPlayerImageLeftFilename = "gfx/128 wanha kanni vasen.png"
   deadPlayerImageRightFilename = "gfx/128 wanha dead oikea.png"
   deadPlayerImageFeftFilename = "gfx/128 wanha dead vasen.png"  
+  
+  winAnimation = new Animation
+  winAnimation.addFrame("gfx/128 wanha dead oikea.png")
+  
   
   override def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)

@@ -3,7 +3,7 @@ import uusipeli.Event
 import uusipeli.Game
 
 class EndGameEvent extends Event {
-  delay = 3000
+  delay = 4000
   
   override def start() = {
     Game.player.stopped = true    

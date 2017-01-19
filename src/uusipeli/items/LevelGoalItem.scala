@@ -5,13 +5,15 @@ import uusipeli.ItemStatic
 import uusipeli.Game
 import uusipeli.Event
 import uusipeli.events.EndGameEvent
+import uusipeli.events.GoalEvent
 
 class LevelGoalItem(val filename: String) extends Item {
   LevelGoalItem.imageFilename = filename
+  LevelGoalItem.loadImage()
   this.setImage(LevelGoalItem.getImage())
   
   override def processCollision() = {
-    Game.addEvent(new EndGameEvent())
+    Game.addEvent(new GoalEvent)
   }
 }
 

@@ -41,6 +41,8 @@ class World(player: Player) {
     player.deadPlayerImageLeftFilename = l.deadPlayerImageFeftFilename
     player.deadPlayerImageRightFilename = l.deadPlayerImageRightFilename
     
+    player.winAnimation = l.winAnimation
+    
     /* Player's starting position. */
     player.positionX = l.playerPositionX
     player.positionY = l.playerPositionY

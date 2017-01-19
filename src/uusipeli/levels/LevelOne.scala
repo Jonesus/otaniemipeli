@@ -6,6 +6,7 @@ import uusipeli.Slice
 import uusipeli.Game
 import uusipeli.model._
 import uusipeli.items._
+import uusipeli.Animation
 
 class LevelOne extends BaseLevel {
   length = 100
@@ -22,6 +23,18 @@ class LevelOne extends BaseLevel {
   deadPlayerImageRightFilename = "gfx/128 fuksi dead oikea.png"
   deadPlayerImageFeftFilename = "gfx/128 fuksi dead vasen.png"
     
+  winAnimation = new Animation
+  winAnimation.frameDuration = 600
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  winAnimation.addFrame("gfx/128 fuksi oikea.png")
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  winAnimation.addFrame("gfx/128 fuksi oikea.png")
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  winAnimation.addFrame("gfx/128 pixel teekkari oikea.png")
+  
+  
   override def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)
     if (itemType == 0) return Some(new Beer())
