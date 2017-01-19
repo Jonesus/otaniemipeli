@@ -51,10 +51,6 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
 
     case KeyTyped(_, 'P', _, _) => Game.pauseKeyPressed()
     case KeyTyped(_, 'p', _, _) => Game.pauseKeyPressed()
-    /*
-    case KeyTyped(_, 'N', _, _) => Game.newGameKeyPressed()
-    case KeyTyped(_, 'n', _, _) => Game.newGameKeyPressed()    
-  	*/
   }
 
   def render() = {
