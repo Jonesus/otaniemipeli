@@ -19,7 +19,7 @@ class Slice(filename: String) {
   
   val items = ArrayBuffer[Item]()
   
-  val background_image = Some(ImageIO.read(new File(filename)))
+  val backgroundImage = Some(ImageIO.read(new File(filename)))
   
   def render: BufferedImage = {
     new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
@@ -28,8 +28,8 @@ class Slice(filename: String) {
   def populate(itemFunc: () => Option[Item]) = {
     val n: Option[Item] = itemFunc()
     n.foreach { i =>
-      i.position_x = 160 + rand.nextInt(704)
-      i.position_y = 32 + rand.nextInt(64)
+      i.positionX = 160 + rand.nextInt(704)
+      i.positionY = 32 + rand.nextInt(64)
       this.items += i 
     }
   }

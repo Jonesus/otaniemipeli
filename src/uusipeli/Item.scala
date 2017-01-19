@@ -12,8 +12,8 @@ class Item {
    * These coordinates are in slices coordinate space:
    * (0, 0) is the upper left corner of the slice.
    */
-  var position_x: Int = 0
-  var position_y: Int = 0
+  var positionX: Int = 0
+  var positionY: Int = 0
   
   /* Is this item active? Should collisions be processed? */
   var active = true

@@ -9,18 +9,18 @@ import uusipeli.items._
 
 class LevelTwo extends BaseLevel {
   length = 150
-  level_speed_bonus = 2
-  background_music_filename = "sounds/pahkinansarkija.wav"
-  level_title_filename = "gfx/title smt.png"
-  bg_files = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")
-  level_goal_filename = "gfx/maali2.png"
+  levelSpeedBonus = 2
+  backgroundMusicFilename = "sounds/pahkinansarkija.wav"
+  levelTitleFilename = "gfx/title smt.png"
+  bgFiles = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")
+  levelGoalFilename = "gfx/maali2.png"
   
-  sober_player_image_right_filename = "gfx/128 pixel teekkari oikea.png"
-  sober_player_image_left_filename = "gfx/128 pixel teekkari vasen.png"
-  drunken_player_image_right_filename = "gfx/128 teekkari kanni oikea.png"
-  drunken_player_image_left_filename = "gfx/128 teekkari kanni vasen.png"
-  dead_player_image_right_filename = "gfx/128 teekkari dead oikea.png"
-  dead_player_image_left_filename = "gfx/128 teekkari dead vasen.png"
+  soberPlayerImageRightFilename = "gfx/128 pixel teekkari oikea.png"
+  soberPlayerImageLeftFilename = "gfx/128 pixel teekkari vasen.png"
+  drunkenPlayerImageRightFilename = "gfx/128 teekkari kanni oikea.png"
+  drunkenPlayerImageLeftFilename = "gfx/128 teekkari kanni vasen.png"
+  deadPlayerImageRightFilename = "gfx/128 teekkari dead oikea.png"
+  deadPlayerImageFeftFilename = "gfx/128 teekkari dead vasen.png"
   
   override def randomItem(): Option[Item] = {
     val itemType = rand.nextInt(7)

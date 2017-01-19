@@ -16,37 +16,37 @@ class World(player: Player) {
   val height = 0
   
   /* File names */
-  var background_music_filename = ""
+  var backgroundMusicFilename = ""
   
   /* Items */
   var slices = ArrayBuffer[Slice]()
 
   def loadLevel(l: BaseLevel) = {
-    background_music_filename = l.background_music_filename
+    this.backgroundMusicFilename = l.backgroundMusicFilename
     
     /* We populate this world with the provided map. */
     l.generateSlices()
     this.slices = l.slices
         
     /* Player's animations. */
-    player.sober_player_image_left_filename = l.sober_player_image_left_filename
-    player.sober_player_image_right_filename = l.sober_player_image_right_filename
+    player.soberPlayerImageLeftFilename = l.soberPlayerImageLeftFilename
+    player.soberPlayerImageRightFilename = l.soberPlayerImageRightFilename
     
-    player.drunken_player_image_left_filename = l.drunken_player_image_left_filename
-    player.drunken_player_image_right_filename = l.drunken_player_image_right_filename
+    player.drunkenPlayerImageLeftFilename = l.drunkenPlayerImageLeftFilename
+    player.drunkenPlayerImageRightFilename = l.drunkenPlayerImageRightFilename
     
-    player.dead_player_image_left_filename = l.dead_player_image_left_filename
-    player.dead_player_image_right_filename = l.dead_player_image_right_filename
+    player.deadPlayerImageLeftFilename = l.deadPlayerImageFeftFilename
+    player.deadPlayerImageRightFilename = l.deadPlayerImageRightFilename
     
     /* Reset all players variables and load new images */
     player.reset()
     
     /* Player's starting position. */
-    player.position_x = l.player_position_x
-    player.position_y = l.player_position_y
+    player.positionX = l.playerPositionX
+    player.positionY = l.playerPositionY
     
     /* Player's speed bonus. */
-    player.level_speed_bonus = l.level_speed_bonus
+    player.levelSpeedBonus = l.levelSpeedBonus
     
     /* Load the animations. */
     player.loadResources()
@@ -81,9 +81,9 @@ class World(player: Player) {
     
     try {
       backgroundMusicClip = Some(AudioSystem.getClip(null))
-      backgroundMusicClip.get.open(AudioSystem.getAudioInputStream(new File(background_music_filename)))
+      backgroundMusicClip.get.open(AudioSystem.getAudioInputStream(new File(backgroundMusicFilename)))
     } catch {
-      case e: Exception => println("Could not open sound file " + background_music_filename + ": " + e.toString())
+      case e: Exception => println("Could not open sound file " + backgroundMusicFilename + ": " + e.toString())
     }
   }
   
@@ -124,11 +124,11 @@ class World(player: Player) {
      * else:
      * Intersection = Not Empty
      */
-    val itemX = item.position_x - (item.width / 2)
-    val itemY = slice.index * slice.height + item.position_y - (item.height / 2)
+    val itemX = item.positionX - (item.width / 2)
+    val itemY = slice.index * slice.height + item.positionY - (item.height / 2)
     
-    val playerX = (this.player.position_x - (this.player.width / 2)).toInt
-    val playerY = (this.player.position_y - (this.player.height / 2)).toInt
+    val playerX = (this.player.positionX - (this.player.width / 2)).toInt
+    val playerY = (this.player.positionY - (this.player.height / 2)).toInt
     
     if ( (itemX + item.width < playerX).||(playerX + this.player.width < itemX).||(itemY + item.height < playerY).||(playerY + this.player.height < itemY)) {
       return false

@@ -11,7 +11,7 @@ import uusipeli.model._
  * Viewport_x and viewport_y: The middle of the viewport in world coordinates.
  */
 
-class Viewport(world: World, viewport_width: Int, viewport_height: Int, val viewport_start_x: Int, val viewport_start_y: Int) extends Panel {
+class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewportStartX: Int, val viewportStartY: Int) extends Panel {
   
   /* Toggle this true to enable render debug drawing. */
   val renderDebug = false
@@ -21,10 +21,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
 
   this.background = Color.black
 
-  var viewport_x = viewport_start_x
-  var viewport_y = viewport_start_y
+  var viewportX = viewportStartX
+  var viewportY = viewportStartY
 
-  val viewport_image = new BufferedImage(viewport_width, viewport_height, BufferedImage.TYPE_INT_ARGB)
+  val viewportImage = new BufferedImage(viewportWidth, viewportHeight, BufferedImage.TYPE_INT_ARGB)
 
   // We set this component focusable and request focus, so we can react to keyboard events.
   focusable = true
@@ -54,10 +54,10 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
   }
 
   def render() = {
-    val viewport_graphics = viewport_image.getGraphics
+    val viewportGraphics = viewportImage.getGraphics
 
-    val viewportUpperLeftXInWorldCoordinates = viewport_x - (viewport_width / 2)
-    val viewportUpperLeftYInWorldCoordinates = viewport_y - (viewport_height / 2)
+    val viewportUpperLeftXInWorldCoordinates = viewportX - (viewportWidth / 2)
+    val viewportUpperLeftYInWorldCoordinates = viewportY - (viewportHeight / 2)
     
     // Item coordinates in world coordinate space.
     var itemXWorld, itemYWorld = 0
@@ -67,39 +67,39 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
     var itemXViewport, itemYViewport = 0
 
     /* Clear the buffer. */
-    viewport_graphics.clearRect(0, 0, viewport_width, viewport_height)
+    viewportGraphics.clearRect(0, 0, viewportWidth, viewportHeight)
 
     /* Draw slices and their items. */
     for (slice <- world.slices) {
 
       /* Is this slice visible? */
-      if ((slice.index * slice.height) > (viewport_y - (viewport_height / 2))
-        || (slice.index * slice.height) < (viewport_y + (viewport_height / 2))) {
+      if ((slice.index * slice.height) > (viewportY - (viewportHeight / 2))
+        || (slice.index * slice.height) < (viewportY + (viewportHeight / 2))) {
 
         /* Draw the background of the slice.
          * 
          * Transform world coordinates into viewport coordinates.
          */
-        viewport_graphics.drawImage(
-          slice.background_image.get,
+        viewportGraphics.drawImage(
+          slice.backgroundImage.get,
           0,
-          slice.index * slice.height - (viewport_y - (viewport_height / 2)),
+          slice.index * slice.height - (viewportY - (viewportHeight / 2)),
           null)
 
         for (item <- slice.items) {
           if (item.visible == true) {
 
             // We assume that the slice is as wide as the world.
-            itemXWorld = item.position_x
-            itemYWorld = slice.index * SLICE_HEIGHT + item.position_y
+            itemXWorld = item.positionX
+            itemYWorld = slice.index * SLICE_HEIGHT + item.positionY
 
             itemXViewport = itemXWorld
             itemYViewport = itemYWorld - viewportUpperLeftYInWorldCoordinates
 
             if (this.renderDebug == true) {
-              viewport_graphics.drawRect(itemXViewport - item.width / 2, itemYViewport - item.height / 2, item.width, item.height);
+              viewportGraphics.drawRect(itemXViewport - item.width / 2, itemYViewport - item.height / 2, item.width, item.height);
             }
-            viewport_graphics.drawImage(
+            viewportGraphics.drawImage(
               item.render,
               itemXViewport - (item.width / 2),
               itemYViewport - (item.height / 2),
@@ -112,15 +112,15 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
     /*
      * Player's coordinates (middle point of the player) in viewport coordinates, where (0, 0) is the upper left corner.
      */
-    val playerXViewport = world.getPlayer.position_x.toInt - viewportUpperLeftXInWorldCoordinates
-    val playerYViewport = world.getPlayer.position_y.toInt - viewportUpperLeftYInWorldCoordinates
+    val playerXViewport = world.getPlayer.positionX.toInt - viewportUpperLeftXInWorldCoordinates
+    val playerYViewport = world.getPlayer.positionY.toInt - viewportUpperLeftYInWorldCoordinates
     
     if (this.renderDebug == true) {
-      viewport_graphics.drawRect(playerXViewport - (world.getPlayer.width / 2), playerYViewport - (world.getPlayer.height / 2), world.getPlayer.width, world.getPlayer.width);
+      viewportGraphics.drawRect(playerXViewport - (world.getPlayer.width / 2), playerYViewport - (world.getPlayer.height / 2), world.getPlayer.width, world.getPlayer.width);
     }
     
     /* Draw player on top of the image. */
-    viewport_graphics.drawImage(
+    viewportGraphics.drawImage(
       world.getPlayer.render,
       playerXViewport - (world.getPlayer.width / 2),
       playerYViewport - (world.getPlayer.height / 2),
@@ -128,34 +128,34 @@ class Viewport(world: World, viewport_width: Int, viewport_height: Int, val view
 
     /* Here the InfoBar object is used to draw the points indicator (dice) and player health (hearts). */
 
-    viewport_graphics.drawImage(
+    viewportGraphics.drawImage(
       infoBar.dice,
       5,
       5,
       null)
 
-    viewport_graphics.drawImage(
+    viewportGraphics.drawImage(
       infoBar.drawHealthbar(),
       5,
       42,
       null)
       
       /* Draw the numbers directly on the image (for performance reasons). */
-      infoBar.drawPoints(viewport_graphics.asInstanceOf[Graphics2D])
+      infoBar.drawPoints(viewportGraphics.asInstanceOf[Graphics2D])
   }
 
   //Draw the players points next to the points indicator (noppa).
   override def paintComponent(g: Graphics2D) {
     render()
     g.drawImage(
-      viewport_image,
+      viewportImage,
       null,
       0,
       0)
   }
 
   def reset() = {
-    this.viewport_x = this.viewport_start_x
-    this.viewport_y = this.viewport_start_y
+    this.viewportX = this.viewportStartX
+    this.viewportY = this.viewportStartY
   }
 }

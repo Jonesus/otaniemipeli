@@ -166,8 +166,8 @@ object Game {
    * This is activated when the player has reached START_VIEWPORT_SCROLL.
    */
   def updateViewportLocation() = {
-    if (player.position_y >= START_VIEWPORT_SCROLL) {
-      viewport.viewport_y = player.position_y.toInt + VIEWPORT_SCROLL_OFFSET
+    if (player.positionY >= START_VIEWPORT_SCROLL) {
+      viewport.viewportY = player.positionY.toInt + VIEWPORT_SCROLL_OFFSET
     }
   }
 
