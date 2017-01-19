@@ -64,7 +64,7 @@ class Player {
     this.stopped = false
     this.dead = false
     this.acceleration = 1
-    var Y_RESTING_SPEED = PLAYER_SPEED_DOWN
+    this.Y_RESTING_SPEED = PLAYER_SPEED_DOWN
     this.levelSpeedBonus = 0
     
     this.loadResources()
