@@ -10,7 +10,6 @@ class EndGameEvent extends Event {
   }
   
   override def end() = {
-    Game.stopGame()
-    Game.exitGameToMenu()
+    Game.exitToMenuCommand = true
   }
 }
