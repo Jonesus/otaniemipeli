@@ -17,7 +17,7 @@ class World(player: Player) {
   
   /* File names */
   var background_music_filename = ""
-  var level_name_image_filename = ""
+  var level_title_filename = ""
   
   /* Items */
   var slices = ArrayBuffer[Slice]()
@@ -25,7 +25,10 @@ class World(player: Player) {
   var level_name_image: Option[BufferedImage] = None
  
   def loadLevel(l: BaseLevel) = {
+    player.reset()
     /* We populate this world with the provided map. */
+    l.generateSlices()
+    
     slices = l.slices
     
     /* Player's starting position. */
@@ -33,6 +36,23 @@ class World(player: Player) {
     player.position_y = l.player_position_y
 
     background_music_filename = l.background_music_filename
+    level_title_filename = l.level_title_filename
+    
+    /* Player's animations. */
+    player.sober_player_image_left_filename = l.sober_player_image_left_filename
+    player.sober_player_image_right_filename = l.sober_player_image_right_filename
+    
+    player.drunken_player_image_left_filename = l.drunken_player_image_left_filename
+    player.drunken_player_image_right_filename = l.drunken_player_image_right_filename
+    
+    player.dead_player_image_left_filename = l.dead_player_image_left_filename
+    player.dead_player_image_right_filename = l.dead_player_image_right_filename
+    
+    /* Player's speed bonus. */
+    player.level_speed_bonus = l.level_speed_bonus
+    
+    /* We start with a sober player. */
+    player.playerIsSober()
   }
   
   def loadResources() = {
