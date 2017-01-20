@@ -13,7 +13,7 @@ import scala.collection.mutable.ArrayBuffer
 class LevelOne extends BaseLevel {
   length = 100
   levelSpeedBonus = 0
-  backgroundMusicFilename = "sounds/pahkinansarkija.wav"
+  backgroundMusicFilename = "sounds/level1.wav"
   levelTitleFilename = "gfx/title jmt.png"
   bgFiles = List("gfx/bg1.png", "gfx/bg2.png", "gfx/bg3.png", "gfx/bg4.png")
   levelGoalItem = "gfx/128 maali1.png"
@@ -32,7 +32,7 @@ class LevelOne extends BaseLevel {
   drunkenPlayerImageRightFilename = "gfx/128 fuksi kanni oikea.png"
   drunkenPlayerImageLeftFilename = "gfx/128 fuksi kanni vasen.png"
   deadPlayerImageRightFilename = "gfx/128 fuksi dead oikea.png"
-  deadPlayerImageFeftFilename = "gfx/128 fuksi dead vasen.png"
+  deadPlayerImageLeftFilename = "gfx/128 fuksi dead vasen.png"
     
   winAnimation = new Animation
   winAnimation.frameDuration = 600

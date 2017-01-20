@@ -54,7 +54,7 @@ class BaseLevel {
   var drunkenPlayerImageLeftFilename = ""
   var drunkenPlayerImageRightFilename = ""
     
-  var deadPlayerImageFeftFilename = ""
+  var deadPlayerImageLeftFilename = ""
   var deadPlayerImageRightFilename = ""
   
   var winAnimation: Animation = _

@@ -11,7 +11,7 @@ import uusipeli.Animation
 class LevelTwo extends BaseLevel {
   length = 150
   levelSpeedBonus = 2
-  backgroundMusicFilename = "sounds/pahkinansarkija.wav"
+  backgroundMusicFilename = "sounds/level2.wav"
   levelTitleFilename = "gfx/title smt.png"
   bgFiles = List("gfx/mt1.png", "gfx/mt2.png", "gfx/mt3.png", "gfx/mt4.png")
   levelGoalItem = "gfx/128 maali2.png"
@@ -30,7 +30,7 @@ class LevelTwo extends BaseLevel {
   drunkenPlayerImageRightFilename = "gfx/128 teekkari kanni oikea.png"
   drunkenPlayerImageLeftFilename = "gfx/128 teekkari kanni vasen.png"
   deadPlayerImageRightFilename = "gfx/128 teekkari dead oikea.png"
-  deadPlayerImageFeftFilename = "gfx/128 teekkari dead vasen.png"
+  deadPlayerImageLeftFilename = "gfx/128 teekkari dead vasen.png"
   
   winAnimation = new Animation
   winAnimation.frameDuration = 600
