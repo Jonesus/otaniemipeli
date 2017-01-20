@@ -9,6 +9,7 @@ import java.io.File
 import javax.sound.sampled._
 import uusipeli.events.PlayerDeadEvent
 
+/* World represents the game world. */
 class World(player: Player) {
 
   /* File names */
@@ -56,10 +57,12 @@ class World(player: Player) {
     player.playerIsSober()
   }
   
+  /* Load resources. */
   def loadResources() = {
     loadMusic()
   }
   
+  /* Update the items. */
   def update() = {
     for (slice <- this.slices) {
       for (item <- slice.items) {
@@ -72,6 +75,7 @@ class World(player: Player) {
     this.player
   }
 
+  /* Variables that hold the background music. */
   var backgroundMusicClip: Option[Clip] = None
   
   var backgroundMusicPosition: Long = 0
@@ -89,6 +93,7 @@ class World(player: Player) {
   def playMusic() = {
     this.backgroundMusicClip.foreach {x =>
       x.setMicrosecondPosition(0)
+      x.loop(Clip.LOOP_CONTINUOUSLY)
       x.start()
     
     }
@@ -108,15 +113,17 @@ class World(player: Player) {
   def continueMusic() = {
     this.backgroundMusicClip.foreach {x =>
       x.setMicrosecondPosition(this.backgroundMusicPosition)
-      x.start()
+      x.loop(Clip.LOOP_CONTINUOUSLY)
     }
   }
   
+  /* Reset the world: Clear slices and background music. */
   def reset() = {
     this.slices.clear()
     this.backgroundMusicClip = None
   }
   
+  /* Does the player intersect with some item? */
   def playerIntersectsWithItem(slice: Slice, item: Item) : Boolean = {
     /*
      * if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
@@ -137,9 +144,11 @@ class World(player: Player) {
     return true
   }
   
+  /* Detects a collision and processes it. */
   def checkPlayerCollisions() = {
     for (slice <- this.slices) {
       for (item <- slice.items) {
+        /* Only active items can be collided with. */
         if (this.playerIntersectsWithItem(slice, item) && item.active == true) {
           item.processCollision()
         }
@@ -147,6 +156,7 @@ class World(player: Player) {
     }
   }
   
+  /* Is the player alive? */
   def checkPlayerDeath() = {
     if (this.player.health == 0) {
       this.player.playerIsDead()

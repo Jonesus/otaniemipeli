@@ -112,6 +112,7 @@ class BaseLevel {
     populateSlices()
   }
   
+  /* Populate slices with items. */
   def populateSlices() = {
     var itemList = ArrayBuffer[Item]()
     

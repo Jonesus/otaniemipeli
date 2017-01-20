@@ -3,6 +3,7 @@ package uusipeli.effects
 import uusipeli.Effect
 import uusipeli.Game
 
+/* Effect for a drunk player. */
 class BeerEffect extends Effect {
   
   delay = 4000

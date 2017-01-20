@@ -13,18 +13,24 @@ import uusipeli.model._
 class Slice(filename: String) {
   val rand = new scala.util.Random
 
+  /* Vertical index of the slice. */
   var index = 0
+  
   val width = SLICE_WIDTH
   val height = SLICE_HEIGHT
   
+  /* Items of this slice. */
   var items = ArrayBuffer[Item]()
   
+  /* Slice background. */
   val backgroundImage = Some(ImageIO.read(new File(filename)))
   
+  /* Renders the slice. */
   def render: BufferedImage = {
     new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
   }
   
+  /* Populate this slice with items. */
   def populate(itemFunc: () => Option[Item]) = {
     val n: Option[Item] = itemFunc()
     n.foreach { i =>
@@ -32,6 +38,7 @@ class Slice(filename: String) {
     }
   }
   
+  /* Add an item to a random position to this slice. */
   def addItem(i: Item) = {
     i.positionX = 160 + rand.nextInt(704)
     i.positionY = 32 + rand.nextInt(64)

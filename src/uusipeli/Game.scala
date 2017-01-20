@@ -11,6 +11,7 @@ import uusipeli.levels._
 import uusipeli.items.GameOverItem
 import uusipeli.items.YouWinItem
 import scala.collection.mutable.ArrayBuffer
+import javax.sound.sampled._
 
 /*
  * This object is the game functionality.
@@ -151,13 +152,21 @@ object Game {
   
   /* Play "Game over" sound. */
   def playGameOverSound() = {
-    GameOverItem.playSound()
+    if (GameOverItem.wavClip.isDefined) {
+      if (!GameOverItem.wavClip.get.isRunning()) {
+        GameOverItem.playSound()
+      }
+    }
   }
   
   /* Play "You win" sound. */
   def playYouWinSound() = {
-    YouWinItem.playSound()
-  }  
+    if (YouWinItem.wavClip.isDefined) {
+      if (!YouWinItem.wavClip.get.isRunning()) {
+        YouWinItem.playSound()
+      }
+    }
+  }
   
   /* This method is run every time the game loop fires an event. */
   def update(): Unit = {

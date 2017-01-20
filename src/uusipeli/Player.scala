@@ -11,6 +11,7 @@ import uusipeli.events.EndGameEvent
 /* This class represents the player. */
 class Player {
   
+  /* Player status: Position, speed, etc. */
   var positionX = 0.0
   var positionY = 0.0
   var deltaX = 0  // Speed vectors for current frame
@@ -29,10 +30,11 @@ class Player {
   var Y_RESTING_SPEED = PLAYER_SPEED_DOWN  // Constant speed down
   var levelSpeedBonus = 0
   
+  /* Width and height of the image. */
   var width = 128
   var height = 128
   
-  /* Default animations. These can be overriden from the level classes. */
+  /* Default animations. These can be overrun from the level classes. */
   var soberPlayerAnimation = new Animation
   var soberPlayerImageRightFilename = "gfx/128 pixel teekkari oikea.png"
   var soberPlayerImageLeftFilename = "gfx/128 pixel teekkari vasen.png"
@@ -45,12 +47,14 @@ class Player {
   var deadPlayerImageRightFilename = "gfx/128 teekkari dead oikea.png"
   var deadPlayerImageLeftFilename = "gfx/128 teekkari dead vasen.png" 
   
+  /* Win animation: Different number of frames in different levels. See level classes. */
   var winAnimation: Animation = _
   
   
   /* Current animation */
   var playerAnimation = soberPlayerAnimation
   
+  /* Reset the player's state. */
   def reset() = {
     this.positionX = 0.0
     this.positionY = 0.0
@@ -121,13 +125,14 @@ class Player {
     positionY += dy
   }
   
-  
+  /* Updates the player's position. This is called in the game loop. */
   def update() = {
     if (stopped == false) updatePosition()
     else if (dead == false) goToGoal()
     if (health > 3) health = 3
   }
   
+  /* Move to the goal. Used when the level is completed successfully. */
   def goToGoal() = {
     var dx = 0
     var dy = 0
@@ -160,6 +165,7 @@ class Player {
       yVelocity += deltaY
     }
     
+    /* Update the position according to the speed. */
     move(xVelocity, yVelocity)
     deltaX = 0
     deltaY = 0

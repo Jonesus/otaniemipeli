@@ -37,12 +37,14 @@ class Item {
   /* The image of this item. */
   var image: BufferedImage = _
   
+  /* Sets the image of the item. */
   def setImage(i: BufferedImage) = {
     this.image = i
     this.width = this.image.getWidth()
     this.height = this.image.getHeight()
   }
   
+  /* Renders this item. */
   def render: BufferedImage = {
     return this.image
   }
@@ -54,6 +56,7 @@ class Item {
     this.active = false
   }
   
+  /* Updates item's status. Can be defined in subclasses. */
   def update = {
     
   }

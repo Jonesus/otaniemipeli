@@ -5,6 +5,7 @@ import uusipeli.Slice
 import uusipeli.Item
 import uusipeli.model._
 
+/* Player is dead event. */
 class PlayerDeadEvent extends Event {
   delay = 6000
   

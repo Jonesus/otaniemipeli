@@ -8,7 +8,7 @@ import java.awt.Color
 import uusipeli.model._
 
 /*
- * Viewport_x and viewport_y: The middle of the viewport in world coordinates.
+ * ViewportX and viewportY: The middle of the viewport in world coordinates.
  */
 
 class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewportStartX: Int, val viewportStartY: Int) extends Panel {
@@ -19,11 +19,13 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
   /* Create the info bar that draws the player's health and points. */
   val infoBar = new InfoBar
 
+  /* Viewport background. */
   this.background = Color.black
 
   var viewportX = viewportStartX
   var viewportY = viewportStartY
 
+  /* Viewport draws to this image. */
   val viewportImage = new BufferedImage(viewportWidth, viewportHeight, BufferedImage.TYPE_INT_ARGB)
 
   /* Overlay image, if any. */
@@ -57,6 +59,7 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
     case KeyTyped(_, 'p', _, _) => Game.pauseKeyPressed()
   }
 
+  /* Renders the viewport. */
   def render() = {
     val viewportGraphics = viewportImage.getGraphics
 
@@ -153,7 +156,7 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
     infoBar.drawPoints(viewportGraphics.asInstanceOf[Graphics2D])
   }
 
-  //Draw the players points next to the points indicator (noppa).
+  //Draw the players points next to the points indicator (dice).
   override def paintComponent(g: Graphics2D) {
     render()
     g.drawImage(
@@ -163,6 +166,7 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
       0)
   }
 
+  /* Reset viewport's position and hide the overlay. */
   def reset() = {
     this.viewportX = this.viewportStartX
     this.viewportY = this.viewportStartY

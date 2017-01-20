@@ -5,6 +5,7 @@ import uusipeli.Slice
 import uusipeli.Item
 import uusipeli.model._
 
+/* Level goal reached event */
 class GoalEvent extends Event {
   delay = 6000
   

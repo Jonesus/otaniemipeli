@@ -4,6 +4,7 @@ import uusipeli.Effect
 import uusipeli.Game
 import uusipeli.model._
 
+/* Ice effect */
 class IceEffect extends Effect {
   
   delay = 4000
