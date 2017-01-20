@@ -5,7 +5,7 @@ import uusipeli.Slice
 import uusipeli.Item
 import uusipeli.model._
 
-class GoalEvent extends Event {
+class PlayerDeadEvent extends Event {
   delay = 6000
   
   override def start() = {
@@ -14,8 +14,8 @@ class GoalEvent extends Event {
   
   override def end() = {
     Game.world.slices(Game.world.slices.length-4).items(0).visible = false
-    Game.player.playerAnimation = Game.player.winAnimation
-    Game.showYouWin()
+    Game.player.playerAnimation = Game.player.deadPlayerAnimation
+    Game.showGameOver()
     Game.addEvent(new EndGameEvent())
   }
 }
