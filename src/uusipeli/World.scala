@@ -7,7 +7,7 @@ import javax.imageio.ImageIO
 import java.io.File
 import java.io.File
 import javax.sound.sampled._
-import uusipeli.events.EndGameEvent
+import uusipeli.events.PlayerDeadEvent
 
 class World(player: Player) {
 
@@ -37,7 +37,7 @@ class World(player: Player) {
     player.drunkenPlayerImageLeftFilename = l.drunkenPlayerImageLeftFilename
     player.drunkenPlayerImageRightFilename = l.drunkenPlayerImageRightFilename
     
-    player.deadPlayerImageLeftFilename = l.deadPlayerImageFeftFilename
+    player.deadPlayerImageLeftFilename = l.deadPlayerImageLeftFilename
     player.deadPlayerImageRightFilename = l.deadPlayerImageRightFilename
     
     player.winAnimation = l.winAnimation
@@ -78,8 +78,6 @@ class World(player: Player) {
   
   /* We load the audio file to memory. */
   def loadMusic(): Unit = {
-    if (backgroundMusicClip.isDefined) return
-    
     try {
       backgroundMusicClip = Some(AudioSystem.getClip(null))
       backgroundMusicClip.get.open(AudioSystem.getAudioInputStream(new File(backgroundMusicFilename)))
@@ -116,6 +114,7 @@ class World(player: Player) {
   
   def reset() = {
     this.slices.clear()
+    this.backgroundMusicClip = None
   }
   
   def playerIntersectsWithItem(slice: Slice, item: Item) : Boolean = {
@@ -151,7 +150,7 @@ class World(player: Player) {
   def checkPlayerDeath() = {
     if (this.player.health == 0) {
       this.player.playerIsDead()
-      Game.addEvent(new EndGameEvent())
+      Game.addEvent(new PlayerDeadEvent())
     }
   }  
 }
