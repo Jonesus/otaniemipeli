@@ -8,6 +8,8 @@ import javax.swing.Timer
 import java.awt.image.BufferedImage
 import uusipeli.model._
 import uusipeli.levels._
+import uusipeli.items.GameOverItem
+import uusipeli.items.YouWinItem
 import scala.collection.mutable.ArrayBuffer
 
 /*
@@ -134,6 +136,18 @@ object Game {
     
     this.showMenuCallback()
   }
+  
+  /* Shows "Game over" text to the user. */
+  def showGameOver() = {
+    val i = new GameOverItem()
+    this.viewport.overlayImage = Some(i.image)
+  }
+  
+  /* Shows "You win" text to the user. */
+  def showYouWin() = {
+    val i = new YouWinItem()
+    this.viewport.overlayImage = Some(i.image)
+  }  
   
   /* This method is run every time the game loop fires an event. */
   def update(): Unit = {

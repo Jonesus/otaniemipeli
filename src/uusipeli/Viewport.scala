@@ -26,6 +26,9 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
 
   val viewportImage = new BufferedImage(viewportWidth, viewportHeight, BufferedImage.TYPE_INT_ARGB)
 
+  /* Overlay image, if any. */
+  var overlayImage: Option[BufferedImage] = None
+  
   // We set this component focusable and request focus, so we can react to keyboard events.
   focusable = true
 
@@ -126,23 +129,28 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
       playerXViewport - (world.getPlayer.width / 2),
       playerYViewport - (world.getPlayer.height / 2),
       null)
+      
+    /* Draws the optional overlay image. */
+    this.overlayImage.foreach { i => viewportGraphics.drawImage(i, (this.viewportWidth / 2) - (i.getWidth() / 2), (this.viewportHeight / 2) - (i.getHeight() / 2), null) }
 
     /* Here the InfoBar object is used to draw the points indicator (dice) and player health (hearts). */
-
+    
+    /* Dice */  
     viewportGraphics.drawImage(
       infoBar.dice,
       5,
       5,
       null)
 
+    /* Hearts */
     viewportGraphics.drawImage(
       infoBar.drawHealthbar(),
       5,
       42,
       null)
       
-      /* Draw the numbers directly on the image (for performance reasons). */
-      infoBar.drawPoints(viewportGraphics.asInstanceOf[Graphics2D])
+    /* Draw the numbers directly onto the image (for performance reasons). */
+    infoBar.drawPoints(viewportGraphics.asInstanceOf[Graphics2D])
   }
 
   //Draw the players points next to the points indicator (noppa).
@@ -158,5 +166,7 @@ class Viewport(world: World, viewportWidth: Int, viewportHeight: Int, val viewpo
   def reset() = {
     this.viewportX = this.viewportStartX
     this.viewportY = this.viewportStartY
+    
+    this.overlayImage = None
   }
 }
