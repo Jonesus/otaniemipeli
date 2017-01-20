@@ -16,6 +16,7 @@ class PlayerDeadEvent extends Event {
     Game.world.slices(Game.world.slices.length-4).items(0).visible = false
     Game.player.playerAnimation = Game.player.deadPlayerAnimation
     Game.showGameOver()
+    Game.playGameOverSound()
     Game.addEvent(new EndGameEvent())
   }
 }

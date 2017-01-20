@@ -16,6 +16,7 @@ class GoalEvent extends Event {
     Game.world.slices(Game.world.slices.length-4).items(0).visible = false
     Game.player.playerAnimation = Game.player.winAnimation
     Game.showYouWin()
+    Game.playYouWinSound()
     Game.addEvent(new EndGameEvent())
   }
 }

@@ -147,6 +147,16 @@ object Game {
   def showYouWin() = {
     val i = new YouWinItem()
     this.viewport.overlayImage = Some(i.image)
+  }
+  
+  /* Play "Game over" sound. */
+  def playGameOverSound() = {
+    GameOverItem.playSound()
+  }
+  
+  /* Play "You win" sound. */
+  def playYouWinSound() = {
+    YouWinItem.playSound()
   }  
   
   /* This method is run every time the game loop fires an event. */
