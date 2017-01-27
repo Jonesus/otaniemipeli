@@ -7,7 +7,7 @@ import uusipeli.model._
 
 /* Player is dead event. */
 class PlayerDeadEvent extends Event {
-  delay = 6000
+  delay = 500
   
   override def start() = {
     Game.player.stopped = true
