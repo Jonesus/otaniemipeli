@@ -31,8 +31,8 @@ class VisualButton(xCoord: Int, yCoord: Int, filename: String, filename2: String
   
   val width = unselectedImage.getWidth() 
   val height = unselectedImage.getHeight()
-  val x = WINDOW_WIDTH/2 - width/2  // Center the image
-  val y = yCoord
+  var x = WINDOW_WIDTH/2 - width/2  // Center the image
+  var y = yCoord
   
   
   var action = func  // What to do when clicked

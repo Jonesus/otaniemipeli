@@ -13,25 +13,29 @@ import java.awt.GraphicsEnvironment
 import java.io.File
 
 import java.awt.geom._
-
+import javax.imageio.ImageIO
 import scala.swing.event._
 import java.awt.event._
 
 /* The main menu. */
 class MenuView extends Panel {
-  
   focusable = true
   listenTo(mouse.clicks)
   listenTo(mouse.moves)
   
   reactions += {
       case e: MouseClicked => {
-        for (button <- buttons) {
+        if (!showHelp) {
+          for (button <- menuButtons) {
+            button.isClicked(e.point)
+          }
+        }
+        for (button <- helpButtons) {
           button.isClicked(e.point)
         }
       }
       case e: MouseMoved => {
-        for (button <- buttons) {
+        for (button <- menuButtons) {
           button.isHovered(e.point)
         }
         this.repaint()
@@ -39,6 +43,12 @@ class MenuView extends Panel {
     }
   
   
+  var showHelp = false
+  var instructionsImage = Some(ImageIO.read(new File("gfx/instructions.png"))).get
+  def toggleHelp(x: Unit) {
+    if (this.showHelp) this.showHelp = false
+    else this.showHelp = true
+  }
   
   val fontFile = new File("gfx/Gamer.ttf")
   val newFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -53,10 +63,15 @@ class MenuView extends Panel {
   var JMTbutton = new VisualButton(0, 200, "gfx/title jmt.png", "gfx/title jmt selected.png", null)
   var SMTbutton = new VisualButton(0, 300, "gfx/title smt.png", "gfx/title smt selected.png", null)
   var OTAbutton = new VisualButton(0, 400, "gfx/title otakaari.png", "gfx/title otakaari selected.png", null)
-  var buttons = new ArrayBuffer[VisualButton]()
-  buttons += JMTbutton
-  buttons += SMTbutton
-  buttons += OTAbutton
+  var helpbutton = new VisualButton(0, 500, "gfx/help.png", "gfx/help.png", toggleHelp)
+  helpbutton.x = -57
+  helpbutton.y = 639
+  var menuButtons = new ArrayBuffer[VisualButton]()
+  var helpButtons = new ArrayBuffer[VisualButton]()
+  menuButtons += JMTbutton
+  menuButtons += SMTbutton
+  menuButtons += OTAbutton
+  helpButtons += helpbutton
   
   
   def renderButtons(g: Graphics2D) {
@@ -64,7 +79,7 @@ class MenuView extends Panel {
     menuGraphics.setColor(new Color(0, 0, 0))
     menuGraphics.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
     
-    for (button <- buttons) {
+    for (button <- menuButtons ++ helpButtons) {
       menuGraphics.drawImage(button.render(),
                              button.x,
                              button.y,
@@ -79,8 +94,14 @@ class MenuView extends Panel {
   }
 
   override def paintComponent(g: Graphics2D) {
-    renderButtons(g)
-    g.drawImage(menuImage, null, 0, 0)
-    renderText(g)
+    if (!showHelp) {
+      renderButtons(g)
+      g.drawImage(menuImage, null, 0, 0)
+      renderText(g)
+    }
+    else {
+      g.drawImage(instructionsImage, null, 0, 0)
+    }
+    this.repaint()
   }
 }
