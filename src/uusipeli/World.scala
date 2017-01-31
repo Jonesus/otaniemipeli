@@ -159,8 +159,10 @@ class World(player: Player) {
   /* Is the player alive? */
   def checkPlayerDeath() = {
     if (this.player.health == 0) {
-      this.player.playerIsDead()
-      Game.addEvent(new PlayerDeadEvent())
+      if (this.player.dead == false) {
+        this.player.playerIsDead()
+        Game.addEvent(new PlayerDeadEvent())
+      }
     }
   }  
 }
