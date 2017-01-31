@@ -190,6 +190,7 @@ object Game {
   def checkExitGameCommand() = {
     this.synchronized {
       if (this.exitToMenuCommand == true) {
+        this.exitToMenuCommand = false
         this.stopGame()
         this.exitGameToMenu()
       }

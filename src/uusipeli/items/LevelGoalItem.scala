@@ -13,6 +13,7 @@ class LevelGoalItem(val filename: String) extends Item {
   this.setImage(LevelGoalItem.getImage())
   
   override def processCollision() = {
+    this.active = false
     Game.addEvent(new GoalEvent)
   }
 }
